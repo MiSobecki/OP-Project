@@ -3,11 +3,13 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
@@ -16,7 +18,8 @@ public class Inn extends JFrame {
 	private JPanel healthBarPanel;
 	private JProgressBar hpBar;
 	private JLabel hpLabel, cashLabel;
-	private JButton beerBut;
+	private JButton beerBut, exitBut, returnBut, menuBut;
+	private JToolBar toolBar;
 
 
 	public Inn(Character character) {
@@ -43,6 +46,66 @@ public class Inn extends JFrame {
             	if(character.getHp() == 100 || character.getWealth() < 200) {
             		beerBut.setEnabled(false);
             	}
+            }
+        });
+		
+		//ToolBar
+		toolBar = new JToolBar();
+		toolBar.setBounds(0, 0, 150, 23);
+		getContentPane().add(toolBar);
+		
+		//Button to exit game
+		exitBut = new JButton("Exit");
+		toolBar.add(exitBut);
+		exitBut.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+            	try {
+            		SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "Character2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+                System.exit(0);
+            }
+        });
+		
+		//Button to return to the menu
+		menuBut = new JButton("Menu");
+		toolBar.add(menuBut);
+		
+		menuBut.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+            	try {
+            		SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "Character2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+                @SuppressWarnings("unused")
+				Menu menu = new Menu();
+                dispose();
+            }
+        });
+		
+		//Button to return to the previous window
+		returnBut = new JButton("Return");
+		toolBar.add(returnBut);
+		
+		returnBut.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+            	try {
+            		SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "Character2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            	
+                @SuppressWarnings("unused")
+				City city = new City(character);
+                dispose();
             }
         });
 		

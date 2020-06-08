@@ -5,7 +5,7 @@ public class PracticeSword extends RightHandArtifact{
 	}
 	
 	public int getAmount() {
-		return super.getAmount() + 5;
+		return super.getAmount() + 3;
 	}
 	
 	public String getName() {

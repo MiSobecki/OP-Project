@@ -47,254 +47,241 @@ public class Inventory extends JFrame{
     private void initialize() {
             
             
-                getContentPane().setLayout(null);
-                
-                createModels();
-                
-                //ToolBar
-        		toolBar = new JToolBar();
-        		toolBar.setBounds(0, 0, 150, 23);
-        		getContentPane().add(toolBar);
-        		
-        		//Button to exit game
-        		exitBut = new JButton("Exit");
-        		toolBar.add(exitBut);
-        		exitBut.addActionListener( new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                    	try {
-                    		SaveAndRead sr = new SaveAndRead();
-        					sr.save(character, "Character2");
-        				} catch (IOException e) {
-        					e.printStackTrace();
-        				}
-                        System.exit(0);
-                    }
-                });
-        		
-        		//Button to return to the menu
-        		menuBut = new JButton("Menu");
-        		toolBar.add(menuBut);
-        		
-        		menuBut.addActionListener( new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                    	try {
-                    		SaveAndRead sr = new SaveAndRead();
-        					sr.save(character, "Character2");
-        				} catch (IOException e) {
-        					e.printStackTrace();
-        				}
-                        @SuppressWarnings("unused")
-        				Menu menu = new Menu();
-                        dispose();
-                    }
-                });
-        		
-        		//Button to return to the previous window
-        		returnBut = new JButton("Return");
-        		toolBar.add(returnBut);
-        		
-        		returnBut.addActionListener( new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                    	Character temp = setCharacter();
-                    	
-                    	try {
-                    		SaveAndRead sr = new SaveAndRead();
-							sr.save(temp, "Character2");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-                    	
-                        @SuppressWarnings("unused")
-        				City city = new City(temp);
-                        dispose();
-                    }
-                });
-        		
-               
-        		//Below are functions about graphical lookout for character
-                
-                //HEAD PART
-                
-                headList = new JList<ArtifactTemplate>();
-                scrollPane1 = new JScrollPane();
-                scrollPane1.setBounds(570, 11, 200, 200);
-                getContentPane().add(scrollPane1);
-                scrollPane1.setViewportView(headList);
-                headList.setDragEnabled(true);
-                headList.setTransferHandler(new ListTransferHandler());
-                headList.setModel(model1);
-                headList.setLayoutOrientation(JList.VERTICAL);
-                
-                headLab = new JLabel("Head");
-                if(character.getHead() != null) {
-                	headLab.setText(character.getHead().getName());
-                	headLab.setToolTipText("<html>" 
-                	+ character.getHead().getType() + "<br>" + "armor: "
-                    + character.getHead().getAmount() + "</html>");
-                }
-                headLab.setBounds(400, 30, 160, 48);
-                headLab.setHorizontalAlignment(SwingConstants.CENTER);
-                headLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
-                headLab.setTransferHandler(new ListTransferHandler());
-                getContentPane().add(headLab);
-                
-                
-                //CHEST PART
-                scrollPane2 = new JScrollPane();
-                scrollPane2.setBounds(570, 221, 200, 200);
-                getContentPane().add(scrollPane2);
-                chestList = new JList<ArtifactTemplate>();
-                scrollPane2.setViewportView(chestList);
-                chestList.setDragEnabled(true);
-                chestList.setTransferHandler(new ListTransferHandler());
-                chestList.setModel(model2);
-                chestList.setLayoutOrientation(JList.VERTICAL);
-                
-                chestLab = new JLabel("Chest");
-                if(character.getChest() != null) {
-                	chestLab.setText(character.getChest().getName());
-                	chestLab.setToolTipText("<html>" 
-                	+ character.getChest().getType() + "<br>" + "armor: "
-                    + character.getChest().getAmount() + "</html>");
-                }
-        		chestLab.setHorizontalAlignment(SwingConstants.CENTER);
-        		chestLab.setBounds(400, 240, 160, 48);
-        		getContentPane().add(chestLab);
-        		chestLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
-        		chestLab.setTransferHandler(new ListTransferHandler());
-        		
-        		
-        		//LEGS PART
-                scrollPane3 = new JScrollPane();
-                scrollPane3.setBounds(570, 431, 200, 200);
-                getContentPane().add(scrollPane3);
-                legsList = new JList<ArtifactTemplate>();
-                scrollPane3.setViewportView(legsList);
-                legsList.setDragEnabled(true);
-                legsList.setTransferHandler(new ListTransferHandler());
-                legsList.setModel(model3);
-                legsList.setLayoutOrientation(JList.VERTICAL);
-                
-                legsLab = new JLabel("Legs");
-                if(character.getLegs() != null) {
-                	legsLab.setText(character.getLegs().getName());
-                	legsLab.setToolTipText("<html>" 
-                	+ character.getLegs().getType() + "<br>" + "armor: "
-                    + character.getLegs().getAmount() + "</html>");
-                }
-        		legsLab.setHorizontalAlignment(SwingConstants.CENTER);
-        		legsLab.setBounds(400, 450, 160, 48);
-        		getContentPane().add(legsLab);
-        		legsLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
-        		legsLab.setTransferHandler(new ListTransferHandler());
-        		
-        		
-        		//HANDS PART
-                scrollPane4 = new JScrollPane();
-                scrollPane4.setBounds(190, 11, 200, 200);
-                getContentPane().add(scrollPane4);
-                handsList = new JList<ArtifactTemplate>();
-                scrollPane4.setViewportView(handsList);
-                handsList.setDragEnabled(true);
-                handsList.setTransferHandler(new ListTransferHandler());
-                handsList.setModel(model4);
-                handsList.setLayoutOrientation(JList.VERTICAL);
-                
-                handsLab = new JLabel("Hands");
-                if(character.getHands() != null) {
-                	handsLab.setText(character.getHands().getName());
-                	handsLab.setToolTipText("<html>" 
-                	+ character.getHands().getType() + "<br>" + "armor: "
-                    + character.getHands().getAmount() + "</html>");
-                }
-        		handsLab.setHorizontalAlignment(SwingConstants.CENTER);
-        		handsLab.setBounds(20, 30, 160, 48);
-        		getContentPane().add(handsLab);
-        		handsLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
-        		handsLab.setTransferHandler(new ListTransferHandler());
-        		
-        		
-        		//RIGHT-HAND PART
-                scrollPane5 = new JScrollPane();
-                scrollPane5.setBounds(190, 221, 200, 200);
-                getContentPane().add(scrollPane5);
-                rightList = new JList<ArtifactTemplate>();
-                scrollPane5.setViewportView(rightList);
-                rightList.setDragEnabled(true);
-                rightList.setTransferHandler(new ListTransferHandler());
-                rightList.setModel(model5);
-                rightList.setLayoutOrientation(JList.VERTICAL);
-                
-                rightLab = new JLabel("Right Hand");
-                if(character.getRightHand() != null) {
-                	rightLab.setText(character.getRightHand().getName());
-                	rightLab.setToolTipText("<html>" 
-                	+ character.getRightHand().getType() + "<br>" + "attack: "
-                	+ character.getRightHand().getAmount() + "</html>");
-                }
-        		rightLab.setHorizontalAlignment(SwingConstants.CENTER);
-        		rightLab.setBounds(20, 240, 160, 48);
-        		getContentPane().add(rightLab);
-        		rightLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
-        		rightLab.setTransferHandler(new ListTransferHandler());
-        		
-        		
-        		//LEFT-HAND PART
-                scrollPane6 = new JScrollPane();
-                scrollPane6.setBounds(190, 431, 200, 200);
-                getContentPane().add(scrollPane6);
-                leftList = new JList<ArtifactTemplate>();
-                scrollPane6.setViewportView(leftList);
-                leftList.setDragEnabled(true);
-                leftList.setTransferHandler(new ListTransferHandler());
-                leftList.setModel(model6);
-                leftList.setLayoutOrientation(JList.VERTICAL);
-                
-                leftLab = new JLabel("Left hand");
-                if(character.getLeftHand() != null) {
-                	leftLab.setText(character.getLeftHand().getName());
-                	leftLab.setToolTipText("<html>" 
-                	+ character.getLeftHand().getType() + "<br>" + "defense: "
-                    + character.getLeftHand().getAmount() + "</html>");
-                }
-        		leftLab.setHorizontalAlignment(SwingConstants.CENTER);
-        		leftLab.setBounds(20, 450, 160, 48);
-        		getContentPane().add(leftLab);
-        		leftLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
-        		leftLab.setTransferHandler(new ListTransferHandler());
-        		
-        		
-        		//Statistics
-        		armorLabel  = new JLabel("Armor: " + character.getArmor());
-        		armorLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-        		armorLabel.setBounds(820, 30, 103, 34);
-        		getContentPane().add(armorLabel);
-        		
-        		attackLabel  = new JLabel("Attack: " + character.getAttack());
-        		attackLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-        		attackLabel.setBounds(820, 100, 103, 34);
-        		getContentPane().add(attackLabel);
-        		
-        		hpLabel  = new JLabel("Hp: " + character.getHp());
-        		hpLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-        		hpLabel.setBounds(820, 170, 103, 34);
-        		getContentPane().add(hpLabel);
-        		
-        		defenceLabel  = new JLabel("Defence: " + character.getDefence());
-        		defenceLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-        		defenceLabel.setBounds(820, 240, 103, 34);
-        		getContentPane().add(defenceLabel);
-        		
-        		//Setting to frame
-        		setTitle("Inventory");
-                setLocation(450, 100);
-                setResizable(false);
-                setSize(1000, 700);
-                setVisible(true);
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+
+		createModels();
+
+		// ToolBar
+		toolBar = new JToolBar();
+		toolBar.setBounds(0, 0, 150, 23);
+		getContentPane().add(toolBar);
+
+		// Button to exit game
+		exitBut = new JButton("Exit");
+		toolBar.add(exitBut);
+		exitBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "Character2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.exit(0);
+			}
+		});
+
+		// Button to return to the menu
+		menuBut = new JButton("Menu");
+		toolBar.add(menuBut);
+
+		menuBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "Character2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				@SuppressWarnings("unused")
+				Menu menu = new Menu();
+				dispose();
+			}
+		});
+
+		// Button to return to the previous window
+		returnBut = new JButton("Return");
+		toolBar.add(returnBut);
+
+		returnBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				Character temp = setCharacter();
+
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.save(temp, "Character2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				@SuppressWarnings("unused")
+				City city = new City(temp);
+				dispose();
+			}
+		});
+
+		// Below are functions about graphical lookout for character
+
+		// HEAD PART
+
+		headList = new JList<ArtifactTemplate>();
+		scrollPane1 = new JScrollPane();
+		scrollPane1.setBounds(570, 11, 200, 200);
+		getContentPane().add(scrollPane1);
+		scrollPane1.setViewportView(headList);
+		headList.setDragEnabled(true);
+		headList.setTransferHandler(new ListTransferHandler());
+		headList.setModel(model1);
+		headList.setLayoutOrientation(JList.VERTICAL);
+
+		headLab = new JLabel("Head");
+		if (character.getHead() != null) {
+			headLab.setText(character.getHead().getName());
+			headLab.setToolTipText("<html>" + character.getHead().getType() + "<br>" + "armor: "
+					+ character.getHead().getAmount() + "</html>");
+		}
+		headLab.setBounds(400, 30, 160, 48);
+		headLab.setHorizontalAlignment(SwingConstants.CENTER);
+		headLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
+		headLab.setTransferHandler(new ListTransferHandler());
+		getContentPane().add(headLab);
+
+		// CHEST PART
+		scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(570, 221, 200, 200);
+		getContentPane().add(scrollPane2);
+		chestList = new JList<ArtifactTemplate>();
+		scrollPane2.setViewportView(chestList);
+		chestList.setDragEnabled(true);
+		chestList.setTransferHandler(new ListTransferHandler());
+		chestList.setModel(model2);
+		chestList.setLayoutOrientation(JList.VERTICAL);
+
+		chestLab = new JLabel("Chest");
+		if (character.getChest() != null) {
+			chestLab.setText(character.getChest().getName());
+			chestLab.setToolTipText("<html>" + character.getChest().getType() + "<br>" + "armor: "
+					+ character.getChest().getAmount() + "</html>");
+		}
+		chestLab.setHorizontalAlignment(SwingConstants.CENTER);
+		chestLab.setBounds(400, 240, 160, 48);
+		getContentPane().add(chestLab);
+		chestLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
+		chestLab.setTransferHandler(new ListTransferHandler());
+
+		// LEGS PART
+		scrollPane3 = new JScrollPane();
+		scrollPane3.setBounds(570, 431, 200, 200);
+		getContentPane().add(scrollPane3);
+		legsList = new JList<ArtifactTemplate>();
+		scrollPane3.setViewportView(legsList);
+		legsList.setDragEnabled(true);
+		legsList.setTransferHandler(new ListTransferHandler());
+		legsList.setModel(model3);
+		legsList.setLayoutOrientation(JList.VERTICAL);
+
+		legsLab = new JLabel("Legs");
+		if (character.getLegs() != null) {
+			legsLab.setText(character.getLegs().getName());
+			legsLab.setToolTipText("<html>" + character.getLegs().getType() + "<br>" + "armor: "
+					+ character.getLegs().getAmount() + "</html>");
+		}
+		legsLab.setHorizontalAlignment(SwingConstants.CENTER);
+		legsLab.setBounds(400, 450, 160, 48);
+		getContentPane().add(legsLab);
+		legsLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
+		legsLab.setTransferHandler(new ListTransferHandler());
+
+		// HANDS PART
+		scrollPane4 = new JScrollPane();
+		scrollPane4.setBounds(190, 11, 200, 200);
+		getContentPane().add(scrollPane4);
+		handsList = new JList<ArtifactTemplate>();
+		scrollPane4.setViewportView(handsList);
+		handsList.setDragEnabled(true);
+		handsList.setTransferHandler(new ListTransferHandler());
+		handsList.setModel(model4);
+		handsList.setLayoutOrientation(JList.VERTICAL);
+
+		handsLab = new JLabel("Hands");
+		if (character.getHands() != null) {
+			handsLab.setText(character.getHands().getName());
+			handsLab.setToolTipText("<html>" + character.getHands().getType() + "<br>" + "armor: "
+					+ character.getHands().getAmount() + "</html>");
+		}
+		handsLab.setHorizontalAlignment(SwingConstants.CENTER);
+		handsLab.setBounds(20, 30, 160, 48);
+		getContentPane().add(handsLab);
+		handsLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
+		handsLab.setTransferHandler(new ListTransferHandler());
+
+		// RIGHT-HAND PART
+		scrollPane5 = new JScrollPane();
+		scrollPane5.setBounds(190, 221, 200, 200);
+		getContentPane().add(scrollPane5);
+		rightList = new JList<ArtifactTemplate>();
+		scrollPane5.setViewportView(rightList);
+		rightList.setDragEnabled(true);
+		rightList.setTransferHandler(new ListTransferHandler());
+		rightList.setModel(model5);
+		rightList.setLayoutOrientation(JList.VERTICAL);
+
+		rightLab = new JLabel("Right Hand");
+		if (character.getRightHand() != null) {
+			rightLab.setText(character.getRightHand().getName());
+			rightLab.setToolTipText("<html>" + character.getRightHand().getType() + "<br>" + "attack: "
+					+ character.getRightHand().getAmount() + "</html>");
+		}
+		rightLab.setHorizontalAlignment(SwingConstants.CENTER);
+		rightLab.setBounds(20, 240, 160, 48);
+		getContentPane().add(rightLab);
+		rightLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
+		rightLab.setTransferHandler(new ListTransferHandler());
+
+		// LEFT-HAND PART
+		scrollPane6 = new JScrollPane();
+		scrollPane6.setBounds(190, 431, 200, 200);
+		getContentPane().add(scrollPane6);
+		leftList = new JList<ArtifactTemplate>();
+		scrollPane6.setViewportView(leftList);
+		leftList.setDragEnabled(true);
+		leftList.setTransferHandler(new ListTransferHandler());
+		leftList.setModel(model6);
+		leftList.setLayoutOrientation(JList.VERTICAL);
+
+		leftLab = new JLabel("Left hand");
+		if (character.getLeftHand() != null) {
+			leftLab.setText(character.getLeftHand().getName());
+			leftLab.setToolTipText("<html>" + character.getLeftHand().getType() + "<br>" + "defense: "
+					+ character.getLeftHand().getAmount() + "</html>");
+		}
+		leftLab.setHorizontalAlignment(SwingConstants.CENTER);
+		leftLab.setBounds(20, 450, 160, 48);
+		getContentPane().add(leftLab);
+		leftLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
+		leftLab.setTransferHandler(new ListTransferHandler());
+
+		// Statistics
+		armorLabel = new JLabel("Armor: " + character.getArmor());
+		armorLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		armorLabel.setBounds(820, 30, 103, 34);
+		getContentPane().add(armorLabel);
+
+		attackLabel = new JLabel("Attack: " + character.getAttack());
+		attackLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		attackLabel.setBounds(820, 100, 103, 34);
+		getContentPane().add(attackLabel);
+
+		hpLabel = new JLabel("Hp: " + character.getHp());
+		hpLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		hpLabel.setBounds(820, 170, 103, 34);
+		getContentPane().add(hpLabel);
+
+		defenceLabel = new JLabel("Defence: " + character.getDefence());
+		defenceLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		defenceLabel.setBounds(820, 240, 103, 34);
+		getContentPane().add(defenceLabel);
+
+		// Setting to frame
+		setTitle("Inventory");
+		setLocation(450, 100);
+		setResizable(false);
+		setSize(1000, 700);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
     
