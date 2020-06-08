@@ -21,32 +21,28 @@ import javax.swing.SwingConstants;
 import javax.swing.TransferHandler;
 import javax.swing.border.MatteBorder;
 
-public class Inventory extends JFrame{
+public class Inventory extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel headLab, chestLab, legsLab, handsLab, rightLab, leftLab;
-	private JList<ArtifactTemplate> headList, chestList, legsList, handsList,
-	rightList, leftList;
-	private JScrollPane scrollPane1, scrollPane2, scrollPane3, scrollPane4,
-	scrollPane5, scrollPane6;
-	private DefaultListModel<ArtifactTemplate> model1, model2, model3, model4,
-	model5, model6;
+	private JList<ArtifactTemplate> headList, chestList, legsList, handsList, rightList, leftList;
+	private JScrollPane scrollPane1, scrollPane2, scrollPane3, scrollPane4, scrollPane5, scrollPane6;
+	private DefaultListModel<ArtifactTemplate> model1, model2, model3, model4, model5, model6;
 	private JToolBar toolBar;
 	private JButton exitBut, menuBut, returnBut;
 	private Character character;
 	private JLabel armorLabel, hpLabel, attackLabel, defenceLabel;
 
-    public Inventory(Character character) {
-    	this.character = character;
-        initialize();
-    }
-    
-    private void initialize() {
-            
-            
+	public Inventory(Character character) {
+		this.character = character;
+		initialize();
+	}
+
+	private void initialize() {
+
 		getContentPane().setLayout(null);
 
 		createModels();
@@ -283,170 +279,168 @@ public class Inventory extends JFrame{
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    }
-    
-    
-    //Setting character's items on body
-    private Character setCharacter() {
-		character.setHead(character.searchArtifactByName(headLab.getText()));
-    	character.setChest(character.searchArtifactByName(chestLab.getText()));
-    	character.setLegs(character.searchArtifactByName(legsLab.getText()));
-    	character.setHands(character.searchArtifactByName(handsLab.getText()));
-    	character.setRightHand(character.searchArtifactByName(rightLab.getText()));
-    	character.setLeftHand(character.searchArtifactByName(leftLab.getText()));
-    	
-    	return character;
 	}
-    
-    
-    
-    //Creating models for JLists
-    private void createModels() throws IllegalArgumentException{
-    	model1 = new DefaultListModel<ArtifactTemplate>();
-    	model2 = new DefaultListModel<ArtifactTemplate>();
-    	model3 = new DefaultListModel<ArtifactTemplate>();
-    	model4 = new DefaultListModel<ArtifactTemplate>();
-    	model5 = new DefaultListModel<ArtifactTemplate>();
-    	model6 = new DefaultListModel<ArtifactTemplate>();
-    	
-        for(ArtifactTemplate a : character.getArtifacts()) {
-        	
-        	try {
-				switch(a.getType()) {
-				case "Head": model1.addElement(a);
-				break;
-				case "Chest": model2.addElement(a);
-				break;
-				case "Legs": model3.addElement(a);
-				break;
-				case "Hands": model4.addElement(a);
-				break;
-				case "Right-hand": model5.addElement(a);
-				break;
-				case "Left-hand": model6.addElement(a);
-				break;
-				default: throw new IllegalArgumentException("There is no such a type of an item");
+
+	// Setting character's items on body
+	private Character setCharacter() {
+		character.setHead(character.searchArtifactByName(headLab.getText()));
+		character.setChest(character.searchArtifactByName(chestLab.getText()));
+		character.setLegs(character.searchArtifactByName(legsLab.getText()));
+		character.setHands(character.searchArtifactByName(handsLab.getText()));
+		character.setRightHand(character.searchArtifactByName(rightLab.getText()));
+		character.setLeftHand(character.searchArtifactByName(leftLab.getText()));
+
+		return character;
+	}
+
+	// Creating models for JLists
+	private void createModels() throws IllegalArgumentException {
+		model1 = new DefaultListModel<ArtifactTemplate>();
+		model2 = new DefaultListModel<ArtifactTemplate>();
+		model3 = new DefaultListModel<ArtifactTemplate>();
+		model4 = new DefaultListModel<ArtifactTemplate>();
+		model5 = new DefaultListModel<ArtifactTemplate>();
+		model6 = new DefaultListModel<ArtifactTemplate>();
+
+		for (ArtifactTemplate a : character.getArtifacts()) {
+
+			try {
+				switch (a.getType()) {
+				case "Head":
+					model1.addElement(a);
+					break;
+				case "Chest":
+					model2.addElement(a);
+					break;
+				case "Legs":
+					model3.addElement(a);
+					break;
+				case "Hands":
+					model4.addElement(a);
+					break;
+				case "Right-hand":
+					model5.addElement(a);
+					break;
+				case "Left-hand":
+					model6.addElement(a);
+					break;
+				default:
+					throw new IllegalArgumentException("There is no such a type of an item");
 				}
-        	}
-			 catch(IllegalArgumentException exc) {
-        		//System.out.println("There is no such a type of an item");
-        		exc.printStackTrace();
-        	}
-        	
-        }
-        	
-    }
-    
-    
-    
+			} catch (IllegalArgumentException exc) {
+				// System.out.println("There is no such a type of an item");
+				exc.printStackTrace();
+			}
 
-    //Functions to drag and drop from JList to JLabel imported and modified from
-    //https://stackoverflow.com/questions/13855184/drag-and-drop-custom-object-from-jList-into-jlabel
-    @SuppressWarnings("serial")
-    public class ListTransferHandler extends TransferHandler {
+		}
 
-        @Override
-        public boolean canImport(TransferSupport support) {
-            return (support.getComponent() instanceof JLabel) && support.isDataFlavorSupported(ArtifactTransferable.LIST_ITEM_DATA_FLAVOR);
-        }
+	}
 
-        @Override
-        public boolean importData(TransferSupport support) {
-            boolean accept = false;
-            if (canImport(support)) {
-                try {
-                    Transferable t = support.getTransferable();
-                    Object value = t.getTransferData(ArtifactTransferable.LIST_ITEM_DATA_FLAVOR);
-                    if (value instanceof ArtifactTemplate) {
-                        Component component = support.getComponent();
-                        if (component instanceof JLabel) {
-                            ((JLabel)component).setText(((ArtifactTemplate)value).getName());
-                            if(((ArtifactTemplate)value).getType().compareTo("Right-hand") == 0) {
-                            	((JLabel)component).setToolTipText("<html>" 
-                                + ((ArtifactTemplate)value).getType() + "<br>" + "attack: "
-                                + ((ArtifactTemplate)value).getAmount() + "</html>");
-                            	
-                            	character.setAttack(Character.getBasicAttack() + ((ArtifactTemplate)value).getAmount());
-                            	attackLabel.setText("Attack: " + character.getAttack());
-                            }
-                            else if(((ArtifactTemplate)value).getType().compareTo("Left-hand") == 0) {
-                            	((JLabel)component).setToolTipText("<html>" 
-                                + ((ArtifactTemplate)value).getType() + "<br>" + "defence: "
-                                + ((ArtifactTemplate)value).getAmount() + "</html>");
-                            	
-                            	character.setDefence(Character.getBasicDefence() + ((ArtifactTemplate)value).getAmount());
-                            	defenceLabel.setText("Defence: " + character.getDefence());
-                            }
-                            else {
-                            	((JLabel)component).setToolTipText("<html>" 
-                                + ((ArtifactTemplate)value).getType() + "<br>" + "armor: "
-                                + ((ArtifactTemplate)value).getAmount() + "</html>");
-                            	
-                            	character.setArmor(Character.getBasicArmor() + ((ArtifactTemplate)value).getAmount());
-                            	armorLabel.setText("Armor: " + character.getArmor());
-                            }
-                            accept = true;
-                        }
-                    }
-                } catch (Exception exp) {
-                    exp.printStackTrace();
-                }
-            }
-            return accept;
-        }
+	// Functions to drag and drop from JList to JLabel imported and modified from
+	// https://stackoverflow.com/questions/13855184/drag-and-drop-custom-object-from-jList-into-jlabel
+	@SuppressWarnings("serial")
+	public class ListTransferHandler extends TransferHandler {
 
-        @Override
-        public int getSourceActions(JComponent c) {
-            return DnDConstants.ACTION_COPY_OR_MOVE;
-        }
+		@Override
+		public boolean canImport(TransferSupport support) {
+			return (support.getComponent() instanceof JLabel)
+					&& support.isDataFlavorSupported(ArtifactTransferable.LIST_ITEM_DATA_FLAVOR);
+		}
 
-        @Override
-        protected Transferable createTransferable(JComponent c) {
-            Transferable t = null;
-            if (c instanceof JList) {
-                @SuppressWarnings("unchecked")
-                JList<ArtifactTemplate> list = (JList<ArtifactTemplate>) c;
-                Object value = list.getSelectedValue();
-                if (value instanceof ArtifactTemplate) {
-                	ArtifactTemplate li = (ArtifactTemplate) value;
-                    t = new ArtifactTransferable(li);
-                }
-            }
-            return t;
-        }
+		@Override
+		public boolean importData(TransferSupport support) {
+			boolean accept = false;
+			if (canImport(support)) {
+				try {
+					Transferable t = support.getTransferable();
+					Object value = t.getTransferData(ArtifactTransferable.LIST_ITEM_DATA_FLAVOR);
+					if (value instanceof ArtifactTemplate) {
+						Component component = support.getComponent();
+						if (component instanceof JLabel) {
+							((JLabel) component).setText(((ArtifactTemplate) value).getName());
+							if (((ArtifactTemplate) value).getType().compareTo("Right-hand") == 0) {
+								((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType()
+										+ "<br>" + "attack: " + ((ArtifactTemplate) value).getAmount() + "</html>");
 
-        @Override
-        protected void exportDone(JComponent source, Transferable data, int action) {
-            System.out.println("ExportDone");
-            // Here you need to decide how to handle the completion of the transfer,
-            // should you remove the item from the list or not...
-        }
-    }
+								character
+										.setAttack(Character.getBasicAttack() + ((ArtifactTemplate) value).getAmount());
+								attackLabel.setText("Attack: " + character.getAttack());
+							} else if (((ArtifactTemplate) value).getType().compareTo("Left-hand") == 0) {
+								((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType()
+										+ "<br>" + "defence: " + ((ArtifactTemplate) value).getAmount() + "</html>");
 
-    public static class ArtifactTransferable implements Transferable {
+								character.setDefence(
+										Character.getBasicDefence() + ((ArtifactTemplate) value).getAmount());
+								defenceLabel.setText("Defence: " + character.getDefence());
+							} else {
+								((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType()
+										+ "<br>" + "armor: " + ((ArtifactTemplate) value).getAmount() + "</html>");
 
-        public static final DataFlavor LIST_ITEM_DATA_FLAVOR = new DataFlavor(ArtifactTemplate.class, "java/Artifact");
-        private ArtifactTemplate Artifact;
+								character.setArmor(Character.getBasicArmor() + ((ArtifactTemplate) value).getAmount());
+								armorLabel.setText("Armor: " + character.getArmor());
+							}
+							accept = true;
+						}
+					}
+				} catch (Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+			return accept;
+		}
 
-        public ArtifactTransferable(ArtifactTemplate Artifact) {
-            this.Artifact = Artifact;
-        }
+		@Override
+		public int getSourceActions(JComponent c) {
+			return DnDConstants.ACTION_COPY_OR_MOVE;
+		}
 
-        @Override
-        public DataFlavor[] getTransferDataFlavors() {
-            return new DataFlavor[]{LIST_ITEM_DATA_FLAVOR};
-        }
+		@Override
+		protected Transferable createTransferable(JComponent c) {
+			Transferable t = null;
+			if (c instanceof JList) {
+				@SuppressWarnings("unchecked")
+				JList<ArtifactTemplate> list = (JList<ArtifactTemplate>) c;
+				Object value = list.getSelectedValue();
+				if (value instanceof ArtifactTemplate) {
+					ArtifactTemplate li = (ArtifactTemplate) value;
+					t = new ArtifactTransferable(li);
+				}
+			}
+			return t;
+		}
 
-        @Override
-        public boolean isDataFlavorSupported(DataFlavor flavor) {
-            return flavor.equals(LIST_ITEM_DATA_FLAVOR);
-        }
+		@Override
+		protected void exportDone(JComponent source, Transferable data, int action) {
+			System.out.println("ExportDone");
+			// Here you need to decide how to handle the completion of the transfer,
+			// should you remove the item from the list or not...
+		}
+	}
 
-        @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+	public static class ArtifactTransferable implements Transferable {
 
-            return Artifact;
+		public static final DataFlavor LIST_ITEM_DATA_FLAVOR = new DataFlavor(ArtifactTemplate.class, "java/Artifact");
+		private ArtifactTemplate Artifact;
 
-        }
-    }
+		public ArtifactTransferable(ArtifactTemplate Artifact) {
+			this.Artifact = Artifact;
+		}
+
+		@Override
+		public DataFlavor[] getTransferDataFlavors() {
+			return new DataFlavor[] { LIST_ITEM_DATA_FLAVOR };
+		}
+
+		@Override
+		public boolean isDataFlavorSupported(DataFlavor flavor) {
+			return flavor.equals(LIST_ITEM_DATA_FLAVOR);
+		}
+
+		@Override
+		public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+
+			return Artifact;
+
+		}
+	}
 }

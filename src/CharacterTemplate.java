@@ -3,7 +3,7 @@ import java.io.Serializable;
 public abstract class CharacterTemplate implements Serializable {
 
 	protected int hp, attack, armor;
-	
+
 	public abstract int makeAttack();
 
 	public int getHp() {
@@ -21,14 +21,13 @@ public abstract class CharacterTemplate implements Serializable {
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
-	
-	
+
 	public int getArmor() {
 		return armor;
 	}
-	
+
 	public void setArmor(int armor) {
 		this.armor = armor;
 	}
-	
+
 }
