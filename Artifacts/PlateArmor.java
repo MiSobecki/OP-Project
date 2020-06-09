@@ -16,5 +16,9 @@ public class PlateArmor extends ArtifactDecorator {
 	public String getName() {
 		return "Plate armor";
 	}
+	
+	public String getDescription() {
+		return "Armor: + 5";
+	}
 
 }

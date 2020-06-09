@@ -11,5 +11,9 @@ public class PracticeSword extends RightHandArtifact {
 	public String getName() {
 		return "Practice sword";
 	}
+	
+	public String getDescription() {
+		return "Attack: + 3";
+	}
 
 }

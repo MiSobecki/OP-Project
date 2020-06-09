@@ -8,10 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 public class Shop extends JFrame {
 
@@ -20,7 +18,7 @@ public class Shop extends JFrame {
 
 	private JLabel artLabel1, artLabel2, artLabel3, artLabel4, artLabel5, artLabel6;
 	private JButton artBut1, artBut2, artBut3, artBut4, artBut5, artBut6;
-	private JLabel cashLabel;
+	private JLabel cashLabel, armorLabel, attackLabel, defenceLabel;
 	private JToolBar toolBar;
 	private JButton exitBut, returnBut, menuBut, refreshBut;
 
@@ -38,7 +36,7 @@ public class Shop extends JFrame {
 		setAllArtifacts();
 		setRandomList();
 
-		// Setting
+		// Setting of available artifacts to buy
 		artLabel1 = new JLabel(randomList.get(0).getName());
 		artLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel1.setBounds(80, 170, 100, 30);
@@ -147,12 +145,29 @@ public class Shop extends JFrame {
 			}
 		});
 
+		// Labels informing about character's statistics
 		cashLabel = new JLabel("Cash: " + character.getWealth());
 		cashLabel.setBounds(300, 380, 100, 30);
 		cashLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
 		getContentPane().add(cashLabel);
 
-		refreshBut = new JButton("New button");
+		armorLabel = new JLabel("Armor: " + character.getArmor());
+		armorLabel.setBounds(170, 10, 100, 30);
+		armorLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		getContentPane().add(armorLabel);
+
+		defenceLabel = new JLabel("Defence: " + character.getDefence());
+		defenceLabel.setBounds(300, 10, 100, 30);
+		defenceLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		getContentPane().add(defenceLabel);
+
+		attackLabel = new JLabel("Attack: " + character.getAttack());
+		attackLabel.setBounds(430, 10, 100, 30);
+		attackLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		getContentPane().add(attackLabel);
+
+		// Button to refresh list of available artifacts
+		refreshBut = new JButton("Refresh");
 		refreshBut.setBounds(300, 270, 100, 51);
 		getContentPane().add(refreshBut);
 		refreshBut.addActionListener(new ActionListener() {
@@ -276,9 +291,40 @@ public class Shop extends JFrame {
 	}
 
 	private void buyAction(int i) {
-		character.addArtifact(randomList.get(i));
-		artBut1.setEnabled(false);
-		character.setWealth(character.getWealth() - randomList.get(i).getCost());
+		ArtifactTemplate temp = randomList.get(i);
+
+		switch (i) {
+		case 1:
+			artBut1.setEnabled(false);
+			break;
+		case 2:
+			artBut2.setEnabled(false);
+			break;
+		case 3:
+			artBut3.setEnabled(false);
+			break;
+		case 4:
+			artBut4.setEnabled(false);
+			break;
+		case 5:
+			artBut5.setEnabled(false);
+			break;
+		case 6:
+			artBut6.setEnabled(false);
+			break;
+		default:
+			System.out.println("Such artifact doesn't exist");
+		}
+
+		character.addArtifact(temp);
+		character.setWealth(character.getWealth() - temp.getCost());
 		cashLabel.setText("Cash: " + character.getWealth());
+
+		if (temp.getType() == "Right-hand") {
+			attackLabel.setText("Attack: " + character.getAttack());
+		} else if (temp.getType() == "Left-hand") {
+			defenceLabel.setText("Defence: " + character.getDefence());
+		} else
+			armorLabel.setText("Armor: " + character.getArmor());
 	}
 }

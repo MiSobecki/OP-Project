@@ -7,4 +7,6 @@ public interface ArtifactTemplate {
 	String getName();
 
 	String getType();
+	
+	String getDescription();
 }

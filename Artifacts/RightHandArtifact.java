@@ -8,4 +8,9 @@ public class RightHandArtifact extends ArtifactDecorator {
 	public String getType() {
 		return "Right-hand";
 	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
 }

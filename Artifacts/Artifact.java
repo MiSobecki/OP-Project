@@ -31,5 +31,9 @@ public class Artifact implements Serializable, ArtifactTemplate {
 	public String getType() {
 		return "None";
 	}
+	
+	@Override public String getDescription() {
+		return "None";
+	}
 
 }

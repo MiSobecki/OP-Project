@@ -7,6 +7,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
 
 import javax.swing.DefaultListModel;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.TransferHandler;
 import javax.swing.border.MatteBorder;
@@ -35,6 +38,7 @@ public class Inventory extends JFrame {
 	private JButton exitBut, menuBut, returnBut;
 	private Character character;
 	private JLabel armorLabel, hpLabel, attackLabel, defenceLabel;
+	private MouseMotionAdapter mma;
 
 	public Inventory(Character character) {
 		this.character = character;
@@ -46,6 +50,8 @@ public class Inventory extends JFrame {
 		getContentPane().setLayout(null);
 
 		createModels();
+
+		createJListToolTips();
 
 		// ToolBar
 		toolBar = new JToolBar();
@@ -122,6 +128,7 @@ public class Inventory extends JFrame {
 		headList.setTransferHandler(new ListTransferHandler());
 		headList.setModel(model1);
 		headList.setLayoutOrientation(JList.VERTICAL);
+		headList.addMouseMotionListener(mma);
 
 		headLab = new JLabel("Head");
 		if (character.getHead() != null) {
@@ -145,6 +152,7 @@ public class Inventory extends JFrame {
 		chestList.setTransferHandler(new ListTransferHandler());
 		chestList.setModel(model2);
 		chestList.setLayoutOrientation(JList.VERTICAL);
+		chestList.addMouseMotionListener(mma);
 
 		chestLab = new JLabel("Chest");
 		if (character.getChest() != null) {
@@ -168,6 +176,7 @@ public class Inventory extends JFrame {
 		legsList.setTransferHandler(new ListTransferHandler());
 		legsList.setModel(model3);
 		legsList.setLayoutOrientation(JList.VERTICAL);
+		legsList.addMouseMotionListener(mma);
 
 		legsLab = new JLabel("Legs");
 		if (character.getLegs() != null) {
@@ -191,6 +200,7 @@ public class Inventory extends JFrame {
 		handsList.setTransferHandler(new ListTransferHandler());
 		handsList.setModel(model4);
 		handsList.setLayoutOrientation(JList.VERTICAL);
+		handsList.addMouseMotionListener(mma);
 
 		handsLab = new JLabel("Hands");
 		if (character.getHands() != null) {
@@ -214,6 +224,7 @@ public class Inventory extends JFrame {
 		rightList.setTransferHandler(new ListTransferHandler());
 		rightList.setModel(model5);
 		rightList.setLayoutOrientation(JList.VERTICAL);
+		rightList.addMouseMotionListener(mma);
 
 		rightLab = new JLabel("Right Hand");
 		if (character.getRightHand() != null) {
@@ -237,6 +248,7 @@ public class Inventory extends JFrame {
 		leftList.setTransferHandler(new ListTransferHandler());
 		leftList.setModel(model6);
 		leftList.setLayoutOrientation(JList.VERTICAL);
+		leftList.addMouseMotionListener(mma);
 
 		leftLab = new JLabel("Left hand");
 		if (character.getLeftHand() != null) {
@@ -334,6 +346,22 @@ public class Inventory extends JFrame {
 
 		}
 
+	}
+
+	// Function to create JList ToolTips
+	private void createJListToolTips() {
+		mma = new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				@SuppressWarnings("unchecked")
+				JList<ArtifactTemplate> l = (JList<ArtifactTemplate>) e.getSource();
+				ListModel<ArtifactTemplate> m = l.getModel();
+				int index = l.locationToIndex(e.getPoint());
+				if (index > -1) {
+					l.setToolTipText(m.getElementAt(index).getDescription());
+				}
+			}
+		};
 	}
 
 	// Functions to drag and drop from JList to JLabel imported and modified from

@@ -16,5 +16,9 @@ public class LeatherArmor extends ChestArtifact {
 	public String getName() {
 		return "Leather armor";
 	}
+	
+	public String getDescription() {
+		return "Armor: +  2";
+	}
 
 }

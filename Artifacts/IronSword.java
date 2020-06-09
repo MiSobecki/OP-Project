@@ -16,5 +16,9 @@ public class IronSword extends PracticeSword {
 	public String getName() {
 		return "Iron sword";
 	}
+	
+	public String getDescription() {
+		return "Attack: + 5";
+	}
 
 }

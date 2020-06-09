@@ -27,4 +27,9 @@ public abstract class ArtifactDecorator implements Serializable, ArtifactTemplat
 	public String getType() {
 		return artifact.getType();
 	}
+	
+	@Override
+	public String getDescription() {
+		return artifact.getDescription();
+	}
 }

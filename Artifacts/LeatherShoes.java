@@ -16,4 +16,8 @@ public class LeatherShoes extends LegsArtifact {
 	public String getName() {
 		return "Leather shoes";
 	}
+	
+	public String getDescription() {
+		return "Armor: + 3";
+	}
 }
