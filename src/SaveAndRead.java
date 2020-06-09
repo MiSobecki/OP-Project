@@ -35,4 +35,21 @@ public class SaveAndRead {
 		inputStream.close();
 		return temp;
 	}
+	
+	public void saveSaves(ArrayList<String> temp, String savefile) throws IOException {
+		ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savefile + ".bin"));
+		outputStream.writeObject(temp);
+		System.out.println("saved");
+		outputStream.close();
+	}
+	
+	public ArrayList<String> readSaves(String savefile) throws IOException, ClassNotFoundException {
+		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
+		@SuppressWarnings("unchecked")
+		ArrayList<String> temp = (ArrayList<String>) inputStream.readObject();
+		inputStream.close();
+		return temp;
+	}
+	
+	
 }

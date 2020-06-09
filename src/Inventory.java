@@ -133,8 +133,8 @@ public class Inventory extends JFrame {
 		headLab = new JLabel("Head");
 		if (character.getHead() != null) {
 			headLab.setText(character.getHead().getName());
-			headLab.setToolTipText("<html>" + character.getHead().getType() + "<br>" + "armor: "
-					+ character.getHead().getAmount() + "</html>");
+			headLab.setToolTipText("<html>" + character.getHead().getType() + "<br>"
+					+ character.getHead().getDescription() + "</html>");
 		}
 		headLab.setBounds(400, 30, 160, 48);
 		headLab.setHorizontalAlignment(SwingConstants.CENTER);
@@ -157,8 +157,8 @@ public class Inventory extends JFrame {
 		chestLab = new JLabel("Chest");
 		if (character.getChest() != null) {
 			chestLab.setText(character.getChest().getName());
-			chestLab.setToolTipText("<html>" + character.getChest().getType() + "<br>" + "armor: "
-					+ character.getChest().getAmount() + "</html>");
+			chestLab.setToolTipText("<html>" + character.getChest().getType() + "<br>"
+					+ character.getChest().getDescription() + "</html>");
 		}
 		chestLab.setHorizontalAlignment(SwingConstants.CENTER);
 		chestLab.setBounds(400, 240, 160, 48);
@@ -181,8 +181,8 @@ public class Inventory extends JFrame {
 		legsLab = new JLabel("Legs");
 		if (character.getLegs() != null) {
 			legsLab.setText(character.getLegs().getName());
-			legsLab.setToolTipText("<html>" + character.getLegs().getType() + "<br>" + "armor: "
-					+ character.getLegs().getAmount() + "</html>");
+			legsLab.setToolTipText("<html>" + character.getLegs().getType() + "<br>"
+					+ character.getLegs().getDescription() + "</html>");
 		}
 		legsLab.setHorizontalAlignment(SwingConstants.CENTER);
 		legsLab.setBounds(400, 450, 160, 48);
@@ -205,8 +205,8 @@ public class Inventory extends JFrame {
 		handsLab = new JLabel("Hands");
 		if (character.getHands() != null) {
 			handsLab.setText(character.getHands().getName());
-			handsLab.setToolTipText("<html>" + character.getHands().getType() + "<br>" + "armor: "
-					+ character.getHands().getAmount() + "</html>");
+			handsLab.setToolTipText("<html>" + character.getHands().getType() + "<br>"
+					+ character.getHands().getDescription() + "</html>");
 		}
 		handsLab.setHorizontalAlignment(SwingConstants.CENTER);
 		handsLab.setBounds(20, 30, 160, 48);
@@ -229,8 +229,8 @@ public class Inventory extends JFrame {
 		rightLab = new JLabel("Right Hand");
 		if (character.getRightHand() != null) {
 			rightLab.setText(character.getRightHand().getName());
-			rightLab.setToolTipText("<html>" + character.getRightHand().getType() + "<br>" + "attack: "
-					+ character.getRightHand().getAmount() + "</html>");
+			rightLab.setToolTipText("<html>" + character.getRightHand().getType() + "<br>"
+					+ character.getRightHand().getDescription() + "</html>");
 		}
 		rightLab.setHorizontalAlignment(SwingConstants.CENTER);
 		rightLab.setBounds(20, 240, 160, 48);
@@ -253,8 +253,8 @@ public class Inventory extends JFrame {
 		leftLab = new JLabel("Left hand");
 		if (character.getLeftHand() != null) {
 			leftLab.setText(character.getLeftHand().getName());
-			leftLab.setToolTipText("<html>" + character.getLeftHand().getType() + "<br>" + "defense: "
-					+ character.getLeftHand().getAmount() + "</html>");
+			leftLab.setToolTipText("<html>" + character.getLeftHand().getType() + "<br>"
+					+ character.getLeftHand().getDescription() + "</html>");
 		}
 		leftLab.setHorizontalAlignment(SwingConstants.CENTER);
 		leftLab.setBounds(20, 450, 160, 48);
@@ -386,27 +386,11 @@ public class Inventory extends JFrame {
 						Component component = support.getComponent();
 						if (component instanceof JLabel) {
 							((JLabel) component).setText(((ArtifactTemplate) value).getName());
-							if (((ArtifactTemplate) value).getType().compareTo("Right-hand") == 0) {
-								((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType()
-										+ "<br>" + "attack: " + ((ArtifactTemplate) value).getAmount() + "</html>");
-
-								character
-										.setAttack(Character.getBasicAttack() + ((ArtifactTemplate) value).getAmount());
-								attackLabel.setText("Attack: " + character.getAttack());
-							} else if (((ArtifactTemplate) value).getType().compareTo("Left-hand") == 0) {
-								((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType()
-										+ "<br>" + "defence: " + ((ArtifactTemplate) value).getAmount() + "</html>");
-
-								character.setDefence(
-										Character.getBasicDefence() + ((ArtifactTemplate) value).getAmount());
-								defenceLabel.setText("Defence: " + character.getDefence());
-							} else {
-								((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType()
-										+ "<br>" + "armor: " + ((ArtifactTemplate) value).getAmount() + "</html>");
-
-								character.setArmor(Character.getBasicArmor() + ((ArtifactTemplate) value).getAmount());
-								armorLabel.setText("Armor: " + character.getArmor());
-							}
+							((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType() + "<br>"
+									+ ((ArtifactTemplate) value).getDescription() + "</html>");
+							
+							character.setAttack(Character.getBasicAttack() + ((ArtifactTemplate) value).getAmount());
+							attackLabel.setText("Attack: " + character.getAttack());
 							accept = true;
 						}
 					}
