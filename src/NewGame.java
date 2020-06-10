@@ -69,21 +69,17 @@ public class NewGame extends JFrame {
 
 		if (list.contains(temp)) {
 			int o = JOptionPane.showConfirmDialog(null,
-					"This name of the save already exists.\n"
-					+ "Do you want to overwrite it?",
-					"Save overwite",
+					"This name of the save already exists.\n" + "Do you want to overwrite it?", "Save overwite",
 					JOptionPane.YES_NO_OPTION);
-			if(o == 0) {
+			if (o == 0) {
 				@SuppressWarnings("unused")
 				City city = new City(createNewCharacter(), temp);
-			}
-			else {
+			} else {
 				@SuppressWarnings("unused")
 				Menu menu = new Menu();
 			}
 			dispose();
-		}
-		else {
+		} else {
 			list.add(temp);
 
 			try {
@@ -103,7 +99,7 @@ public class NewGame extends JFrame {
 	private Character createNewCharacter() {
 		Character character = Character.builder().hp(100).attack(3).wealth(0).arenaLvl(0).armor(0).defence(3)
 				.artifacts(new ArrayList<ArtifactTemplate>()).addArrtifact(new PracticeSword(new Artifact()))
-				.addArrtifact(new PracticeShield(new Artifact())).build();
+				.addArrtifact(new PracticeShield(new Artifact())).stamina(30).build();
 		return character;
 	}
 }

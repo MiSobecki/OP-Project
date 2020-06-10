@@ -38,7 +38,7 @@ public class Character extends CharacterTemplate implements Serializable {
 
 	// Builder class
 	public static final class Builder {
-		private int hp, attack, armor, wealth, arenaLvl, defence;
+		private int hp, attack, armor, wealth, arenaLvl, defence, stamina;
 		private ArrayList<ArtifactTemplate> artifacts; // headList of artifacts character have
 		private ArtifactTemplate head, chest, legs, hands, rightHand, leftHand;
 
@@ -111,6 +111,11 @@ public class Character extends CharacterTemplate implements Serializable {
 			this.defence = defence;
 			return this;
 		}
+		
+		public Builder stamina(int stamina) {
+			this.stamina = stamina;
+			return this;
+		}
 
 		public Character build() {
 			if (hp <= 0)
@@ -134,6 +139,7 @@ public class Character extends CharacterTemplate implements Serializable {
 			character.legs = this.legs;
 			character.armor = this.armor;
 			character.defence = this.defence;
+			character.stamina = this.stamina;
 
 			return character;
 		}
