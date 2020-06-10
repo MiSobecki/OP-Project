@@ -78,7 +78,7 @@ public class City extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				@SuppressWarnings("unused")
-				Inn inn = new Inn(character);
+				Inn inn = new Inn(character, savefile);
 				dispose();
 			}
 		});

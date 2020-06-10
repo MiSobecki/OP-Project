@@ -54,18 +54,9 @@ public class Menu extends JFrame {
 		loadBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				try {
-					SaveAndRead sr = new SaveAndRead();
-					@SuppressWarnings("unused")
-					City city = new City((Character) sr.read("Character2"));
-					dispose();
-				} catch (Exception exc) {
-					exc.printStackTrace();
-					System.out.println("Save doesn't exist");
-					@SuppressWarnings("unused")
-					City city = new City(createNewCharacter());
-					dispose();
-				}
+				@SuppressWarnings("unused")
+				LoadGame lg = new LoadGame();
+				dispose();
 			}
 		});
 
@@ -77,13 +68,5 @@ public class Menu extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	private Character createNewCharacter() {
-		Character character = Character.builder().hp(100).attack(3).wealth(0).arenaLvl(0).armor(0).defence(3)
-				.artifacts(new ArrayList<ArtifactTemplate>()).addArrtifact(new PracticeSword(new Artifact()))
-				.addArrtifact(new PracticeShield(new Artifact())).build();
-		return character;
-	}
-
 
 }
