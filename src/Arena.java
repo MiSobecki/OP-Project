@@ -80,7 +80,7 @@ public class Arena extends JFrame {
 		attackBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				attackAction();
+				turnAction();
 			}
 		});
 
@@ -94,44 +94,29 @@ public class Arena extends JFrame {
 	}
 
 	// actions after attackBut pressed
-	private void attackAction() {
-		int dmg = enemy.getArmor() - character.makeAttack();
-		if (dmg > 0)
-			dmg = 0;
-
-		enemy.setHp(enemy.getHp() - dmg);
-		if (enemy.getHp() < 0)
-			enemy.setHp(0);
-		hpBarE.setValue(enemy.getHp());
-		hpLabelE.setText("HP: " + enemy.getHp() + "/100");
-		attackBut.setEnabled(false);
+	private void turnAction() {
+		String dec = enemy.makeDecision();
+		charactersAttack(dec);
 
 		if (enemy.getHp() == 0) {
 			character.setArenaLvl(character.getArenaLvl() + 1);
 			character.setWealth(character.getWealth() + enemy.getAward());
 			enemy.setHp(100);
+
 			try {
 				SaveAndRead sr = new SaveAndRead();
 				sr.save(character, savefile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
 			@SuppressWarnings("unused")
 			City city = new City(character, savefile);
 			dispose();
 		} else {
 			Timer timer = new Timer(1000, new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int dmg = character.getArmor() - enemy.makeAttack();
-					if (dmg > 0)
-						dmg = 0;
-
-					character.setHp(character.getHp() - dmg);
-					if (character.getHp() < 0)
-						character.setHp(0);
-					hpBar.setValue(character.getHp());
-					hpLabel.setText("HP: " + character.getHp() + "/100");
-					attackBut.setEnabled(true);
+					EnemysMove("Attack", dec);
 				}
 			});
 
@@ -143,5 +128,44 @@ public class Arena extends JFrame {
 			}
 
 		}
+	}
+
+	private void charactersAttack(String Edecision) {
+		int dmg = 0;
+		if (Edecision.compareTo("Attack") == 0 || Edecision.compareTo("Wait") == 0) {
+			dmg = enemy.getArmor() - character.makeAttack();
+		} else {
+			dmg = enemy.getArmor() + enemy.getDefence() - character.makeAttack();
+		}
+		if (dmg > 0)
+			dmg = 0;
+
+		enemy.setHp(enemy.getHp() - dmg);
+		if (enemy.getHp() < 0)
+			enemy.setHp(0);
+		hpBarE.setValue(enemy.getHp());
+		hpLabelE.setText("HP: " + enemy.getHp() + "/100");
+		attackBut.setEnabled(false);
+	}
+
+	private void EnemysMove(String Cdecision, String Edecision) {
+		if (Edecision.compareTo("Attack") == 0) {
+			int dmg = 0;
+			if (dmg > 0)
+				dmg = 0;
+
+			character.setHp(character.getHp() - dmg);
+			if (character.getHp() < 0)
+				character.setHp(0);
+			hpBar.setValue(character.getHp());
+			hpLabel.setText("HP: " + character.getHp() + "/100");
+			enemy.setStamina(enemy.getStamina() - 5);
+		} else if (Edecision.compareTo("Defend") == 0) {
+			enemy.setStamina(enemy.getStamina() - 3);
+		} else {
+			enemy.setStamina(enemy.getStamina() + 4);
+		}
+
+		attackBut.setEnabled(true);
 	}
 }

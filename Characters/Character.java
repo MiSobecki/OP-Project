@@ -10,7 +10,7 @@ public class Character extends CharacterTemplate implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<ArtifactTemplate> artifacts; // headList of artifacts character have
 	private ArtifactTemplate head, chest, legs, hands, rightHand, leftHand;
-	private int wealth, arenaLvl, defence;
+	private int wealth, arenaLvl, maxStamina;
 	private static final int basicAttack = 3;
 	private static final int basicArmor = 0;
 	private static final int basicDefence = 3;
@@ -38,7 +38,7 @@ public class Character extends CharacterTemplate implements Serializable {
 
 	// Builder class
 	public static final class Builder {
-		private int hp, attack, armor, wealth, arenaLvl, defence, stamina;
+		private int hp, attack, armor, wealth, arenaLvl, defence, stamina, maxStamina;
 		private ArrayList<ArtifactTemplate> artifacts; // headList of artifacts character have
 		private ArtifactTemplate head, chest, legs, hands, rightHand, leftHand;
 
@@ -116,6 +116,11 @@ public class Character extends CharacterTemplate implements Serializable {
 			this.stamina = stamina;
 			return this;
 		}
+		
+		public Builder maxStamina(int maxStamina) {
+			this.maxStamina = maxStamina;
+			return this;
+		}
 
 		public Character build() {
 			if (hp <= 0)
@@ -140,6 +145,7 @@ public class Character extends CharacterTemplate implements Serializable {
 			character.armor = this.armor;
 			character.defence = this.defence;
 			character.stamina = this.stamina;
+			character.maxStamina = this.maxStamina;
 
 			return character;
 		}
@@ -223,20 +229,20 @@ public class Character extends CharacterTemplate implements Serializable {
 		this.arenaLvl = arenaLvl;
 	}
 
+	public int getMaxStamina() {
+		return maxStamina;
+	}
+
+	public void setMaxStamina(int maxStamina) {
+		this.maxStamina = maxStamina;
+	}
+
 	public static int getBasicAttack() {
 		return basicAttack;
 	}
 
 	public static int getBasicArmor() {
 		return basicArmor;
-	}
-
-	public int getDefence() {
-		return defence;
-	}
-
-	public void setDefence(int defence) {
-		this.defence = defence;
 	}
 
 	public static int getBasicDefence() {

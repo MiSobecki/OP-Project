@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class EnemiesList extends ArrayList<Enemy> {
 
 	public EnemiesList(Character character) {
-		add(new Enemy(100, 5, 0, 1000, "Skeleton", 0));
-		add(new Enemy(100, 7, 0, 2000, "Demon", 1));
-		add(new Enemy(100, 10, 2, 3000, "Ghost", 2));
+		add(new Enemy(100, 5, 0, 1000, "Skeleton", 0, 10, 1));
+		add(new Enemy(100, 7, 0, 2000, "Demon", 1, 20, 2));
+		add(new Enemy(100, 10, 2, 3000, "Ghost", 2, 30, 3));
 
 		setLvls(character);
 	}
