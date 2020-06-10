@@ -36,12 +36,15 @@ public class Inventory extends JFrame {
 	private DefaultListModel<ArtifactTemplate> model1, model2, model3, model4, model5, model6;
 	private JToolBar toolBar;
 	private JButton exitBut, menuBut, returnBut;
-	private Character character;
 	private JLabel armorLabel, hpLabel, attackLabel, defenceLabel;
+	
+	private Character character;
 	private MouseMotionAdapter mma;
+	private String savefile;
 
-	public Inventory(Character character) {
+	public Inventory(Character character, String savefile) {
 		this.character = character;
+		this.savefile = savefile;
 		initialize();
 	}
 
@@ -66,7 +69,7 @@ public class Inventory extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -83,7 +86,7 @@ public class Inventory extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -104,13 +107,13 @@ public class Inventory extends JFrame {
 
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(temp, "Character2");
+					sr.save(temp, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				@SuppressWarnings("unused")
-				City city = new City(temp);
+				City city = new City(temp, savefile);
 				dispose();
 			}
 		});

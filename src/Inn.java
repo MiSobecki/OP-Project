@@ -21,11 +21,11 @@ public class Inn extends JFrame {
 	private JButton beerBut, exitBut, returnBut, menuBut;
 	private JToolBar toolBar;
 
-	public Inn(Character character) {
-		initialize(character);
+	public Inn(Character character, String savefile) {
+		initialize(character, savefile);
 	}
 
-	private void initialize(Character character) {
+	private void initialize(Character character, String savefile) {
 		getContentPane().setLayout(null);
 
 		// Beer button
@@ -61,7 +61,7 @@ public class Inn extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -78,7 +78,7 @@ public class Inn extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -97,13 +97,13 @@ public class Inn extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				@SuppressWarnings("unused")
-				City city = new City(character);
+				City city = new City(character, savefile);
 				dispose();
 			}
 		});

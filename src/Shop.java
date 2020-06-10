@@ -24,12 +24,12 @@ public class Shop extends JFrame {
 
 	private Character character;
 
-	public Shop(Character character) {
+	public Shop(Character character, String savefile) {
 		this.character = character;
-		initialize();
+		initialize(savefile);
 	}
 
-	private void initialize() {
+	private void initialize(String savefile) {
 
 		getContentPane().setLayout(null);
 
@@ -181,7 +181,7 @@ public class Shop extends JFrame {
 					e.printStackTrace();
 				}
 				getContentPane().removeAll();
-				initialize();
+				initialize(savefile);
 			}
 		});
 
@@ -198,7 +198,7 @@ public class Shop extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 					sr.saveShop(randomList, "Shop");
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -216,7 +216,7 @@ public class Shop extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 					sr.saveShop(randomList, "Shop");
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -235,14 +235,14 @@ public class Shop extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 					sr.saveShop(randomList, "Shop");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				@SuppressWarnings("unused")
-				City city = new City(character);
+				City city = new City(character, savefile);
 				dispose();
 			}
 		});

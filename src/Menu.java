@@ -37,7 +37,7 @@ public class Menu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				@SuppressWarnings("unused")
-				City city = new City(createNewCharacter());
+				NewGame ng = new NewGame();
 				dispose();
 			}
 		});
@@ -77,12 +77,13 @@ public class Menu extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	
 	private Character createNewCharacter() {
 		Character character = Character.builder().hp(100).attack(3).wealth(0).arenaLvl(0).armor(0).defence(3)
 				.artifacts(new ArrayList<ArtifactTemplate>()).addArrtifact(new PracticeSword(new Artifact()))
 				.addArrtifact(new PracticeShield(new Artifact())).build();
 		return character;
 	}
+
 
 }

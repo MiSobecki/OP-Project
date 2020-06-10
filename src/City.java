@@ -24,11 +24,11 @@ public class City extends JFrame {
 	private JProgressBar hpBar;
 	private JLabel hpLabel, cashLabel;
 
-	public City(Character character) {
-		initialize(character);
+	public City(Character character, String savefile) {
+		initialize(character, savefile);
 	}
 
-	private void initialize(Character character) {
+	private void initialize(Character character, String savefile) {
 		getContentPane().setLayout(null);
 
 		// Button to open shop window
@@ -39,7 +39,7 @@ public class City extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				@SuppressWarnings("unused")
-				Shop shop = new Shop(character);
+				Shop shop = new Shop(character, savefile);
 				dispose();
 			}
 		});
@@ -52,7 +52,7 @@ public class City extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				@SuppressWarnings("unused")
-				ArenaList arenaList = new ArenaList(character);
+				ArenaList arenaList = new ArenaList(character, savefile);
 				dispose();
 			}
 		});
@@ -65,7 +65,7 @@ public class City extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				@SuppressWarnings("unused")
-				Inventory inv = new Inventory(character);
+				Inventory inv = new Inventory(character, savefile);
 				dispose();
 			}
 		});

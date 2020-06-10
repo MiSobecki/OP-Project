@@ -15,11 +15,11 @@ public class ArenaList extends JFrame {
 	private JButton fightBut, exitBut, menuBut, returnBut;
 	private JToolBar toolBar;
 
-	public ArenaList(Character character) {
-		initialize(character);
+	public ArenaList(Character character, String savefile) {
+		initialize(character, savefile);
 	}
 
-	private void initialize(Character character) {
+	private void initialize(Character character, String savefile) {
 		getContentPane().setLayout(null);
 
 		// ToolBar
@@ -35,7 +35,7 @@ public class ArenaList extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -52,7 +52,7 @@ public class ArenaList extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -71,13 +71,13 @@ public class ArenaList extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "Character2");
+					sr.save(character, savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				@SuppressWarnings("unused")
-				City city = new City(character);
+				City city = new City(character, savefile);
 				dispose();
 			}
 		});
@@ -100,7 +100,7 @@ public class ArenaList extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				Enemy temp = list.getSelectedValue();
 				@SuppressWarnings("unused")
-				Arena arena = new Arena(character, temp);
+				Arena arena = new Arena(character, temp, savefile);
 				dispose();
 			}
 		});

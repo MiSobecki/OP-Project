@@ -21,10 +21,12 @@ public class Arena extends JFrame {
 
 	private Character character;
 	private Enemy enemy;
+	private String savefile;
 
-	public Arena(Character character, Enemy enemy) {
+	public Arena(Character character, Enemy enemy, String savefile) {
 		this.character = character;
 		this.enemy = enemy;
+		this.savefile = savefile;
 		initialize();
 	}
 
@@ -110,12 +112,12 @@ public class Arena extends JFrame {
 			enemy.setHp(100);
 			try {
 				SaveAndRead sr = new SaveAndRead();
-				sr.save(character, "Character2");
+				sr.save(character, savefile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			@SuppressWarnings("unused")
-			City city = new City(character);
+			City city = new City(character, savefile);
 			dispose();
 		} else {
 			Timer timer = new Timer(1000, new ActionListener() {
