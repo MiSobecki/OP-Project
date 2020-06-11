@@ -198,7 +198,7 @@ public class Shop extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, savefile);
+					sr.save(character, "saves/" + savefile);
 					sr.saveShop(randomList, "Shop");
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -216,7 +216,7 @@ public class Shop extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, savefile);
+					sr.save(character, "saves/" + savefile);
 					sr.saveShop(randomList, "Shop");
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -235,7 +235,7 @@ public class Shop extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, savefile);
+					sr.save(character, "saves/" + savefile);
 					sr.saveShop(randomList, "Shop");
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -294,22 +294,22 @@ public class Shop extends JFrame {
 		ArtifactTemplate temp = randomList.get(i);
 
 		switch (i) {
-		case 1:
+		case 0:
 			artBut1.setEnabled(false);
 			break;
-		case 2:
+		case 1:
 			artBut2.setEnabled(false);
 			break;
-		case 3:
+		case 2:
 			artBut3.setEnabled(false);
 			break;
-		case 4:
+		case 3:
 			artBut4.setEnabled(false);
 			break;
-		case 5:
+		case 4:
 			artBut5.setEnabled(false);
 			break;
-		case 6:
+		case 5:
 			artBut6.setEnabled(false);
 			break;
 		default:

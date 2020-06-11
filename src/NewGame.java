@@ -84,6 +84,7 @@ public class NewGame extends JFrame {
 
 			try {
 				sr.saveSaves(list, "Saves");
+				sr.save(createNewCharacter(), "saves/" + temp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -86,7 +86,6 @@ public class LoadGame extends JFrame {
 		for (String s : al) {
 			model.addElement(s);
 		}
-		System.out.println("aaa");
 	}
 
 	private void selectSave() {
@@ -94,7 +93,7 @@ public class LoadGame extends JFrame {
 		SaveAndRead sr = new SaveAndRead();
 
 		try {
-			Character character = (Character) sr.read(temp);
+			Character character = (Character) sr.read("saves/" + temp);
 			@SuppressWarnings("unused")
 			City city = new City(character, temp);
 		} catch (Exception e) {

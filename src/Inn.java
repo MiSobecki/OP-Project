@@ -61,7 +61,7 @@ public class Inn extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, savefile);
+					sr.save(character, "saves/" + savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -78,7 +78,7 @@ public class Inn extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, savefile);
+					sr.save(character, "saves/" + savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -97,7 +97,7 @@ public class Inn extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				try {
 					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, savefile);
+					sr.save(character, "saves/" + savefile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

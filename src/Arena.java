@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Arena extends JFrame {
@@ -44,6 +45,12 @@ public class Arena extends JFrame {
 		enemyLab.setHorizontalAlignment(SwingConstants.CENTER);
 		enemyLab.setBounds(300, 11, 200, 78);
 		getContentPane().add(enemyLab);
+		
+		JLabel upArrowLab = new JLabel("");
+		ImageIcon imgThisImg = new ImageIcon("upArrow.png");
+		upArrowLab.setIcon(imgThisImg);
+		upArrowLab.setBounds(227, 183, 102, 358);
+		getContentPane().add(upArrowLab);
 
 		// Attack button
 		attackBut = new JButton("Attack");
@@ -173,7 +180,7 @@ public class Arena extends JFrame {
 		if (character.getStamina() < 0)
 			character.setStamina(0);
 
-		enemy.setHp(enemy.getHp() - dmg);
+		enemy.setHp(enemy.getHp() + dmg);
 		if (enemy.getHp() < 0)
 			enemy.setHp(0);
 		hpBarE.setValue(enemy.getHp());
@@ -195,7 +202,7 @@ public class Arena extends JFrame {
 			if (dmg > 0)
 				dmg = 0;
 
-			character.setHp(character.getHp() - dmg);
+			character.setHp(character.getHp() + dmg);
 			if (character.getHp() < 0)
 				character.setHp(0);
 			hpBar.setValue(character.getHp());
@@ -220,7 +227,7 @@ public class Arena extends JFrame {
 
 		try {
 			SaveAndRead sr = new SaveAndRead();
-			sr.save(character, savefile);
+			sr.save(character, "saves/" + savefile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -276,8 +283,8 @@ public class Arena extends JFrame {
 
 		hpBarE = new JProgressBar(0, 100);
 		hpBarE.setPreferredSize(new Dimension(200, 30));
-		hpBarE.setBackground(Color.red);
-		hpBarE.setForeground(Color.green);
+		hpBarE.setBackground(Color.black);
+		hpBarE.setForeground(Color.red);
 		healthBarPanelE.add(hpBarE);
 		hpBarE.setValue(enemy.getHp());
 
@@ -290,6 +297,7 @@ public class Arena extends JFrame {
 		staminaBarPanelE.setBounds(500, 100, 200, 30);
 		getContentPane().add(staminaBarPanelE);
 		
+		sBarE = new JProgressBar(0, enemy.getMaxStamina());
 		sBarE.setPreferredSize(new Dimension(200, 30));
 		sBarE.setBackground(Color.DARK_GRAY);
 		sBarE.setForeground(Color.green);
@@ -300,5 +308,6 @@ public class Arena extends JFrame {
 		sLabelE.setHorizontalAlignment(SwingConstants.CENTER);
 		sLabelE.setBounds(400, 100, 90, 30);
 		getContentPane().add(sLabelE);
+		System.out.println("aaa");
 	}
 }
