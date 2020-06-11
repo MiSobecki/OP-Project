@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public abstract class CharacterTemplate implements Serializable {
 
-	protected int hp, attack, armor, stamina, defence;
+	protected int hp, attack, armor, stamina, maxStamina, defence;
 
 	public abstract int makeAttack();
 
@@ -44,6 +44,14 @@ public abstract class CharacterTemplate implements Serializable {
 	
 	public void setDefence(int defence) {
 		this.defence = defence;
+	}
+	
+	public int getMaxStamina() {
+		return maxStamina;
+	}
+	
+	public void setMaxStamina(int maxStamina) {
+		this.maxStamina = maxStamina;
 	}
 
 }

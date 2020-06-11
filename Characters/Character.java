@@ -10,7 +10,7 @@ public class Character extends CharacterTemplate implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<ArtifactTemplate> artifacts; // headList of artifacts character have
 	private ArtifactTemplate head, chest, legs, hands, rightHand, leftHand;
-	private int wealth, arenaLvl, maxStamina;
+	private int wealth, arenaLvl;
 	private static final int basicAttack = 3;
 	private static final int basicArmor = 0;
 	private static final int basicDefence = 3;
@@ -227,14 +227,6 @@ public class Character extends CharacterTemplate implements Serializable {
 
 	public void setArenaLvl(int arenaLvl) {
 		this.arenaLvl = arenaLvl;
-	}
-
-	public int getMaxStamina() {
-		return maxStamina;
-	}
-
-	public void setMaxStamina(int maxStamina) {
-		this.maxStamina = maxStamina;
 	}
 
 	public static int getBasicAttack() {

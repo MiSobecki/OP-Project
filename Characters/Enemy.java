@@ -5,7 +5,8 @@ public class Enemy extends CharacterTemplate {
 	private String name;
 	private boolean locked;
 
-	public Enemy(int hp, int attack, int armor, int award, String name, int lvl, int stamina, int defence) {
+	public Enemy(int hp, int attack, int armor, int award, String name, int lvl, int stamina, int defence,
+			int maxStamina) {
 		this.hp = hp;
 		this.attack = attack;
 		this.armor = armor;
@@ -15,12 +16,13 @@ public class Enemy extends CharacterTemplate {
 		this.lvl = lvl;
 		this.stamina = stamina;
 		this.defence = defence;
+		this.maxStamina = maxStamina;
 	}
 
 	public int makeAttack() {
 		return attack;
 	}
-	
+
 	public String makeDecision() {
 		return "Attack";
 	}

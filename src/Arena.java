@@ -14,10 +14,10 @@ import javax.swing.JButton;
 
 public class Arena extends JFrame {
 
-	private JPanel healthBarPanel, healthBarPanelE;
-	private JProgressBar hpBar, hpBarE;
-	private JLabel hpLabel, hpLabelE, enemyLab;
-	private JButton attackBut;
+	private JPanel healthBarPanel, healthBarPanelE, staminaBarPanel, staminaBarPanelE;
+	private JProgressBar hpBar, hpBarE, sBar, sBarE;
+	private JLabel hpLabel, hpLabelE, sLabel, sLabelE, enemyLab;
+	private JButton attackBut, defendBut, waitBut;
 
 	private Character character;
 	private Enemy enemy;
@@ -34,38 +34,10 @@ public class Arena extends JFrame {
 		getContentPane().setLayout(null);
 
 		// Character HP bar
-		healthBarPanel = new JPanel();
-		healthBarPanel.setBounds(300, 700, 200, 30);
-		getContentPane().add(healthBarPanel);
-
-		hpBar = new JProgressBar(0, 100);
-		hpBar.setPreferredSize(new Dimension(200, 30));
-		hpBar.setBackground(Color.red);
-		hpBar.setForeground(Color.green);
-		healthBarPanel.add(hpBar);
-		hpBar.setValue(character.getHp());
-
-		hpLabel = new JLabel("HP: " + character.getHp() + "/100");
-		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabel.setBounds(200, 700, 90, 30);
-		getContentPane().add(hpLabel);
+		createCharacterBars();
 
 		// Enemy HP bar
-		healthBarPanelE = new JPanel();
-		healthBarPanelE.setBounds(300, 100, 200, 30);
-		getContentPane().add(healthBarPanelE);
-
-		hpBarE = new JProgressBar(0, 100);
-		hpBarE.setPreferredSize(new Dimension(200, 30));
-		hpBarE.setBackground(Color.red);
-		hpBarE.setForeground(Color.green);
-		healthBarPanelE.add(hpBarE);
-		hpBarE.setValue(enemy.getHp());
-
-		hpLabelE = new JLabel("HP: " + enemy.getHp() + "/100");
-		hpLabelE.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabelE.setBounds(200, 100, 90, 30);
-		getContentPane().add(hpLabelE);
+		createEnemyBars();
 
 		// Enemy portrait
 		enemyLab = new JLabel(enemy.getName());
@@ -80,7 +52,29 @@ public class Arena extends JFrame {
 		attackBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				turnAction();
+				attackAction();
+			}
+		});
+
+		// Defend button
+		defendBut = new JButton("Defend");
+		defendBut.setBounds(340, 633, 89, 23);
+		getContentPane().add(defendBut);
+		defendBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				defendAction();
+			}
+		});
+
+		// Wait button
+		waitBut = new JButton("Wait");
+		waitBut.setBounds(440, 633, 89, 23);
+		getContentPane().add(waitBut);
+		waitBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				waitAction();
 			}
 		});
 
@@ -94,29 +88,16 @@ public class Arena extends JFrame {
 	}
 
 	// actions after attackBut pressed
-	private void turnAction() {
+	private void attackAction() {
 		String dec = enemy.makeDecision();
 		charactersAttack(dec);
 
 		if (enemy.getHp() == 0) {
-			character.setArenaLvl(character.getArenaLvl() + 1);
-			character.setWealth(character.getWealth() + enemy.getAward());
-			enemy.setHp(100);
-
-			try {
-				SaveAndRead sr = new SaveAndRead();
-				sr.save(character, savefile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			@SuppressWarnings("unused")
-			City city = new City(character, savefile);
-			dispose();
+			enemyLost();
 		} else {
 			Timer timer = new Timer(1000, new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					EnemysMove("Attack", dec);
+					enemysMove("Attack", dec);
 				}
 			});
 
@@ -124,9 +105,57 @@ public class Arena extends JFrame {
 			timer.start();
 
 			if (character.getHp() == 0) {
-				dispose();
+				characterLost();
 			}
 
+		}
+	}
+
+	// actions after defendBut pressed
+	private void defendAction() {
+		character.setStamina(character.getStamina() - 3);
+		if (character.getStamina() < 0)
+			character.setStamina(0);
+
+		attackBut.setEnabled(false);
+		defendBut.setEnabled(false);
+		waitBut.setEnabled(false);
+
+		Timer timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enemysMove("Defend", enemy.makeDecision());
+			}
+		});
+
+		timer.setRepeats(false);
+		timer.start();
+
+		if (character.getHp() == 0) {
+			characterLost();
+		}
+	}
+
+	// actions after waitBut pressed
+	private void waitAction() {
+		character.setStamina(character.getStamina() + 4);
+		if (character.getStamina() > character.getMaxStamina())
+			character.setStamina(character.getMaxStamina());
+		
+		attackBut.setEnabled(false);
+		defendBut.setEnabled(false);
+		waitBut.setEnabled(false);
+		
+		Timer timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enemysMove("Wait", enemy.makeDecision());
+			}
+		});
+		
+		timer.setRepeats(false);
+		timer.start();
+		
+		if (character.getHp() == 0) {
+			characterLost();
 		}
 	}
 
@@ -140,17 +169,29 @@ public class Arena extends JFrame {
 		if (dmg > 0)
 			dmg = 0;
 
+		character.setStamina(character.getStamina() - 5);
+		if (character.getStamina() < 0)
+			character.setStamina(0);
+
 		enemy.setHp(enemy.getHp() - dmg);
 		if (enemy.getHp() < 0)
 			enemy.setHp(0);
 		hpBarE.setValue(enemy.getHp());
 		hpLabelE.setText("HP: " + enemy.getHp() + "/100");
 		attackBut.setEnabled(false);
+		defendBut.setEnabled(false);
+		waitBut.setEnabled(false);
+
 	}
 
-	private void EnemysMove(String Cdecision, String Edecision) {
+	private void enemysMove(String Cdecision, String Edecision) {
 		if (Edecision.compareTo("Attack") == 0) {
 			int dmg = 0;
+			if (Cdecision.compareTo("Attack") == 0 || Cdecision.compareTo("Wait") == 0) {
+				dmg = character.getArmor() - enemy.makeAttack();
+			} else {
+				dmg = character.getArmor() + character.getDefence() - enemy.makeAttack();
+			}
 			if (dmg > 0)
 				dmg = 0;
 
@@ -167,5 +208,97 @@ public class Arena extends JFrame {
 		}
 
 		attackBut.setEnabled(true);
+		defendBut.setEnabled(true);
+		waitBut.setEnabled(true);
+	}
+
+	// happens if enemy has 0 hp
+	private void enemyLost() {
+		character.setArenaLvl(character.getArenaLvl() + 1);
+		character.setWealth(character.getWealth() + enemy.getAward());
+		enemy.setHp(100);
+
+		try {
+			SaveAndRead sr = new SaveAndRead();
+			sr.save(character, savefile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		@SuppressWarnings("unused")
+		City city = new City(character, savefile);
+		dispose();
+	}
+
+	// happens if character has 0 hp
+	private void characterLost() {
+		dispose();
+	}
+	
+	private void createCharacterBars() {
+		healthBarPanel = new JPanel();
+		healthBarPanel.setBounds(150, 700, 200, 30);
+		getContentPane().add(healthBarPanel);
+
+		hpBar = new JProgressBar(0, 100);
+		hpBar.setPreferredSize(new Dimension(200, 30));
+		hpBar.setBackground(Color.black);
+		hpBar.setForeground(Color.red);
+		healthBarPanel.add(hpBar);
+		hpBar.setValue(character.getHp());
+
+		hpLabel = new JLabel("HP: " + character.getHp() + "/100");
+		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		hpLabel.setBounds(50, 700, 90, 30);
+		getContentPane().add(hpLabel);
+		
+		staminaBarPanel = new JPanel();
+		staminaBarPanel.setBounds(500, 700, 200, 30);
+		getContentPane().add(staminaBarPanel);
+		
+		sBar = new JProgressBar(0, character.getMaxStamina());
+		sBar.setPreferredSize(new Dimension(200, 30));
+		sBar.setBackground(Color.DARK_GRAY);
+		sBar.setForeground(Color.green);
+		staminaBarPanel.add(sBar);
+		sBar.setValue(character.getStamina());
+		
+		sLabel = new JLabel("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
+		sLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		sLabel.setBounds(400, 700, 90, 30);
+		getContentPane().add(sLabel);
+	}
+	
+	private void createEnemyBars() {
+		healthBarPanelE = new JPanel();
+		healthBarPanelE.setBounds(150, 100, 200, 30);
+		getContentPane().add(healthBarPanelE);
+
+		hpBarE = new JProgressBar(0, 100);
+		hpBarE.setPreferredSize(new Dimension(200, 30));
+		hpBarE.setBackground(Color.red);
+		hpBarE.setForeground(Color.green);
+		healthBarPanelE.add(hpBarE);
+		hpBarE.setValue(enemy.getHp());
+
+		hpLabelE = new JLabel("HP: " + enemy.getHp() + "/100");
+		hpLabelE.setHorizontalAlignment(SwingConstants.CENTER);
+		hpLabelE.setBounds(50, 100, 90, 30);
+		getContentPane().add(hpLabelE);
+		
+		staminaBarPanelE = new JPanel();
+		staminaBarPanelE.setBounds(500, 100, 200, 30);
+		getContentPane().add(staminaBarPanelE);
+		
+		sBarE.setPreferredSize(new Dimension(200, 30));
+		sBarE.setBackground(Color.DARK_GRAY);
+		sBarE.setForeground(Color.green);
+		staminaBarPanelE.add(sBarE);
+		sBarE.setValue(enemy.getStamina());
+		
+		sLabelE = new JLabel("Stamina: " + enemy.getStamina() + "/" + enemy.getMaxStamina());
+		sLabelE.setHorizontalAlignment(SwingConstants.CENTER);
+		sLabelE.setBounds(400, 100, 90, 30);
+		getContentPane().add(sLabelE);
 	}
 }
