@@ -1,7 +1,13 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -12,17 +18,20 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 public class Arena extends JFrame {
 
 	private JPanel healthBarPanel, healthBarPanelE, staminaBarPanel, staminaBarPanelE;
 	private JProgressBar hpBar, hpBarE, sBar, sBarE;
-	private JLabel hpLabel, hpLabelE, sLabel, sLabelE, enemyLab;
+	private JLabel hpLabel, hpLabelE, sLabel, sLabelE, enemyLab, actionLab;
+	private JLabel upArrowLab, downArrowLab;
 	private JButton attackBut, defendBut, waitBut;
 
 	private Character character;
 	private Enemy enemy;
 	private String savefile;
+	private JLabel nameLab;
 
 	public Arena(Character character, Enemy enemy, String savefile) {
 		this.character = character;
@@ -41,16 +50,23 @@ public class Arena extends JFrame {
 		createEnemyBars();
 
 		// Enemy portrait
-		enemyLab = new JLabel(enemy.getName());
-		enemyLab.setHorizontalAlignment(SwingConstants.CENTER);
-		enemyLab.setBounds(300, 11, 200, 78);
+		enemyLab = new JLabel();
+		ImageIcon img = new ImageIcon(enemy.getImg());
+		enemyLab.setIcon(img);
+		enemyLab.setBounds(325, 11, 150, 180);
 		getContentPane().add(enemyLab);
-		
-		JLabel upArrowLab = new JLabel("");
-		ImageIcon imgThisImg = new ImageIcon("upArrow.png");
-		upArrowLab.setIcon(imgThisImg);
-		upArrowLab.setBounds(227, 183, 102, 358);
+
+		upArrowLab = new JLabel("");
+		ImageIcon img1 = new ImageIcon("pictures/upArrow.gif");
+		upArrowLab.setIcon(img1);
+		upArrowLab.setBounds(150, 290, 193, 300);
 		getContentPane().add(upArrowLab);
+		
+		downArrowLab = new JLabel("");
+		ImageIcon img2 = new ImageIcon("pictures/downArrow.gif");
+		downArrowLab.setIcon(img2);
+		downArrowLab.setBounds(450, 290, 193, 300);
+		getContentPane().add(downArrowLab);
 
 		// Attack button
 		attackBut = new JButton("Attack");
@@ -85,8 +101,18 @@ public class Arena extends JFrame {
 			}
 		});
 
+		actionLab = new JLabel("");
+		actionLab.setHorizontalAlignment(SwingConstants.CENTER);
+		actionLab.setBounds(556, 88, 150, 56);
+		getContentPane().add(actionLab);
+
+		nameLab = new JLabel(enemy.getName());
+		nameLab.setHorizontalAlignment(SwingConstants.CENTER);
+		nameLab.setBounds(50, 88, 150, 56);
+		getContentPane().add(nameLab);
+
 		// Setting to frame
-		setTitle("Arena List");
+		setTitle("Arena");
 		setLocation(450, 100);
 		setResizable(false);
 		setSize(800, 800);
@@ -97,6 +123,7 @@ public class Arena extends JFrame {
 	// actions after attackBut pressed
 	private void attackAction() {
 		String dec = enemy.makeDecision();
+		actionLab.setText(dec);
 		charactersAttack(dec);
 
 		if (enemy.getHp() == 0) {
@@ -111,6 +138,8 @@ public class Arena extends JFrame {
 			timer.setRepeats(false);
 			timer.start();
 
+			actionLab.setText("");
+
 			if (character.getHp() == 0) {
 				characterLost();
 			}
@@ -123,6 +152,8 @@ public class Arena extends JFrame {
 		character.setStamina(character.getStamina() - 3);
 		if (character.getStamina() < 0)
 			character.setStamina(0);
+
+		actionLab.setText(enemy.makeDecision());
 
 		attackBut.setEnabled(false);
 		defendBut.setEnabled(false);
@@ -137,6 +168,8 @@ public class Arena extends JFrame {
 		timer.setRepeats(false);
 		timer.start();
 
+		actionLab.setText("");
+
 		if (character.getHp() == 0) {
 			characterLost();
 		}
@@ -147,20 +180,24 @@ public class Arena extends JFrame {
 		character.setStamina(character.getStamina() + 4);
 		if (character.getStamina() > character.getMaxStamina())
 			character.setStamina(character.getMaxStamina());
-		
+
+		actionLab.setText(enemy.makeDecision());
+
 		attackBut.setEnabled(false);
 		defendBut.setEnabled(false);
 		waitBut.setEnabled(false);
-		
+
 		Timer timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enemysMove("Wait", enemy.makeDecision());
 			}
 		});
-		
+
 		timer.setRepeats(false);
 		timer.start();
-		
+
+		actionLab.setText("");
+
 		if (character.getHp() == 0) {
 			characterLost();
 		}
@@ -214,8 +251,10 @@ public class Arena extends JFrame {
 			enemy.setStamina(enemy.getStamina() + 4);
 		}
 
-		attackBut.setEnabled(true);
-		defendBut.setEnabled(true);
+		if (character.getStamina() >= 5)
+			attackBut.setEnabled(true);
+		if (character.getStamina() >= 3)
+			defendBut.setEnabled(true);
 		waitBut.setEnabled(true);
 	}
 
@@ -223,6 +262,7 @@ public class Arena extends JFrame {
 	private void enemyLost() {
 		character.setArenaLvl(character.getArenaLvl() + 1);
 		character.setWealth(character.getWealth() + enemy.getAward());
+		character.setStamina(character.getMaxStamina());
 		enemy.setHp(100);
 
 		try {
@@ -241,7 +281,7 @@ public class Arena extends JFrame {
 	private void characterLost() {
 		dispose();
 	}
-	
+
 	private void createCharacterBars() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(150, 700, 200, 30);
@@ -258,27 +298,27 @@ public class Arena extends JFrame {
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		hpLabel.setBounds(50, 700, 90, 30);
 		getContentPane().add(hpLabel);
-		
+
 		staminaBarPanel = new JPanel();
 		staminaBarPanel.setBounds(500, 700, 200, 30);
 		getContentPane().add(staminaBarPanel);
-		
+
 		sBar = new JProgressBar(0, character.getMaxStamina());
 		sBar.setPreferredSize(new Dimension(200, 30));
 		sBar.setBackground(Color.DARK_GRAY);
 		sBar.setForeground(Color.green);
 		staminaBarPanel.add(sBar);
 		sBar.setValue(character.getStamina());
-		
+
 		sLabel = new JLabel("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
 		sLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		sLabel.setBounds(400, 700, 90, 30);
 		getContentPane().add(sLabel);
 	}
-	
+
 	private void createEnemyBars() {
 		healthBarPanelE = new JPanel();
-		healthBarPanelE.setBounds(150, 100, 200, 30);
+		healthBarPanelE.setBounds(150, 200, 200, 30);
 		getContentPane().add(healthBarPanelE);
 
 		hpBarE = new JProgressBar(0, 100);
@@ -290,24 +330,23 @@ public class Arena extends JFrame {
 
 		hpLabelE = new JLabel("HP: " + enemy.getHp() + "/100");
 		hpLabelE.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabelE.setBounds(50, 100, 90, 30);
+		hpLabelE.setBounds(50, 200, 90, 30);
 		getContentPane().add(hpLabelE);
-		
+
 		staminaBarPanelE = new JPanel();
-		staminaBarPanelE.setBounds(500, 100, 200, 30);
+		staminaBarPanelE.setBounds(500, 200, 200, 30);
 		getContentPane().add(staminaBarPanelE);
-		
+
 		sBarE = new JProgressBar(0, enemy.getMaxStamina());
 		sBarE.setPreferredSize(new Dimension(200, 30));
 		sBarE.setBackground(Color.DARK_GRAY);
 		sBarE.setForeground(Color.green);
 		staminaBarPanelE.add(sBarE);
 		sBarE.setValue(enemy.getStamina());
-		
+
 		sLabelE = new JLabel("Stamina: " + enemy.getStamina() + "/" + enemy.getMaxStamina());
 		sLabelE.setHorizontalAlignment(SwingConstants.CENTER);
-		sLabelE.setBounds(400, 100, 90, 30);
+		sLabelE.setBounds(400, 200, 90, 30);
 		getContentPane().add(sLabelE);
-		System.out.println("aaa");
 	}
 }

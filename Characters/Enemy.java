@@ -4,9 +4,10 @@ public class Enemy extends CharacterTemplate {
 	private int award, lvl;
 	private String name;
 	private boolean locked;
+	private String img;
 
 	public Enemy(int hp, int attack, int armor, int award, String name, int lvl, int stamina, int defence,
-			int maxStamina) {
+			int maxStamina, String img) {
 		this.hp = hp;
 		this.attack = attack;
 		this.armor = armor;
@@ -17,6 +18,7 @@ public class Enemy extends CharacterTemplate {
 		this.stamina = stamina;
 		this.defence = defence;
 		this.maxStamina = maxStamina;
+		this.img = "pictures/" + img;
 	}
 
 	public int makeAttack() {
@@ -24,7 +26,15 @@ public class Enemy extends CharacterTemplate {
 	}
 
 	public String makeDecision() {
-		return "Attack";
+		if (stamina >= 5) {
+			return "Attack";
+		}
+		else if (stamina >= 3) {
+			return "Defend";
+		}
+		else {
+			return "Wait";
+		}
 	}
 
 	@Override
@@ -70,6 +80,14 @@ public class Enemy extends CharacterTemplate {
 
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }
