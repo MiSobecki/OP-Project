@@ -4,8 +4,13 @@ import javax.swing.JProgressBar;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JToolBar;
@@ -97,6 +102,7 @@ public class City extends JFrame {
 		System.out.println(character.getHp());
 
 		hpLabel = new JLabel("HP: " + character.getHp() + "/100");
+		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		hpLabel.setBounds(10, 320, 90, 30);
 		getContentPane().add(hpLabel);
