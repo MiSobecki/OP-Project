@@ -10,7 +10,7 @@ public class Main {
 		
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/EnchantedLand.otf"));
-	        font = font.deriveFont(Font.PLAIN,20);
+	        font = font.deriveFont(Font.PLAIN, 20);
 	        GraphicsEnvironment ge =
 	            GraphicsEnvironment.getLocalGraphicsEnvironment();
 	        ge.registerFont(font);

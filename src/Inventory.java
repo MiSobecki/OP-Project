@@ -20,6 +20,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.TransferHandler;
 import javax.swing.border.MatteBorder;
@@ -64,6 +65,7 @@ public class Inventory extends JFrame {
 		// Button to exit game
 		exitBut = new JButton("Exit");
 		toolBar.add(exitBut);
+		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		exitBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -80,7 +82,7 @@ public class Inventory extends JFrame {
 		// Button to return to the menu
 		menuBut = new JButton("Menu");
 		toolBar.add(menuBut);
-
+		menuBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		menuBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -99,7 +101,7 @@ public class Inventory extends JFrame {
 		// Button to return to the previous window
 		returnBut = new JButton("Return");
 		toolBar.add(returnBut);
-
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		returnBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -132,6 +134,8 @@ public class Inventory extends JFrame {
 		headList.setModel(model1);
 		headList.setLayoutOrientation(JList.VERTICAL);
 		headList.addMouseMotionListener(mma);
+		headList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		headList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		headLab = new JLabel("Head");
 		if (character.getHead() != null) {
@@ -144,6 +148,7 @@ public class Inventory extends JFrame {
 		headLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		headLab.setTransferHandler(new ListTransferHandler());
 		getContentPane().add(headLab);
+		headLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// CHEST PART
 		scrollPane2 = new JScrollPane();
@@ -156,6 +161,8 @@ public class Inventory extends JFrame {
 		chestList.setModel(model2);
 		chestList.setLayoutOrientation(JList.VERTICAL);
 		chestList.addMouseMotionListener(mma);
+		chestList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		chestList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		chestLab = new JLabel("Chest");
 		if (character.getChest() != null) {
@@ -168,6 +175,7 @@ public class Inventory extends JFrame {
 		getContentPane().add(chestLab);
 		chestLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		chestLab.setTransferHandler(new ListTransferHandler());
+		chestLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// LEGS PART
 		scrollPane3 = new JScrollPane();
@@ -180,6 +188,8 @@ public class Inventory extends JFrame {
 		legsList.setModel(model3);
 		legsList.setLayoutOrientation(JList.VERTICAL);
 		legsList.addMouseMotionListener(mma);
+		legsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		legsList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		legsLab = new JLabel("Legs");
 		if (character.getLegs() != null) {
@@ -192,6 +202,7 @@ public class Inventory extends JFrame {
 		getContentPane().add(legsLab);
 		legsLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		legsLab.setTransferHandler(new ListTransferHandler());
+		legsLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// HANDS PART
 		scrollPane4 = new JScrollPane();
@@ -204,6 +215,8 @@ public class Inventory extends JFrame {
 		handsList.setModel(model4);
 		handsList.setLayoutOrientation(JList.VERTICAL);
 		handsList.addMouseMotionListener(mma);
+		handsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		handsList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		handsLab = new JLabel("Hands");
 		if (character.getHands() != null) {
@@ -216,6 +229,7 @@ public class Inventory extends JFrame {
 		getContentPane().add(handsLab);
 		handsLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		handsLab.setTransferHandler(new ListTransferHandler());
+		handsLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// RIGHT-HAND PART
 		scrollPane5 = new JScrollPane();
@@ -228,6 +242,8 @@ public class Inventory extends JFrame {
 		rightList.setModel(model5);
 		rightList.setLayoutOrientation(JList.VERTICAL);
 		rightList.addMouseMotionListener(mma);
+		rightList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		rightList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		rightLab = new JLabel("Right Hand");
 		if (character.getRightHand() != null) {
@@ -240,6 +256,7 @@ public class Inventory extends JFrame {
 		getContentPane().add(rightLab);
 		rightLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		rightLab.setTransferHandler(new ListTransferHandler());
+		rightLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// LEFT-HAND PART
 		scrollPane6 = new JScrollPane();
@@ -252,6 +269,8 @@ public class Inventory extends JFrame {
 		leftList.setModel(model6);
 		leftList.setLayoutOrientation(JList.VERTICAL);
 		leftList.addMouseMotionListener(mma);
+		leftList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		leftList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		leftLab = new JLabel("Left hand");
 		if (character.getLeftHand() != null) {
@@ -264,25 +283,26 @@ public class Inventory extends JFrame {
 		getContentPane().add(leftLab);
 		leftLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		leftLab.setTransferHandler(new ListTransferHandler());
+		leftLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// Statistics
 		armorLabel = new JLabel("Armor: " + character.getArmor());
-		armorLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		armorLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		armorLabel.setBounds(820, 30, 103, 34);
 		getContentPane().add(armorLabel);
 
 		attackLabel = new JLabel("Attack: " + character.getAttack());
-		attackLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		attackLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		attackLabel.setBounds(820, 100, 103, 34);
 		getContentPane().add(attackLabel);
 
-		hpLabel = new JLabel("Hp: " + character.getHp());
-		hpLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		hpLabel = new JLabel("Hp: " + character.getHp() + "/100");
+		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		hpLabel.setBounds(820, 170, 103, 34);
 		getContentPane().add(hpLabel);
 
 		defenceLabel = new JLabel("Defence: " + character.getDefence());
-		defenceLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		defenceLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		defenceLabel.setBounds(820, 240, 103, 34);
 		getContentPane().add(defenceLabel);
 

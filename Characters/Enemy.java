@@ -5,6 +5,7 @@ public class Enemy extends CharacterTemplate {
 	private String name;
 	private boolean locked;
 	private String img;
+	private String description;
 
 	public Enemy(int hp, int attack, int armor, int award, String name, int lvl, int stamina, int defence,
 			int maxStamina, String img) {
@@ -19,6 +20,7 @@ public class Enemy extends CharacterTemplate {
 		this.defence = defence;
 		this.maxStamina = maxStamina;
 		this.img = "pictures/" + img;
+		this.description = name + ", hp: " + hp + "/100, attack: " + attack + ", armor: " + armor + ", award: " + award;
 	}
 
 	public int makeAttack() {
@@ -28,25 +30,16 @@ public class Enemy extends CharacterTemplate {
 	public String makeDecision() {
 		if (stamina >= 5) {
 			return "Attack";
-		}
-		else if (stamina >= 3) {
+		} else if (stamina >= 3) {
 			return "Defend";
-		}
-		else {
+		} else {
 			return "Wait";
 		}
 	}
 
 	@Override
 	public String toString() {
-		String lock;
-		if (locked)
-			lock = "LOCKED";
-		else
-			lock = "UNLOCKED";
-
-		return name + ", hp: " + hp + "/100, attack: " + attack + ", armor: " + armor + ", award: " + award + ", "
-				+ lock;
+		return description;
 	}
 
 	// GETTERS AND SETTERS
@@ -88,6 +81,14 @@ public class Enemy extends CharacterTemplate {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

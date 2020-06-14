@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -9,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 
 public class LoadGame extends JFrame {
@@ -17,6 +20,7 @@ public class LoadGame extends JFrame {
 	private JList<String> list;
 	private JButton selectBut, returnBut;
 	private DefaultListModel<String> model;
+	private JScrollPane scroll;
 
 	private ArrayList<String> al;
 
@@ -30,20 +34,26 @@ public class LoadGame extends JFrame {
 
 		label = new JLabel("Select game save to load");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		label.setBounds(125, 20, 250, 40);
 		getContentPane().add(label);
 
 		createModel();
 
+		scroll = new JScrollPane();
+		scroll.setBounds(100, 100, 300, 380);
+		getContentPane().add(scroll);
 		list = new JList<String>();
+		scroll.setViewportView(list);
 		list.setModel(model);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		list.setLayoutOrientation(JList.VERTICAL);
-		list.setBounds(100, 100, 300, 380);
-		getContentPane().add(list);
 
 		selectBut = new JButton("Load save");
 		selectBut.setBounds(293, 502, 107, 40);
 		getContentPane().add(selectBut);
+		selectBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		selectBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -54,6 +64,7 @@ public class LoadGame extends JFrame {
 		returnBut = new JButton("Return to the menu");
 		returnBut.setBounds(100, 502, 142, 40);
 		getContentPane().add(returnBut);
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		returnBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -64,7 +75,7 @@ public class LoadGame extends JFrame {
 		});
 
 		// Frame settings
-		setLocation(800, 400);
+		setLocation(700, 300);
 		setSize(500, 600);
 		setResizable(false);
 		setTitle("Load Game");

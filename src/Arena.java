@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -70,8 +71,9 @@ public class Arena extends JFrame {
 
 		// Attack button
 		attackBut = new JButton("Attack");
-		attackBut.setBounds(240, 633, 89, 23);
+		attackBut.setBounds(119, 626, 168, 30);
 		getContentPane().add(attackBut);
+		attackBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		attackBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -81,8 +83,9 @@ public class Arena extends JFrame {
 
 		// Defend button
 		defendBut = new JButton("Defend");
-		defendBut.setBounds(340, 633, 89, 23);
+		defendBut.setBounds(297, 626, 168, 30);
 		getContentPane().add(defendBut);
+		defendBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		defendBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -92,8 +95,9 @@ public class Arena extends JFrame {
 
 		// Wait button
 		waitBut = new JButton("Wait");
-		waitBut.setBounds(440, 633, 89, 23);
+		waitBut.setBounds(475, 626, 168, 30);
 		getContentPane().add(waitBut);
+		waitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		waitBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -105,11 +109,13 @@ public class Arena extends JFrame {
 		actionLab.setHorizontalAlignment(SwingConstants.CENTER);
 		actionLab.setBounds(556, 88, 150, 56);
 		getContentPane().add(actionLab);
+		actionLab.setFont(new Font("Enchanted Land", Font.PLAIN, 30));
 
 		nameLab = new JLabel(enemy.getName());
 		nameLab.setHorizontalAlignment(SwingConstants.CENTER);
 		nameLab.setBounds(50, 88, 150, 56);
 		getContentPane().add(nameLab);
+		nameLab.setFont(new Font("Enchanted Land", Font.PLAIN, 40));
 
 		// Setting to frame
 		setTitle("Arena");
@@ -238,6 +244,8 @@ public class Arena extends JFrame {
 			}
 			if (dmg > 0)
 				dmg = 0;
+			
+			actionLab.setText(Edecision);
 
 			character.setHp(character.getHp() + dmg);
 			if (character.getHp() < 0)
@@ -296,8 +304,9 @@ public class Arena extends JFrame {
 
 		hpLabel = new JLabel("HP: " + character.getHp() + "/100");
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabel.setBounds(50, 700, 90, 30);
+		hpLabel.setBounds(22, 700, 118, 30);
 		getContentPane().add(hpLabel);
+		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		staminaBarPanel = new JPanel();
 		staminaBarPanel.setBounds(500, 700, 200, 30);
@@ -312,8 +321,9 @@ public class Arena extends JFrame {
 
 		sLabel = new JLabel("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
 		sLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		sLabel.setBounds(400, 700, 90, 30);
+		sLabel.setBounds(360, 700, 130, 30);
 		getContentPane().add(sLabel);
+		sLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 	}
 
 	private void createEnemyBars() {
@@ -330,8 +340,9 @@ public class Arena extends JFrame {
 
 		hpLabelE = new JLabel("HP: " + enemy.getHp() + "/100");
 		hpLabelE.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabelE.setBounds(50, 200, 90, 30);
+		hpLabelE.setBounds(22, 200, 118, 30);
 		getContentPane().add(hpLabelE);
+		hpLabelE.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		staminaBarPanelE = new JPanel();
 		staminaBarPanelE.setBounds(500, 200, 200, 30);
@@ -346,7 +357,8 @@ public class Arena extends JFrame {
 
 		sLabelE = new JLabel("Stamina: " + enemy.getStamina() + "/" + enemy.getMaxStamina());
 		sLabelE.setHorizontalAlignment(SwingConstants.CENTER);
-		sLabelE.setBounds(400, 200, 90, 30);
+		sLabelE.setBounds(360, 200, 130, 30);
 		getContentPane().add(sLabelE);
+		sLabelE.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 	}
 }

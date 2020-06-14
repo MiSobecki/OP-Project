@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class NewGame extends JFrame {
 
 	private JTextField textField;
 	private JLabel infoLabel;
-	private JButton confirmBut;
+	private JButton confirmBut, returnBut;
 
 	public NewGame() {
 		initialize();
@@ -26,12 +27,14 @@ public class NewGame extends JFrame {
 		getContentPane().setLayout(null);
 
 		infoLabel = new JLabel("Name your new save");
+		infoLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		infoLabel.setBounds(150, 20, 150, 30);
+		infoLabel.setBounds(137, 20, 178, 30);
 		getContentPane().add(infoLabel);
 
 		confirmBut = new JButton("Confirm");
 		confirmBut.setBounds(317, 134, 107, 37);
+		confirmBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		getContentPane().add(confirmBut);
 		confirmBut.addActionListener(new ActionListener() {
 			@Override
@@ -42,12 +45,26 @@ public class NewGame extends JFrame {
 
 		textField = new JTextField();
 		textField.setBounds(33, 134, 241, 37);
+		textField.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		getContentPane().add(textField);
 		textField.setColumns(10);
 
+		returnBut = new JButton("Return to the menu");
+		returnBut.setBounds(33, 210, 136, 37);
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		getContentPane().add(returnBut);
+		returnBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				@SuppressWarnings("unused")
+				Menu menu = new Menu();
+				dispose();
+			}
+		});
+
 		// Frame settings
 		setLocation(800, 400);
-		setSize(450, 250);
+		setSize(450, 300);
 		setResizable(false);
 		setTitle("New Game");
 		setVisible(true);

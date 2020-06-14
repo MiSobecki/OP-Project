@@ -38,8 +38,9 @@ public class City extends JFrame {
 
 		// Button to open shop window
 		shopBut = new JButton("Shop");
-		shopBut.setBounds(280, 285, 89, 23);
+		shopBut.setBounds(550, 552, 150, 50);
 		getContentPane().add(shopBut);
+		shopBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		shopBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -51,8 +52,9 @@ public class City extends JFrame {
 
 		// Button to open arena list window
 		arenaBut = new JButton("Arena");
-		arenaBut.setBounds(152, 36, 89, 23);
+		arenaBut.setBounds(350, 99, 150, 50);
 		getContentPane().add(arenaBut);
+		arenaBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		arenaBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -64,8 +66,9 @@ public class City extends JFrame {
 
 		// Button to open inventory window
 		invBut = new JButton("Inventory");
-		invBut.setBounds(20, 285, 89, 23);
+		invBut.setBounds(100, 552, 150, 50);
 		getContentPane().add(invBut);
+		invBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		invBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -77,8 +80,9 @@ public class City extends JFrame {
 
 		// Button to open Inn window
 		innBut = new JButton("Inn");
-		innBut.setBounds(20, 123, 89, 23);
+		innBut.setBounds(100, 251, 150, 50);
 		getContentPane().add(innBut);
+		innBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		innBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -90,7 +94,7 @@ public class City extends JFrame {
 
 		// HP bar
 		healthBarPanel = new JPanel();
-		healthBarPanel.setBounds(100, 320, 200, 30);
+		healthBarPanel.setBounds(350, 700, 200, 30);
 		getContentPane().add(healthBarPanel);
 
 		hpBar = new JProgressBar(0, 100);
@@ -99,21 +103,21 @@ public class City extends JFrame {
 		hpBar.setForeground(Color.green);
 		healthBarPanel.add(hpBar);
 		hpBar.setValue(character.getHp());
-		System.out.println(character.getHp());
 
 		hpLabel = new JLabel("HP: " + character.getHp() + "/100");
-		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabel.setBounds(10, 320, 90, 30);
+		hpLabel.setBounds(250, 700, 90, 30);
 		getContentPane().add(hpLabel);
 
 		// ToolBar
 		toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 100, 23);
+		toolBar.setBounds(0, 0, 122, 30);
 		getContentPane().add(toolBar);
 
 		// Button to exit game
 		exitBut = new JButton("Exit");
+		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		toolBar.add(exitBut);
 		exitBut.addActionListener(new ActionListener() {
 			@Override
@@ -124,6 +128,7 @@ public class City extends JFrame {
 
 		// Button to return to the menu
 		menuBut = new JButton("Menu");
+		menuBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		toolBar.add(menuBut);
 		menuBut.addActionListener(new ActionListener() {
 			@Override
@@ -136,14 +141,15 @@ public class City extends JFrame {
 
 		// Label to inform about wealth of character
 		cashLabel = new JLabel("Cash: " + character.getWealth());
-		cashLabel.setBounds(310, 319, 89, 31);
+		cashLabel.setBounds(618, 699, 89, 31);
 		getContentPane().add(cashLabel);
+		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		// Frame settings
 		setTitle("City");
-		setLocation(700, 250);
+		setLocation(450, 200);
 		setResizable(false);
-		setSize(420, 400);
+		setSize(800, 800);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

@@ -1,11 +1,15 @@
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 
 public class ArenaList extends JFrame {
@@ -14,6 +18,7 @@ public class ArenaList extends JFrame {
 	private DefaultListModel<Enemy> defaultList;
 	private JButton fightBut, exitBut, menuBut, returnBut;
 	private JToolBar toolBar;
+	private JScrollPane scroll;
 
 	public ArenaList(Character character, String savefile) {
 		initialize(character, savefile);
@@ -30,6 +35,7 @@ public class ArenaList extends JFrame {
 		// Button to exit game
 		exitBut = new JButton("Exit");
 		toolBar.add(exitBut);
+		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		exitBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -45,8 +51,8 @@ public class ArenaList extends JFrame {
 
 		// Button to return to the menu
 		menuBut = new JButton("Menu");
+		menuBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		toolBar.add(menuBut);
-
 		menuBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -65,7 +71,7 @@ public class ArenaList extends JFrame {
 		// Button to return to the previous window
 		returnBut = new JButton("Return");
 		toolBar.add(returnBut);
-
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		returnBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -85,23 +91,30 @@ public class ArenaList extends JFrame {
 		// List of enemies
 		createModel(new EnemiesList(character));
 
+		scroll = new JScrollPane();
+		scroll.setBounds(100, 50, 400, 400);
+		getContentPane().add(scroll);
 		list = new JList<Enemy>();
+		scroll.setViewportView(list);
 		list.setModel(defaultList);
+		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		list.setLayoutOrientation(JList.VERTICAL);
-		list.setBounds(100, 50, 400, 400);
-		getContentPane().add(list);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Button to start fighting enemy
 		fightBut = new JButton("FIGHT");
 		fightBut.setBounds(250, 460, 100, 50);
+		fightBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		getContentPane().add(fightBut);
 		fightBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				Enemy temp = list.getSelectedValue();
-				@SuppressWarnings("unused")
-				Arena arena = new Arena(character, temp, savefile);
-				dispose();
+				if (!temp.isLocked()) {
+					@SuppressWarnings("unused")
+					Arena arena = new Arena(character, temp, savefile);
+					dispose();
+				}
 			}
 		});
 
@@ -115,10 +128,13 @@ public class ArenaList extends JFrame {
 
 	}
 
-	// create defaultModelList
+	// create defaultListModel
 	private void createModel(EnemiesList enemiesList) {
 		defaultList = new DefaultListModel<Enemy>();
 		for (Enemy a : enemiesList) {
+			if (a.isLocked()) {
+				a.setDescription("<html><font color = gray>" + a.getDescription() + "</font></html>");
+			}
 			defaultList.addElement(a);
 		}
 	}
