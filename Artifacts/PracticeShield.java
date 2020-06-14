@@ -14,7 +14,7 @@ public class PracticeShield extends LeftHandArtifact {
 	}
 	
 	public String getDescription() {
-		return "Armor: + 3";
+		return "Defence: + 3";
 	}
 
 }

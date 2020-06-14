@@ -38,7 +38,7 @@ public class Inventory extends JFrame {
 	private JToolBar toolBar;
 	private JButton exitBut, menuBut, returnBut;
 	private JLabel armorLabel, hpLabel, attackLabel, defenceLabel;
-	
+
 	private Character character;
 	private MouseMotionAdapter mma;
 	private String savefile;
@@ -138,7 +138,7 @@ public class Inventory extends JFrame {
 		headList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		headLab = new JLabel("Head");
-		if (character.getHead() != null) {
+		if (character.getHead().getType().compareTo("None") != 0) {
 			headLab.setText(character.getHead().getName());
 			headLab.setToolTipText("<html>" + character.getHead().getType() + "<br>"
 					+ character.getHead().getDescription() + "</html>");
@@ -165,7 +165,7 @@ public class Inventory extends JFrame {
 		chestList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		chestLab = new JLabel("Chest");
-		if (character.getChest() != null) {
+		if (character.getChest().getType().compareTo("None") != 0) {
 			chestLab.setText(character.getChest().getName());
 			chestLab.setToolTipText("<html>" + character.getChest().getType() + "<br>"
 					+ character.getChest().getDescription() + "</html>");
@@ -192,7 +192,7 @@ public class Inventory extends JFrame {
 		legsList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		legsLab = new JLabel("Legs");
-		if (character.getLegs() != null) {
+		if (character.getLegs().getType().compareTo("None") != 0) {
 			legsLab.setText(character.getLegs().getName());
 			legsLab.setToolTipText("<html>" + character.getLegs().getType() + "<br>"
 					+ character.getLegs().getDescription() + "</html>");
@@ -219,7 +219,7 @@ public class Inventory extends JFrame {
 		handsList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		handsLab = new JLabel("Hands");
-		if (character.getHands() != null) {
+		if (character.getHands().getType().compareTo("None") != 0) {
 			handsLab.setText(character.getHands().getName());
 			handsLab.setToolTipText("<html>" + character.getHands().getType() + "<br>"
 					+ character.getHands().getDescription() + "</html>");
@@ -246,7 +246,7 @@ public class Inventory extends JFrame {
 		rightList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		rightLab = new JLabel("Right Hand");
-		if (character.getRightHand() != null) {
+		if (character.getRightHand().getType().compareTo("None") != 0) {
 			rightLab.setText(character.getRightHand().getName());
 			rightLab.setToolTipText("<html>" + character.getRightHand().getType() + "<br>"
 					+ character.getRightHand().getDescription() + "</html>");
@@ -273,7 +273,7 @@ public class Inventory extends JFrame {
 		leftList.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 
 		leftLab = new JLabel("Left hand");
-		if (character.getLeftHand() != null) {
+		if (character.getLeftHand().getType().compareTo("None") != 0) {
 			leftLab.setText(character.getLeftHand().getName());
 			leftLab.setToolTipText("<html>" + character.getLeftHand().getType() + "<br>"
 					+ character.getLeftHand().getDescription() + "</html>");
@@ -411,9 +411,21 @@ public class Inventory extends JFrame {
 							((JLabel) component).setText(((ArtifactTemplate) value).getName());
 							((JLabel) component).setToolTipText("<html>" + ((ArtifactTemplate) value).getType() + "<br>"
 									+ ((ArtifactTemplate) value).getDescription() + "</html>");
-							
-							character.setAttack(Character.getBasicAttack() + ((ArtifactTemplate) value).getAmount());
-							attackLabel.setText("Attack: " + character.getAttack());
+
+							if (((ArtifactTemplate) value).getType().compareTo("Right-hand") == 0) {
+								character
+										.setAttack(Character.getBasicAttack() + ((ArtifactTemplate) value).getAmount());
+								attackLabel.setText("Attack: " + character.getAttack());
+							} else if (((ArtifactTemplate) value).getType().compareTo("Left-hand") == 0) {
+								character.setDefence(
+										Character.getBasicDefence() + ((ArtifactTemplate) value).getAmount());
+								defenceLabel.setText("Defence: " + character.getDefence());
+							} else {
+								character = setCharacter();
+								character.setArmor(character.getHead().getAmount() + character.getChest().getAmount()
+										+ character.getLegs().getAmount() + character.getHands().getAmount());
+								armorLabel.setText("Armor: " + character.getArmor());
+							}
 							accept = true;
 						}
 					}

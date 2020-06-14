@@ -62,7 +62,7 @@ public class Arena extends JFrame {
 		upArrowLab.setIcon(img1);
 		upArrowLab.setBounds(150, 290, 193, 300);
 		getContentPane().add(upArrowLab);
-		
+
 		downArrowLab = new JLabel("");
 		ImageIcon img2 = new ImageIcon("pictures/downArrow.gif");
 		downArrowLab.setIcon(img2);
@@ -138,13 +138,13 @@ public class Arena extends JFrame {
 			Timer timer = new Timer(1000, new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					enemysMove("Attack", dec);
+					actionLab.setText("");
 				}
 			});
 
 			timer.setRepeats(false);
 			timer.start();
 
-			actionLab.setText("");
 
 			if (character.getHp() == 0) {
 				characterLost();
@@ -155,11 +155,14 @@ public class Arena extends JFrame {
 
 	// actions after defendBut pressed
 	private void defendAction() {
-		character.setStamina(character.getStamina() - 3);
-		if (character.getStamina() < 0)
-			character.setStamina(0);
-
 		actionLab.setText(enemy.makeDecision());
+		
+		character.setStamina(character.getStamina() - 3);
+		if (character.getStamina() < 0) {
+			character.setStamina(0);
+			sBar.setValue(character.getStamina());
+			sLabel.setText("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
+		}
 
 		attackBut.setEnabled(false);
 		defendBut.setEnabled(false);
@@ -168,13 +171,12 @@ public class Arena extends JFrame {
 		Timer timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enemysMove("Defend", enemy.makeDecision());
+				actionLab.setText("");
 			}
 		});
 
 		timer.setRepeats(false);
 		timer.start();
-
-		actionLab.setText("");
 
 		if (character.getHp() == 0) {
 			characterLost();
@@ -183,11 +185,15 @@ public class Arena extends JFrame {
 
 	// actions after waitBut pressed
 	private void waitAction() {
+		actionLab.setText(enemy.makeDecision());
+		
 		character.setStamina(character.getStamina() + 4);
+		
 		if (character.getStamina() > character.getMaxStamina())
 			character.setStamina(character.getMaxStamina());
-
-		actionLab.setText(enemy.makeDecision());
+		
+		sBar.setValue(character.getStamina());
+		sLabel.setText("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
 
 		attackBut.setEnabled(false);
 		defendBut.setEnabled(false);
@@ -196,13 +202,12 @@ public class Arena extends JFrame {
 		Timer timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enemysMove("Wait", enemy.makeDecision());
+				actionLab.setText("");
 			}
 		});
 
 		timer.setRepeats(false);
 		timer.start();
-
-		actionLab.setText("");
 
 		if (character.getHp() == 0) {
 			characterLost();
@@ -222,6 +227,9 @@ public class Arena extends JFrame {
 		character.setStamina(character.getStamina() - 5);
 		if (character.getStamina() < 0)
 			character.setStamina(0);
+		
+		sBar.setValue(character.getStamina());
+		sLabel.setText("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
 
 		enemy.setHp(enemy.getHp() + dmg);
 		if (enemy.getHp() < 0)
@@ -244,20 +252,22 @@ public class Arena extends JFrame {
 			}
 			if (dmg > 0)
 				dmg = 0;
-			
-			actionLab.setText(Edecision);
 
 			character.setHp(character.getHp() + dmg);
 			if (character.getHp() < 0)
 				character.setHp(0);
 			hpBar.setValue(character.getHp());
 			hpLabel.setText("HP: " + character.getHp() + "/100");
+			
 			enemy.setStamina(enemy.getStamina() - 5);
 		} else if (Edecision.compareTo("Defend") == 0) {
 			enemy.setStamina(enemy.getStamina() - 3);
 		} else {
 			enemy.setStamina(enemy.getStamina() + 4);
 		}
+		
+		sBarE.setValue(enemy.getStamina());
+		sLabelE.setText("Stamina: " + enemy.getStamina() + "/" + enemy.getMaxStamina());
 
 		if (character.getStamina() >= 5)
 			attackBut.setEnabled(true);

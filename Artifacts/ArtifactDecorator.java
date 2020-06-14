@@ -2,6 +2,10 @@ import java.io.Serializable;
 
 public abstract class ArtifactDecorator implements Serializable, ArtifactTemplate {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 806049283161547930L;
 	private ArtifactTemplate artifact;
 
 	public ArtifactDecorator(ArtifactTemplate artifact) {

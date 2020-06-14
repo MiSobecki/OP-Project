@@ -33,14 +33,15 @@ public class Character extends CharacterTemplate implements Serializable {
 			if (a.getName().compareTo(name) == 0)
 				return a;
 		}
-		return null;
+		return new Artifact();
 	}
 
 	// Builder class
 	public static final class Builder {
 		private int hp, attack, armor, wealth, arenaLvl, defence, stamina, maxStamina;
 		private ArrayList<ArtifactTemplate> artifacts; // headList of artifacts character have
-		private ArtifactTemplate head, chest, legs, hands, rightHand, leftHand;
+		private ArtifactTemplate head = new Artifact(), chest = new Artifact(), legs = new Artifact(),
+				hands = new Artifact(), rightHand = new Artifact(), leftHand = new Artifact();
 
 		public Builder hp(int hp) {
 			this.hp = hp;
@@ -111,12 +112,12 @@ public class Character extends CharacterTemplate implements Serializable {
 			this.defence = defence;
 			return this;
 		}
-		
+
 		public Builder stamina(int stamina) {
 			this.stamina = stamina;
 			return this;
 		}
-		
+
 		public Builder maxStamina(int maxStamina) {
 			this.maxStamina = maxStamina;
 			return this;

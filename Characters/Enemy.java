@@ -30,11 +30,11 @@ public class Enemy extends CharacterTemplate {
 	public String makeDecision() {
 		if (stamina >= 5) {
 			return "Attack";
-		} else if (stamina >= 3) {
-			return "Defend";
-		} else {
-			return "Wait";
 		}
+		if (stamina >= 3) {
+			return "Defend";
+		}
+		return "Wait";
 	}
 
 	@Override

@@ -107,7 +107,7 @@ public class City extends JFrame {
 		hpLabel = new JLabel("HP: " + character.getHp() + "/100");
 		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		hpLabel.setBounds(250, 700, 90, 30);
+		hpLabel.setBounds(202, 700, 138, 30);
 		getContentPane().add(hpLabel);
 
 		// ToolBar
