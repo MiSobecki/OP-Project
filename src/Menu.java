@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,14 +23,17 @@ public class Menu extends JFrame {
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
 		newBut = new JButton("New Game");
+		newBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		newBut.setAlignmentX(0.5f);
 		getContentPane().add(newBut);
 
 		loadBut = new JButton("Load");
+		loadBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		loadBut.setAlignmentX(0.5f);
 		getContentPane().add(loadBut);
 
 		exitBut = new JButton("Exit");
+		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		exitBut.setAlignmentX(0.5f);
 		getContentPane().add(exitBut);
 

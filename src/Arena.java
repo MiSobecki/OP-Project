@@ -62,12 +62,14 @@ public class Arena extends JFrame {
 		upArrowLab.setIcon(img1);
 		upArrowLab.setBounds(150, 290, 193, 300);
 		getContentPane().add(upArrowLab);
+		upArrowLab.setVisible(false);
 
 		downArrowLab = new JLabel("");
 		ImageIcon img2 = new ImageIcon("pictures/downArrow.gif");
 		downArrowLab.setIcon(img2);
 		downArrowLab.setBounds(450, 290, 193, 300);
 		getContentPane().add(downArrowLab);
+		downArrowLab.setVisible(false);
 
 		// Attack button
 		attackBut = new JButton("Attack");
@@ -109,7 +111,7 @@ public class Arena extends JFrame {
 		actionLab.setHorizontalAlignment(SwingConstants.CENTER);
 		actionLab.setBounds(556, 88, 150, 56);
 		getContentPane().add(actionLab);
-		actionLab.setFont(new Font("Enchanted Land", Font.PLAIN, 30));
+		actionLab.setFont(new Font("Enchanted Land", Font.PLAIN, 40));
 
 		nameLab = new JLabel(enemy.getName());
 		nameLab.setHorizontalAlignment(SwingConstants.CENTER);
@@ -128,6 +130,8 @@ public class Arena extends JFrame {
 
 	// actions after attackBut pressed
 	private void attackAction() {
+		upArrowLab.setVisible(true);
+
 		String dec = enemy.makeDecision();
 		actionLab.setText(dec);
 		charactersAttack(dec);
@@ -137,14 +141,15 @@ public class Arena extends JFrame {
 		} else {
 			Timer timer = new Timer(1000, new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					upArrowLab.setVisible(false);
 					enemysMove("Attack", dec);
-					actionLab.setText("");
 				}
 			});
 
 			timer.setRepeats(false);
 			timer.start();
 
+			secondTimer();
 
 			if (character.getHp() == 0) {
 				characterLost();
@@ -156,7 +161,7 @@ public class Arena extends JFrame {
 	// actions after defendBut pressed
 	private void defendAction() {
 		actionLab.setText(enemy.makeDecision());
-		
+
 		character.setStamina(character.getStamina() - 3);
 		if (character.getStamina() < 0) {
 			character.setStamina(0);
@@ -171,12 +176,13 @@ public class Arena extends JFrame {
 		Timer timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enemysMove("Defend", enemy.makeDecision());
-				actionLab.setText("");
 			}
 		});
 
 		timer.setRepeats(false);
 		timer.start();
+		
+		secondTimer();
 
 		if (character.getHp() == 0) {
 			characterLost();
@@ -186,12 +192,12 @@ public class Arena extends JFrame {
 	// actions after waitBut pressed
 	private void waitAction() {
 		actionLab.setText(enemy.makeDecision());
-		
+
 		character.setStamina(character.getStamina() + 4);
-		
+
 		if (character.getStamina() > character.getMaxStamina())
 			character.setStamina(character.getMaxStamina());
-		
+
 		sBar.setValue(character.getStamina());
 		sLabel.setText("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
 
@@ -202,12 +208,13 @@ public class Arena extends JFrame {
 		Timer timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				enemysMove("Wait", enemy.makeDecision());
-				actionLab.setText("");
 			}
 		});
 
 		timer.setRepeats(false);
 		timer.start();
+		
+		secondTimer();
 
 		if (character.getHp() == 0) {
 			characterLost();
@@ -227,7 +234,7 @@ public class Arena extends JFrame {
 		character.setStamina(character.getStamina() - 5);
 		if (character.getStamina() < 0)
 			character.setStamina(0);
-		
+
 		sBar.setValue(character.getStamina());
 		sLabel.setText("Stamina: " + character.getStamina() + "/" + character.getMaxStamina());
 
@@ -244,6 +251,7 @@ public class Arena extends JFrame {
 
 	private void enemysMove(String Cdecision, String Edecision) {
 		if (Edecision.compareTo("Attack") == 0) {
+			downArrowLab.setVisible(true);
 			int dmg = 0;
 			if (Cdecision.compareTo("Attack") == 0 || Cdecision.compareTo("Wait") == 0) {
 				dmg = character.getArmor() - enemy.makeAttack();
@@ -258,22 +266,16 @@ public class Arena extends JFrame {
 				character.setHp(0);
 			hpBar.setValue(character.getHp());
 			hpLabel.setText("HP: " + character.getHp() + "/100");
-			
+
 			enemy.setStamina(enemy.getStamina() - 5);
 		} else if (Edecision.compareTo("Defend") == 0) {
 			enemy.setStamina(enemy.getStamina() - 3);
 		} else {
 			enemy.setStamina(enemy.getStamina() + 4);
 		}
-		
+
 		sBarE.setValue(enemy.getStamina());
 		sLabelE.setText("Stamina: " + enemy.getStamina() + "/" + enemy.getMaxStamina());
-
-		if (character.getStamina() >= 5)
-			attackBut.setEnabled(true);
-		if (character.getStamina() >= 3)
-			defendBut.setEnabled(true);
-		waitBut.setEnabled(true);
 	}
 
 	// happens if enemy has 0 hp
@@ -370,5 +372,22 @@ public class Arena extends JFrame {
 		sLabelE.setBounds(360, 200, 130, 30);
 		getContentPane().add(sLabelE);
 		sLabelE.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+	}
+	
+	private void secondTimer() {
+		Timer timer2 = new Timer(2000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (character.getStamina() >= 5)
+					attackBut.setEnabled(true);
+				if (character.getStamina() >= 3)
+					defendBut.setEnabled(true);
+				waitBut.setEnabled(true);
+				actionLab.setText("");
+				downArrowLab.setVisible(false);
+			}
+		});
+
+		timer2.setRepeats(false);
+		timer2.start();
 	}
 }

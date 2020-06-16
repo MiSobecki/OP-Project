@@ -1,0 +1,12 @@
+File,LOC,SLOC-P,SLOC-L,MVG,BLOC,C&SLOC,CLOC,CWORD,HCLOC,HCWORD
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\Arena.java,416,335,289,20,69,0,12,41,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\ArenaList.java,142,117,96,3,17,0,8,31,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\City.java,157,125,105,0,19,0,13,46,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\Inn.java,205,176,148,7,20,0,9,33,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\Inventory.java,493,411,336,30,58,0,24,105,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\LoadGame.java,131,107,89,1,23,0,1,2,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\Main.java,37,25,20,0,9,0,3,11,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\Menu.java,78,57,46,0,14,0,7,19,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\NewGame.java,124,102,81,3,21,0,1,2,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\SaveAndRead.java,56,46,37,3,10,0,0,0,0,0
+C:\Users\micha\eclipse-workspace\Demons & Darkness\src\Shop.java,361,311,253,23,42,0,8,39,0,0

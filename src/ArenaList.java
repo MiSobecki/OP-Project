@@ -29,7 +29,7 @@ public class ArenaList extends JFrame {
 
 		// ToolBar
 		toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 150, 23);
+		toolBar.setBounds(0, 0, 172, 23);
 		getContentPane().add(toolBar);
 
 		// Button to exit game

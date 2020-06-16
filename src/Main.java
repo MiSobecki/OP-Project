@@ -4,6 +4,9 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -21,6 +24,8 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		UIManager.put("ToolTip.font", new FontUIResource("Enchanted Land", Font.TRUETYPE_FONT, 20));
 
 		// opens menu window
 		@SuppressWarnings("unused")

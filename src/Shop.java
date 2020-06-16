@@ -42,8 +42,9 @@ public class Shop extends JFrame {
 		artLabel1.setBounds(80, 170, 200, 30);
 		getContentPane().add(artLabel1);
 		artLabel1.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		
+
 		artBut1 = new JButton("BUY");
+		artBut1.setToolTipText("Cost: " + randomList.get(0).getCost());
 		artBut1.setBounds(80, 210, 200, 30);
 		if (character.containArtifact(randomList.get(0).getName())
 				|| character.getWealth() < randomList.get(0).getCost()) {
@@ -63,8 +64,9 @@ public class Shop extends JFrame {
 		artLabel2.setBounds(720, 170, 200, 30);
 		getContentPane().add(artLabel2);
 		artLabel2.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		
+
 		artBut2 = new JButton("BUY");
+		artBut2.setToolTipText("Cost: " + randomList.get(1).getCost());
 		artBut2.setBounds(720, 210, 200, 30);
 		if (character.containArtifact(randomList.get(1).getName())
 				|| character.getWealth() < randomList.get(1).getCost()) {
@@ -84,8 +86,9 @@ public class Shop extends JFrame {
 		artLabel3.setBounds(80, 420, 200, 30);
 		getContentPane().add(artLabel3);
 		artLabel3.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		
+
 		artBut3 = new JButton("BUY");
+		artBut3.setToolTipText("Cost: " + randomList.get(2).getCost());
 		artBut3.setBounds(80, 460, 200, 30);
 		if (character.containArtifact(randomList.get(2).getName())
 				|| character.getWealth() < randomList.get(2).getCost()) {
@@ -105,8 +108,9 @@ public class Shop extends JFrame {
 		artLabel4.setBounds(720, 420, 200, 30);
 		getContentPane().add(artLabel4);
 		artLabel4.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		
+
 		artBut4 = new JButton("BUY");
+		artBut4.setToolTipText("Cost: " + randomList.get(3).getCost());
 		artBut4.setBounds(720, 460, 200, 30);
 		if (character.containArtifact(randomList.get(3).getName())
 				|| character.getWealth() < randomList.get(3).getCost()) {
@@ -126,8 +130,9 @@ public class Shop extends JFrame {
 		artLabel5.setBounds(400, 500, 200, 30);
 		getContentPane().add(artLabel5);
 		artLabel5.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		
+
 		artBut5 = new JButton("BUY");
+		artBut5.setToolTipText("Cost: " + randomList.get(4).getCost());
 		artBut5.setBounds(400, 540, 200, 30);
 		if (character.containArtifact(randomList.get(4).getName())
 				|| character.getWealth() < randomList.get(4).getCost()) {
@@ -147,8 +152,9 @@ public class Shop extends JFrame {
 		artLabel6.setBounds(400, 100, 200, 30);
 		getContentPane().add(artLabel6);
 		artLabel6.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		
+
 		artBut6 = new JButton("BUY");
+		artBut6.setToolTipText("Cost: " + randomList.get(5).getCost());
 		artBut6.setBounds(400, 141, 200, 30);
 		if (character.containArtifact(randomList.get(5).getName())
 				|| character.getWealth() < randomList.get(5).getCost()) {
@@ -186,6 +192,7 @@ public class Shop extends JFrame {
 
 		// Button to refresh list of available artifacts
 		refreshBut = new JButton("Refresh");
+		refreshBut.setToolTipText("Cost: 500");
 		refreshBut.setBounds(430, 269, 100, 51);
 		getContentPane().add(refreshBut);
 		refreshBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
@@ -203,10 +210,12 @@ public class Shop extends JFrame {
 				initialize(savefile);
 			}
 		});
+		if (character.getWealth() < 500)
+			refreshBut.setEnabled(false);
 
 		// ToolBar
 		toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 150, 23);
+		toolBar.setBounds(0, 0, 178, 23);
 		getContentPane().add(toolBar);
 
 		// Button to exit game
