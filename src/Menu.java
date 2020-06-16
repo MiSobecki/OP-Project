@@ -41,8 +41,7 @@ public class Menu extends JFrame {
 		newBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				NewGame ng = new NewGame();
+				new NewGame();
 				dispose();
 			}
 		});
@@ -59,8 +58,7 @@ public class Menu extends JFrame {
 		loadBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				LoadGame lg = new LoadGame();
+				new LoadGame();
 				dispose();
 			}
 		});

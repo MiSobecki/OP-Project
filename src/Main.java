@@ -28,8 +28,7 @@ public class Main {
 		UIManager.put("ToolTip.font", new FontUIResource("Enchanted Land", Font.TRUETYPE_FONT, 20));
 
 		// opens menu window
-		@SuppressWarnings("unused")
-		Menu menu = new Menu();
+		new Menu();
 
 	}
 

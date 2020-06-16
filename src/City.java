@@ -44,8 +44,7 @@ public class City extends JFrame {
 		shopBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				Shop shop = new Shop(character, savefile);
+				new Shop(character, savefile);
 				dispose();
 			}
 		});
@@ -58,8 +57,7 @@ public class City extends JFrame {
 		arenaBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				ArenaList arenaList = new ArenaList(character, savefile);
+				new ArenaList(character, savefile);
 				dispose();
 			}
 		});
@@ -72,8 +70,7 @@ public class City extends JFrame {
 		invBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				Inventory inv = new Inventory(character, savefile);
+				new Inventory(character, savefile);
 				dispose();
 			}
 		});
@@ -86,8 +83,7 @@ public class City extends JFrame {
 		innBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				Inn inn = new Inn(character, savefile);
+				new Inn(character, savefile);
 				dispose();
 			}
 		});
@@ -133,8 +129,7 @@ public class City extends JFrame {
 		menuBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 				dispose();
 			}
 		});

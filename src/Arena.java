@@ -292,13 +292,13 @@ public class Arena extends JFrame {
 			e.printStackTrace();
 		}
 
-		@SuppressWarnings("unused")
-		City city = new City(character, savefile);
+		new City(character, savefile);
 		dispose();
 	}
 
 	// happens if character has 0 hp
 	private void characterLost() {
+		new LostWindow();
 		dispose();
 	}
 

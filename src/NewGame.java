@@ -56,8 +56,7 @@ public class NewGame extends JFrame {
 		returnBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 				dispose();
 			}
 		});
@@ -89,11 +88,9 @@ public class NewGame extends JFrame {
 					"This name of the save already exists.\n" + "Do you want to overwrite it?", "Save overwite",
 					JOptionPane.YES_NO_OPTION);
 			if (o == 0) {
-				@SuppressWarnings("unused")
-				City city = new City(createNewCharacter(), temp);
+				new City(createNewCharacter(), temp);
 			} else {
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 			}
 			dispose();
 		} else {
@@ -108,8 +105,7 @@ public class NewGame extends JFrame {
 
 			JOptionPane.showMessageDialog(null, "Creating new save was successful");
 
-			@SuppressWarnings("unused")
-			City city = new City(createNewCharacter(), temp);
+			 new City(createNewCharacter(), temp);
 			dispose();
 		}
 	}

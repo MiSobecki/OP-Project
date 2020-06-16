@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -51,5 +55,30 @@ public class SaveAndRead {
 		return temp;
 	}
 	
+	public String readHistory(String path) {
+		String line, text;
+		
+		text = "<html>";
+		
+		try {
+			File file = new File("stories/" + path);
+			@SuppressWarnings("resource")
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			
+			while((line = br.readLine()) != null) {
+				text += line + "<br>";
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		text += "</html>";
+		
+		return text;
+	}
 	
 }

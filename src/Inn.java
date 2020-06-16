@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,7 +20,7 @@ public class Inn extends JFrame {
 
 	private JPanel healthBarPanel;
 	private JProgressBar hpBar;
-	private JLabel hpLabel, cashLabel;
+	private JLabel hpLabel, cashLabel, histLab;
 	private JButton beerBut, chickenBut, exitBut, returnBut, menuBut;
 	private JToolBar toolBar;
 	private JButton soupBut;
@@ -130,8 +132,7 @@ public class Inn extends JFrame {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 				dispose();
 			}
 		});
@@ -150,8 +151,7 @@ public class Inn extends JFrame {
 					e.printStackTrace();
 				}
 
-				@SuppressWarnings("unused")
-				City city = new City(character, savefile);
+				new City(character, savefile);
 				dispose();
 			}
 		});
@@ -179,6 +179,13 @@ public class Inn extends JFrame {
 		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		cashLabel.setBounds(410, 520, 89, 31);
 		getContentPane().add(cashLabel);
+		
+		histLab = new JLabel("");
+		histLab.setVerticalAlignment(SwingConstants.TOP);
+		histLab.setBounds(10, 34, 574, 420);
+		histLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		getContentPane().add(histLab);
+		setHistory();
 
 		// Frame settings
 		setTitle("City");
@@ -200,5 +207,18 @@ public class Inn extends JFrame {
 		} else if (character.getHp() == 100 || character.getWealth() < 500) {
 			chickenBut.setEnabled(false);
 		}
+	}
+	
+	private void setHistory() {
+		SaveAndRead sr = new SaveAndRead();
+		
+		ArrayList<String> hists = new ArrayList<String>();
+		hists.add("firstStory.txt");
+		hists.add("secondStory.txt");
+		hists.add("thirdStory.txt");
+		
+		int x = ThreadLocalRandom.current().nextInt(0, hists.size());
+		
+		histLab.setText(sr.readHistory(hists.get(x)));
 	}
 }

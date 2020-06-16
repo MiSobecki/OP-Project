@@ -68,8 +68,7 @@ public class LoadGame extends JFrame {
 		returnBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 				dispose();
 			}
 		});
@@ -105,8 +104,7 @@ public class LoadGame extends JFrame {
 
 		try {
 			Character character = (Character) sr.read("saves/" + temp);
-			@SuppressWarnings("unused")
-			City city = new City(character, temp);
+			new City(character, temp);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
 					"Ups, save doesn't exist, Sorry!\n" + "Deleting corrupted save and" + "Moving to main menu...",
@@ -119,8 +117,7 @@ public class LoadGame extends JFrame {
 				e1.printStackTrace();
 			}
 
-			@SuppressWarnings("unused")
-			Menu menu = new Menu();
+			new Menu();
 
 			e.printStackTrace();
 		}

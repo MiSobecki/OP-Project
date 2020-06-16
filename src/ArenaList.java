@@ -62,8 +62,8 @@ public class ArenaList extends JFrame {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				
+				new Menu();
 				dispose();
 			}
 		});
@@ -82,8 +82,7 @@ public class ArenaList extends JFrame {
 					e.printStackTrace();
 				}
 
-				@SuppressWarnings("unused")
-				City city = new City(character, savefile);
+				new City(character, savefile);
 				dispose();
 			}
 		});
@@ -111,8 +110,7 @@ public class ArenaList extends JFrame {
 			public void actionPerformed(ActionEvent actionEvent) {
 				Enemy temp = list.getSelectedValue();
 				if (!temp.isLocked()) {
-					@SuppressWarnings("unused")
-					Arena arena = new Arena(character, temp, savefile);
+					new Arena(character, temp, savefile);
 					dispose();
 				}
 			}

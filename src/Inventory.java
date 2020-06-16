@@ -92,8 +92,7 @@ public class Inventory extends JFrame {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 				dispose();
 			}
 		});
@@ -114,8 +113,7 @@ public class Inventory extends JFrame {
 					e.printStackTrace();
 				}
 
-				@SuppressWarnings("unused")
-				City city = new City(temp, savefile);
+				new City(temp, savefile);
 				dispose();
 			}
 		});

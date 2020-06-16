@@ -250,8 +250,7 @@ public class Shop extends JFrame {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				@SuppressWarnings("unused")
-				Menu menu = new Menu();
+				new Menu();
 				dispose();
 			}
 		});
@@ -271,8 +270,7 @@ public class Shop extends JFrame {
 					e.printStackTrace();
 				}
 
-				@SuppressWarnings("unused")
-				City city = new City(character, savefile);
+				new City(character, savefile);
 				dispose();
 			}
 		});
