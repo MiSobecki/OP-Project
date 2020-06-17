@@ -44,15 +44,7 @@ public class LoadGame extends JFrame {
 
 		createModel();
 
-		scroll = new JScrollPane();
-		scroll.setBounds(100, 100, 300, 380);
-		getContentPane().add(scroll);
-		list = new JList<String>();
-		scroll.setViewportView(list);
-		list.setModel(model);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		list.setLayoutOrientation(JList.VERTICAL);
+		createSavesList();
 
 		selectBut = new JButton("Load save");
 		selectBut.setBounds(293, 502, 107, 40);
@@ -127,5 +119,17 @@ public class LoadGame extends JFrame {
 		}
 
 		dispose();
+	}
+	
+	private void createSavesList() {
+		scroll = new JScrollPane();
+		scroll.setBounds(100, 100, 300, 380);
+		getContentPane().add(scroll);
+		list = new JList<String>();
+		scroll.setViewportView(list);
+		list.setModel(model);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		list.setLayoutOrientation(JList.VERTICAL);
 	}
 }

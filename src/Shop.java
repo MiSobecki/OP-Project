@@ -27,13 +27,15 @@ public class Shop extends JFrame {
 	private JButton exitBut, returnBut, menuBut, refreshBut;
 
 	private Character character;
+	private String savefile;
 
 	public Shop(Character character, String savefile) {
 		this.character = character;
-		initialize(savefile);
+		this.savefile = savefile;
+		initialize();
 	}
 
-	private void initialize(String savefile) {
+	private void initialize() {
 
 		getContentPane().setLayout(null);
 
@@ -41,6 +43,99 @@ public class Shop extends JFrame {
 		setRandomList();
 
 		// Setting of available artifacts to buy
+		setupArtifactsToBuy();
+
+		// Labels informing about character's statistics
+		setupStats();
+
+		// Button to refresh list of available artifacts
+		setupRefreshBut();
+
+		// ToolBar
+		setupToolBar();
+
+		// Setting to frame
+		setTitle("Shop");
+		setLocation(450, 100);
+		setResizable(false);
+		setSize(1000, 700);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	private void setAllArtifacts() {
+		allArtifacts = new ArrayList<ArtifactTemplate>();
+		allArtifacts.add(new PracticeShield(new Artifact()));
+		allArtifacts.add(new PracticeSword(new Artifact()));
+		allArtifacts.add(new IronSword(new Artifact()));
+		allArtifacts.add(new LeatherArmor(new Artifact()));
+		allArtifacts.add(new PlateArmor(new Artifact()));
+		allArtifacts.add(new LeatherShoes(new Artifact()));
+	}
+
+	private void setRandomList() {
+		SaveAndRead sr = new SaveAndRead();
+		try {
+			randomList = (ArrayList<ArtifactTemplate>) sr.readShop("Shop");
+		} catch (Exception e) {
+			createNewRandList();
+
+			e.printStackTrace();
+		}
+	}
+
+	private void createNewRandList() {
+		randomList = new ArrayList<ArtifactTemplate>();
+		int x;
+
+		for (int i = 0; i < allArtifacts.size(); i++) {
+			x = ThreadLocalRandom.current().nextInt(0, allArtifacts.size());
+			if (!randomList.contains(allArtifacts.get(x))) {
+				randomList.add(allArtifacts.get(x));
+			} else
+				i = i - 1;
+		}
+	}
+
+	private void buyAction(int i) {
+		ArtifactTemplate temp = randomList.get(i);
+
+		switch (i) {
+		case 0:
+			artBut1.setEnabled(false);
+			break;
+		case 1:
+			artBut2.setEnabled(false);
+			break;
+		case 2:
+			artBut3.setEnabled(false);
+			break;
+		case 3:
+			artBut4.setEnabled(false);
+			break;
+		case 4:
+			artBut5.setEnabled(false);
+			break;
+		case 5:
+			artBut6.setEnabled(false);
+			break;
+		default:
+			System.out.println("Such artifact doesn't exist");
+		}
+
+		character.addArtifact(temp);
+		character.setWealth(character.getWealth() - temp.getCost());
+		cashLabel.setText("Cash: " + character.getWealth());
+
+		if (temp.getType() == "Right-hand") {
+			attackLabel.setText("Attack: " + character.getAttack());
+		} else if (temp.getType() == "Left-hand") {
+			defenceLabel.setText("Defence: " + character.getDefence());
+		} else
+			armorLabel.setText("Armor: " + character.getArmor());
+	}
+	
+	private void setupArtifactsToBuy() {
 		artLabel1 = new JLabel(randomList.get(0).getName());
 		artLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel1.setBounds(80, 170, 200, 30);
@@ -172,8 +267,9 @@ public class Shop extends JFrame {
 				buyAction(5);
 			}
 		});
-
-		// Labels informing about character's statistics
+	}
+	
+	private void setupStats() {
 		cashLabel = new JLabel("Cash: " + character.getWealth());
 		cashLabel.setBounds(450, 378, 100, 30);
 		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
@@ -193,31 +289,9 @@ public class Shop extends JFrame {
 		attackLabel.setBounds(700, 10, 100, 30);
 		attackLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(attackLabel);
-
-		// Button to refresh list of available artifacts
-		refreshBut = new JButton("Refresh");
-		refreshBut.setToolTipText("Cost: 500");
-		refreshBut.setBounds(430, 269, 100, 51);
-		getContentPane().add(refreshBut);
-		refreshBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		refreshBut.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				createNewRandList();
-				try {
-					SaveAndRead sr = new SaveAndRead();
-					sr.saveShop(randomList, "Shop");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				getContentPane().removeAll();
-				initialize(savefile);
-			}
-		});
-		if (character.getWealth() < 500)
-			refreshBut.setEnabled(false);
-
-		// ToolBar
+	}
+	
+	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 178, 23);
 		getContentPane().add(toolBar);
@@ -278,85 +352,30 @@ public class Shop extends JFrame {
 				dispose();
 			}
 		});
-
-		// Setting to frame
-		setTitle("Shop");
-		setLocation(450, 100);
-		setResizable(false);
-		setSize(1000, 700);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
-	private void setAllArtifacts() {
-		allArtifacts = new ArrayList<ArtifactTemplate>();
-		allArtifacts.add(new PracticeShield(new Artifact()));
-		allArtifacts.add(new PracticeSword(new Artifact()));
-		allArtifacts.add(new IronSword(new Artifact()));
-		allArtifacts.add(new LeatherArmor(new Artifact()));
-		allArtifacts.add(new PlateArmor(new Artifact()));
-		allArtifacts.add(new LeatherShoes(new Artifact()));
-	}
-
-	private void setRandomList() {
-		SaveAndRead sr = new SaveAndRead();
-		try {
-			randomList = (ArrayList<ArtifactTemplate>) sr.readShop("Shop");
-		} catch (Exception e) {
-			createNewRandList();
-
-			e.printStackTrace();
-		}
-	}
-
-	private void createNewRandList() {
-		randomList = new ArrayList<ArtifactTemplate>();
-		int x;
-
-		for (int i = 0; i < allArtifacts.size(); i++) {
-			x = ThreadLocalRandom.current().nextInt(0, allArtifacts.size());
-			if (!randomList.contains(allArtifacts.get(x))) {
-				randomList.add(allArtifacts.get(x));
-			} else
-				i = i - 1;
-		}
-	}
-
-	private void buyAction(int i) {
-		ArtifactTemplate temp = randomList.get(i);
-
-		switch (i) {
-		case 0:
-			artBut1.setEnabled(false);
-			break;
-		case 1:
-			artBut2.setEnabled(false);
-			break;
-		case 2:
-			artBut3.setEnabled(false);
-			break;
-		case 3:
-			artBut4.setEnabled(false);
-			break;
-		case 4:
-			artBut5.setEnabled(false);
-			break;
-		case 5:
-			artBut6.setEnabled(false);
-			break;
-		default:
-			System.out.println("Such artifact doesn't exist");
-		}
-
-		character.addArtifact(temp);
-		character.setWealth(character.getWealth() - temp.getCost());
-		cashLabel.setText("Cash: " + character.getWealth());
-
-		if (temp.getType() == "Right-hand") {
-			attackLabel.setText("Attack: " + character.getAttack());
-		} else if (temp.getType() == "Left-hand") {
-			defenceLabel.setText("Defence: " + character.getDefence());
-		} else
-			armorLabel.setText("Armor: " + character.getArmor());
+	
+	private void setupRefreshBut() {
+		refreshBut = new JButton("Refresh");
+		refreshBut.setToolTipText("Cost: 500");
+		refreshBut.setBounds(430, 269, 100, 51);
+		getContentPane().add(refreshBut);
+		refreshBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		refreshBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				createNewRandList();
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.saveShop(randomList, "Shop");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				getContentPane().removeAll();
+				initialize();
+			}
+		});
+		
+		if (character.getWealth() < 500)
+			refreshBut.setEnabled(false);
 	}
 }

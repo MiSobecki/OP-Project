@@ -11,6 +11,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		changeFonts();
+
+		// opens menu window
+		new Menu();
+
+	}
+	
+	private static void changeFonts() {
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/EnchantedLand.otf"));
 	        font = font.deriveFont(Font.PLAIN, 20);
@@ -26,10 +34,6 @@ public class Main {
 		}
 		
 		UIManager.put("ToolTip.font", new FontUIResource("Enchanted Land", Font.TRUETYPE_FONT, 20));
-
-		// opens menu window
-		new Menu();
-
 	}
 
 }
