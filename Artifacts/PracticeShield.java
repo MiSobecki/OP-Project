@@ -1,6 +1,11 @@
 
 public class PracticeShield extends LeftHandArtifact {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8220390300682097672L;
+
 	public PracticeShield(ArtifactTemplate artifact) {
 		super(artifact);
 	}

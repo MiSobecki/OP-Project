@@ -2,6 +2,10 @@ import java.io.Serializable;
 
 public abstract class CharacterTemplate implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3783281753918653219L;
 	protected int hp, attack, armor, stamina, maxStamina, defence;
 
 	public abstract int makeAttack();

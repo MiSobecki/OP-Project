@@ -1,5 +1,10 @@
 public class PracticeSword extends RightHandArtifact {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -630305300774558039L;
+
 	public PracticeSword(ArtifactTemplate artifact) {
 		super(artifact);
 	}

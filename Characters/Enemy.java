@@ -1,6 +1,10 @@
 
 public class Enemy extends CharacterTemplate {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 241595758663054555L;
 	private int award, lvl;
 	private String name;
 	private boolean locked;

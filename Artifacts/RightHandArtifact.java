@@ -1,6 +1,11 @@
 
 public class RightHandArtifact extends ArtifactDecorator {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5665507818367366560L;
+
 	public RightHandArtifact(ArtifactTemplate artifact) {
 		super(artifact);
 	}

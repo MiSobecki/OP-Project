@@ -1,14 +1,8 @@
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Path2D;
-import java.awt.geom.Point2D;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -19,10 +13,13 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 public class Arena extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3556826648760581683L;
 	private JPanel healthBarPanel, healthBarPanelE, staminaBarPanel, staminaBarPanelE;
 	private JProgressBar hpBar, hpBarE, sBar, sBarE;
 	private JLabel hpLabel, hpLabelE, sLabel, sLabelE, enemyLab, actionLab;
@@ -57,19 +54,8 @@ public class Arena extends JFrame {
 		enemyLab.setBounds(325, 11, 150, 180);
 		getContentPane().add(enemyLab);
 
-		upArrowLab = new JLabel("");
-		ImageIcon img1 = new ImageIcon("pictures/upArrow.gif");
-		upArrowLab.setIcon(img1);
-		upArrowLab.setBounds(150, 290, 193, 300);
-		getContentPane().add(upArrowLab);
-		upArrowLab.setVisible(false);
-
-		downArrowLab = new JLabel("");
-		ImageIcon img2 = new ImageIcon("pictures/downArrow.gif");
-		downArrowLab.setIcon(img2);
-		downArrowLab.setBounds(450, 290, 193, 300);
-		getContentPane().add(downArrowLab);
-		downArrowLab.setVisible(false);
+		// Create images of up/down arrows
+		setupArrows();
 
 		// Attack button
 		attackBut = new JButton("Attack");
@@ -150,11 +136,6 @@ public class Arena extends JFrame {
 			timer.start();
 
 			secondTimer();
-
-			if (character.getHp() == 0) {
-				characterLost();
-			}
-
 		}
 	}
 
@@ -181,12 +162,8 @@ public class Arena extends JFrame {
 
 		timer.setRepeats(false);
 		timer.start();
-		
-		secondTimer();
 
-		if (character.getHp() == 0) {
-			characterLost();
-		}
+		secondTimer();
 	}
 
 	// actions after waitBut pressed
@@ -213,12 +190,8 @@ public class Arena extends JFrame {
 
 		timer.setRepeats(false);
 		timer.start();
-		
-		secondTimer();
 
-		if (character.getHp() == 0) {
-			characterLost();
-		}
+		secondTimer();
 	}
 
 	private void charactersAttack(String Edecision) {
@@ -298,7 +271,7 @@ public class Arena extends JFrame {
 
 	// happens if character has 0 hp
 	private void characterLost() {
-		new LostWindow();
+		new LostWindow(savefile);
 		dispose();
 	}
 
@@ -373,7 +346,7 @@ public class Arena extends JFrame {
 		getContentPane().add(sLabelE);
 		sLabelE.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 	}
-	
+
 	private void secondTimer() {
 		Timer timer2 = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -384,10 +357,30 @@ public class Arena extends JFrame {
 				waitBut.setEnabled(true);
 				actionLab.setText("");
 				downArrowLab.setVisible(false);
+
+				if (character.getHp() == 0) {
+					characterLost();
+				}
 			}
 		});
 
 		timer2.setRepeats(false);
 		timer2.start();
+	}
+
+	private void setupArrows() {
+		upArrowLab = new JLabel("");
+		ImageIcon img1 = new ImageIcon("pictures/upArrow.gif");
+		upArrowLab.setIcon(img1);
+		upArrowLab.setBounds(150, 290, 193, 300);
+		getContentPane().add(upArrowLab);
+		upArrowLab.setVisible(false);
+
+		downArrowLab = new JLabel("");
+		ImageIcon img2 = new ImageIcon("pictures/downArrow.gif");
+		downArrowLab.setIcon(img2);
+		downArrowLab.setBounds(450, 290, 193, 300);
+		getContentPane().add(downArrowLab);
+		downArrowLab.setVisible(false);
 	}
 }

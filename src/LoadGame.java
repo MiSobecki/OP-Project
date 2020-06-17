@@ -16,6 +16,10 @@ import javax.swing.JButton;
 
 public class LoadGame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1240165944405984184L;
 	private JLabel label;
 	private JList<String> list;
 	private JButton selectBut, returnBut;

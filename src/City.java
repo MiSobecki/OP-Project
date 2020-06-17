@@ -5,12 +5,8 @@ import javax.swing.JProgressBar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JToolBar;
@@ -28,12 +24,15 @@ public class City extends JFrame {
 	private JToolBar toolBar;
 	private JProgressBar hpBar;
 	private JLabel hpLabel, cashLabel;
+	
+	private Character character;
 
 	public City(Character character, String savefile) {
-		initialize(character, savefile);
+		this.character = character;
+		initialize(savefile);
 	}
 
-	private void initialize(Character character, String savefile) {
+	private void initialize(String savefile) {
 		getContentPane().setLayout(null);
 
 		// Button to open shop window
@@ -89,6 +88,27 @@ public class City extends JFrame {
 		});
 
 		// HP bar
+		setupHpBar();
+
+		// ToolBar
+		setupToolBar();
+
+		// Label to inform about wealth of character
+		cashLabel = new JLabel("Cash: " + character.getWealth());
+		cashLabel.setBounds(618, 699, 89, 31);
+		getContentPane().add(cashLabel);
+		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+
+		// Frame settings
+		setTitle("City");
+		setLocation(450, 200);
+		setResizable(false);
+		setSize(800, 800);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	private void setupHpBar() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(350, 700, 200, 30);
 		getContentPane().add(healthBarPanel);
@@ -105,8 +125,9 @@ public class City extends JFrame {
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		hpLabel.setBounds(202, 700, 138, 30);
 		getContentPane().add(hpLabel);
-
-		// ToolBar
+	}
+	
+	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 122, 30);
 		getContentPane().add(toolBar);
@@ -133,19 +154,5 @@ public class City extends JFrame {
 				dispose();
 			}
 		});
-
-		// Label to inform about wealth of character
-		cashLabel = new JLabel("Cash: " + character.getWealth());
-		cashLabel.setBounds(618, 699, 89, 31);
-		getContentPane().add(cashLabel);
-		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-
-		// Frame settings
-		setTitle("City");
-		setLocation(450, 200);
-		setResizable(false);
-		setSize(800, 800);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

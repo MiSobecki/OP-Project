@@ -1,6 +1,11 @@
 
 public class LeatherArmor extends ChestArtifact {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8619494584444978390L;
+
 	public LeatherArmor(ArtifactTemplate artifact) {
 		super(artifact);
 	}

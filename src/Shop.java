@@ -13,6 +13,10 @@ import javax.swing.SwingConstants;
 
 public class Shop extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3154264130679785063L;
 	private ArrayList<ArtifactTemplate> randomList;
 	private ArrayList<ArtifactTemplate> allArtifacts;
 

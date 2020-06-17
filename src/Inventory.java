@@ -58,6 +58,80 @@ public class Inventory extends JFrame {
 		createJListToolTips();
 
 		// ToolBar
+		setupToolBar();
+
+		// Setup of the Labels with artefacts, which character own
+		bodyGraphic();
+
+		// Statistics
+		setupStats();
+
+		// Setting to frame
+		setTitle("Inventory");
+		setLocation(450, 100);
+		setResizable(false);
+		setSize(1000, 700);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	}
+
+	// Setting character's items on body
+	private Character setCharacter() {
+		character.setHead(character.searchArtifactByName(headLab.getText()));
+		character.setChest(character.searchArtifactByName(chestLab.getText()));
+		character.setLegs(character.searchArtifactByName(legsLab.getText()));
+		character.setHands(character.searchArtifactByName(handsLab.getText()));
+		character.setRightHand(character.searchArtifactByName(rightLab.getText()));
+		character.setLeftHand(character.searchArtifactByName(leftLab.getText()));
+
+		return character;
+	}
+
+	// Creating models for JLists
+	private void createModels() throws IllegalArgumentException {
+		model1 = new DefaultListModel<ArtifactTemplate>();
+		model2 = new DefaultListModel<ArtifactTemplate>();
+		model3 = new DefaultListModel<ArtifactTemplate>();
+		model4 = new DefaultListModel<ArtifactTemplate>();
+		model5 = new DefaultListModel<ArtifactTemplate>();
+		model6 = new DefaultListModel<ArtifactTemplate>();
+
+		for (ArtifactTemplate a : character.getArtifacts()) {
+
+			try {
+				switch (a.getType()) {
+				case "Head":
+					model1.addElement(a);
+					break;
+				case "Chest":
+					model2.addElement(a);
+					break;
+				case "Legs":
+					model3.addElement(a);
+					break;
+				case "Hands":
+					model4.addElement(a);
+					break;
+				case "Right-hand":
+					model5.addElement(a);
+					break;
+				case "Left-hand":
+					model6.addElement(a);
+					break;
+				default:
+					throw new IllegalArgumentException("There is no such a type of an item");
+				}
+			} catch (IllegalArgumentException exc) {
+				// System.out.println("There is no such a type of an item");
+				exc.printStackTrace();
+			}
+
+		}
+
+	}
+
+	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 150, 23);
 		getContentPane().add(toolBar);
@@ -117,11 +191,25 @@ public class Inventory extends JFrame {
 				dispose();
 			}
 		});
+	}
 
-		// Below are functions about graphical lookout for character
+	// Function to create JList ToolTips
+	private void createJListToolTips() {
+		mma = new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				@SuppressWarnings("unchecked")
+				JList<ArtifactTemplate> l = (JList<ArtifactTemplate>) e.getSource();
+				ListModel<ArtifactTemplate> m = l.getModel();
+				int index = l.locationToIndex(e.getPoint());
+				if (index > -1) {
+					l.setToolTipText(m.getElementAt(index).getDescription());
+				}
+			}
+		};
+	}
 
-		// HEAD PART
-
+	private void bodyGraphic() {
 		headList = new JList<ArtifactTemplate>();
 		scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(570, 11, 200, 200);
@@ -282,8 +370,9 @@ public class Inventory extends JFrame {
 		leftLab.setBorder(new MatteBorder(4, 4, 4, 4, Color.red));
 		leftLab.setTransferHandler(new ListTransferHandler());
 		leftLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-
-		// Statistics
+	}
+	
+	private void setupStats() {
 		armorLabel = new JLabel("Armor: " + character.getArmor());
 		armorLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		armorLabel.setBounds(820, 30, 103, 34);
@@ -303,86 +392,6 @@ public class Inventory extends JFrame {
 		defenceLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		defenceLabel.setBounds(820, 240, 103, 34);
 		getContentPane().add(defenceLabel);
-
-		// Setting to frame
-		setTitle("Inventory");
-		setLocation(450, 100);
-		setResizable(false);
-		setSize(1000, 700);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
-
-	// Setting character's items on body
-	private Character setCharacter() {
-		character.setHead(character.searchArtifactByName(headLab.getText()));
-		character.setChest(character.searchArtifactByName(chestLab.getText()));
-		character.setLegs(character.searchArtifactByName(legsLab.getText()));
-		character.setHands(character.searchArtifactByName(handsLab.getText()));
-		character.setRightHand(character.searchArtifactByName(rightLab.getText()));
-		character.setLeftHand(character.searchArtifactByName(leftLab.getText()));
-
-		return character;
-	}
-
-	// Creating models for JLists
-	private void createModels() throws IllegalArgumentException {
-		model1 = new DefaultListModel<ArtifactTemplate>();
-		model2 = new DefaultListModel<ArtifactTemplate>();
-		model3 = new DefaultListModel<ArtifactTemplate>();
-		model4 = new DefaultListModel<ArtifactTemplate>();
-		model5 = new DefaultListModel<ArtifactTemplate>();
-		model6 = new DefaultListModel<ArtifactTemplate>();
-
-		for (ArtifactTemplate a : character.getArtifacts()) {
-
-			try {
-				switch (a.getType()) {
-				case "Head":
-					model1.addElement(a);
-					break;
-				case "Chest":
-					model2.addElement(a);
-					break;
-				case "Legs":
-					model3.addElement(a);
-					break;
-				case "Hands":
-					model4.addElement(a);
-					break;
-				case "Right-hand":
-					model5.addElement(a);
-					break;
-				case "Left-hand":
-					model6.addElement(a);
-					break;
-				default:
-					throw new IllegalArgumentException("There is no such a type of an item");
-				}
-			} catch (IllegalArgumentException exc) {
-				// System.out.println("There is no such a type of an item");
-				exc.printStackTrace();
-			}
-
-		}
-
-	}
-
-	// Function to create JList ToolTips
-	private void createJListToolTips() {
-		mma = new MouseMotionAdapter() {
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				@SuppressWarnings("unchecked")
-				JList<ArtifactTemplate> l = (JList<ArtifactTemplate>) e.getSource();
-				ListModel<ArtifactTemplate> m = l.getModel();
-				int index = l.locationToIndex(e.getPoint());
-				if (index > -1) {
-					l.setToolTipText(m.getElementAt(index).getDescription());
-				}
-			}
-		};
 	}
 
 	// Functions to drag and drop from JList to JLabel imported and modified from

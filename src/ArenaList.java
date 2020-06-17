@@ -2,7 +2,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -14,91 +13,36 @@ import javax.swing.JButton;
 
 public class ArenaList extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8316110784225205041L;
 	private JList<Enemy> list;
 	private DefaultListModel<Enemy> defaultList;
 	private JButton fightBut, exitBut, menuBut, returnBut;
 	private JToolBar toolBar;
 	private JScrollPane scroll;
 
+	private Character character;
+	private String savefile;
+
 	public ArenaList(Character character, String savefile) {
-		initialize(character, savefile);
+		this.character = character;
+		this.savefile = savefile;
+		initialize();
 	}
 
-	private void initialize(Character character, String savefile) {
+	private void initialize() {
 		getContentPane().setLayout(null);
 
 		// ToolBar
-		toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 172, 23);
-		getContentPane().add(toolBar);
-
-		// Button to exit game
-		exitBut = new JButton("Exit");
-		toolBar.add(exitBut);
-		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
-		exitBut.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				try {
-					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "saves/" + savefile);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				System.exit(0);
-			}
-		});
-
-		// Button to return to the menu
-		menuBut = new JButton("Menu");
-		menuBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
-		toolBar.add(menuBut);
-		menuBut.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				try {
-					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "saves/" + savefile);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				new Menu();
-				dispose();
-			}
-		});
-
-		// Button to return to the previous window
-		returnBut = new JButton("Return");
-		toolBar.add(returnBut);
-		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
-		returnBut.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				try {
-					SaveAndRead sr = new SaveAndRead();
-					sr.save(character, "saves/" + savefile);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				new City(character, savefile);
-				dispose();
-			}
-		});
+		createToolBar();
 
 		// List of enemies
 		createModel(new EnemiesList(character));
 
-		scroll = new JScrollPane();
-		scroll.setBounds(100, 50, 400, 400);
-		getContentPane().add(scroll);
-		list = new JList<Enemy>();
-		scroll.setViewportView(list);
-		list.setModel(defaultList);
-		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
-		list.setLayoutOrientation(JList.VERTICAL);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// Creates list of enemies
+		setupScrolledList();
 
 		// Button to start fighting enemy
 		fightBut = new JButton("FIGHT");
@@ -135,5 +79,78 @@ public class ArenaList extends JFrame {
 			}
 			defaultList.addElement(a);
 		}
+	}
+
+	private void createToolBar() {
+		toolBar = new JToolBar();
+		toolBar.setBounds(0, 0, 172, 23);
+		getContentPane().add(toolBar);
+
+		// Button to exit game
+		exitBut = new JButton("Exit");
+		toolBar.add(exitBut);
+		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		exitBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "saves/" + savefile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.exit(0);
+			}
+		});
+
+		// Button to return to the menu
+		menuBut = new JButton("Menu");
+		menuBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		toolBar.add(menuBut);
+		menuBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "saves/" + savefile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				new Menu();
+				dispose();
+			}
+		});
+
+		// Button to return to the previous window
+		returnBut = new JButton("Return");
+		toolBar.add(returnBut);
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		returnBut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				try {
+					SaveAndRead sr = new SaveAndRead();
+					sr.save(character, "saves/" + savefile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				new City(character, savefile);
+				dispose();
+			}
+		});
+	}
+
+	private void setupScrolledList() {
+		scroll = new JScrollPane();
+		scroll.setBounds(100, 50, 400, 400);
+		getContentPane().add(scroll);
+		list = new JList<Enemy>();
+		scroll.setViewportView(list);
+		list.setModel(defaultList);
+		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		list.setLayoutOrientation(JList.VERTICAL);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 }

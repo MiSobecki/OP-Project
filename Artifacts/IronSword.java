@@ -1,6 +1,11 @@
 
 public class IronSword extends PracticeSword {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7590129260623119171L;
+
 	public IronSword(ArtifactTemplate artifact) {
 		super(artifact);
 	}

@@ -1,6 +1,11 @@
 
 public class PlateArmor extends ArtifactDecorator {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1182332846536463169L;
+
 	public PlateArmor(ArtifactTemplate artifact) {
 		super(artifact);
 	}

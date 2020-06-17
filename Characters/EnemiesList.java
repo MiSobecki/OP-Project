@@ -2,6 +2,11 @@ import java.util.ArrayList;
 
 public class EnemiesList extends ArrayList<Enemy> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 297540105218619951L;
+
 	public EnemiesList(Character character) {
 		add(new Enemy(100, 5, 0, 1000, "Skeleton", 0, 10, 1, 10, "skeleton.jpg"));
 		add(new Enemy(100, 7, 0, 2000, "Demon", 1, 20, 2, 20, "demon.jpg"));

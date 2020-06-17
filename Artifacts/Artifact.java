@@ -5,7 +5,7 @@ public class Artifact implements Serializable, ArtifactTemplate {
 	/**
 	 * 
 	 */
-	// private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1157296666418787540L;
 
 	@Override
 	public int getAmount() {

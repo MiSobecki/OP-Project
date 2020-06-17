@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 
 public class LostWindow extends JFrame {
 
-	String savefile;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2883702054085686616L;
+	private String savefile;
 
 	public LostWindow(String savefile) {
 		this.savefile = savefile;
@@ -20,6 +24,7 @@ public class LostWindow extends JFrame {
 	private void initialize() {
 		
 		deleteSave();
+		setBackground();
 
 		// Setting to frame
 		setTitle("Game Lost");
@@ -28,12 +33,16 @@ public class LostWindow extends JFrame {
 		setSize(800, 800);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground();
 	}
 
 	private void setBackground() {
-		Image img = Toolkit.getDefaultToolkit().getImage("pictures/lostGame.jpg");
+		Image img = Toolkit.getDefaultToolkit().createImage("pictures/lostGame.jpg");
 		this.setContentPane(new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5310148578979799754L;
+
 			@Override
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -62,7 +71,7 @@ public class LostWindow extends JFrame {
 			e.printStackTrace();
 		}
 
-		File file = new File("saves/" + savefile);
+		File file = new File("saves/" + savefile + ".bin");
 		if (file.delete())
 			System.out.println("Save successfully deleted");
 	
