@@ -4,6 +4,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+import javax.print.attribute.standard.Media;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
@@ -12,6 +13,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		changeFonts();
+		
+		//playMusic();
 
 		// opens menu window
 		new Menu();
@@ -35,5 +38,12 @@ public class Main {
 		
 		UIManager.put("ToolTip.font", new FontUIResource("Enchanted Land", Font.TRUETYPE_FONT, 20));
 	}
+	
+	/*private static void playMusic() {
+		String bip = "bip.mp3";
+		Media hit = new Media(new File(bip).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(hit);
+		mediaPlayer.play();
+	}*/
 
 }

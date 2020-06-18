@@ -115,7 +115,7 @@ public class NewGame extends JFrame {
 	}
 
 	private Character createNewCharacter() {
-		Character character = Character.builder().hp(2).attack(3).wealth(0).arenaLvl(0).armor(0).defence(3)
+		Character character = Character.builder().hp(100).attack(3).wealth(0).arenaLvl(0).armor(0).defence(3)
 				.artifacts(new ArrayList<ArtifactTemplate>()).addArrtifact(new PracticeSword(new Artifact()))
 				.addArrtifact(new PracticeShield(new Artifact())).stamina(30).maxStamina(30).build();
 		return character;
