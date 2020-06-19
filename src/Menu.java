@@ -1,10 +1,12 @@
 import javax.swing.JFrame;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Component;
 
 public class Menu extends JFrame {
 
@@ -19,22 +21,28 @@ public class Menu extends JFrame {
 	}
 
 	private void initialize() {
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		getContentPane().setLayout(new GridLayout(6, 1, 5, 5));
 
 		newBut = new JButton("New Game");
-		newBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
-		newBut.setAlignmentX(0.5f);
+		newBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		newBut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		getContentPane().add(newBut);
+		newBut.setBackground(Color.black);
+		newBut.setForeground(Color.red);
 
 		loadBut = new JButton("Load");
-		loadBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
-		loadBut.setAlignmentX(0.5f);
+		loadBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		loadBut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		getContentPane().add(loadBut);
+		loadBut.setBackground(Color.black);
+		loadBut.setForeground(Color.red);
 
 		exitBut = new JButton("Exit");
-		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
-		exitBut.setAlignmentX(0.5f);
+		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		exitBut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		getContentPane().add(exitBut);
+		exitBut.setBackground(Color.black);
+		exitBut.setForeground(Color.red);
 
 		// Button to create a new game
 		newBut.addActionListener(new ActionListener() {
@@ -61,6 +69,8 @@ public class Menu extends JFrame {
 				dispose();
 			}
 		});
+		
+		
 
 		// Frame settings
 		setLocation(800, 400);
@@ -69,6 +79,8 @@ public class Menu extends JFrame {
 		setTitle("Menu");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.black);
+		setFocusable(true);
 	}
 
 }

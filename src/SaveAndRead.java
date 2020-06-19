@@ -19,9 +19,13 @@ public class SaveAndRead {
 	}
 
 	public Character read(String savefile) throws IOException, ClassNotFoundException {
-		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
-		Character temp = (Character) inputStream.readObject();
-		inputStream.close();
+		Character temp;
+		if (new File(savefile + ".bin").exists()) {
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
+			temp = (Character) inputStream.readObject();
+			inputStream.close();
+		}
+		else temp = new Character();
 		return temp;
 	}
 
@@ -32,40 +36,48 @@ public class SaveAndRead {
 		outputStream.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<ArtifactTemplate> readShop(String savefile) throws IOException, ClassNotFoundException {
-		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
-		@SuppressWarnings("unchecked")
-		ArrayList<ArtifactTemplate> temp = (ArrayList<ArtifactTemplate>) inputStream.readObject();
-		inputStream.close();
+		ArrayList<ArtifactTemplate> temp;
+		if (new File(savefile + ".bin").exists()) {
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
+			temp = (ArrayList<ArtifactTemplate>) inputStream.readObject();
+			inputStream.close();
+		}
+		else temp = new ArrayList<ArtifactTemplate>();
 		return temp;
 	}
-	
+
 	public void saveSaves(ArrayList<String> temp, String savefile) throws IOException {
 		ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savefile + ".bin"));
 		outputStream.writeObject(temp);
 		System.out.println("saved");
 		outputStream.close();
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public ArrayList<String> readSaves(String savefile) throws IOException, ClassNotFoundException {
-		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
-		@SuppressWarnings("unchecked")
-		ArrayList<String> temp = (ArrayList<String>) inputStream.readObject();
-		inputStream.close();
+		ArrayList<String> temp;
+		if (new File(savefile + ".bin").exists()) {
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(savefile + ".bin"));
+			temp = (ArrayList<String>) inputStream.readObject();
+			inputStream.close();
+		}
+		else temp = new ArrayList<String>();
 		return temp;
 	}
-	
+
 	public String readHistory(String path) {
 		String line, text;
-		
+
 		text = "<html>";
-		
+
 		try {
 			File file = new File("stories/" + path);
 			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(new FileReader(file));
-			
-			while((line = br.readLine()) != null) {
+
+			while ((line = br.readLine()) != null) {
 				text += line + "<br>";
 			}
 		} catch (FileNotFoundException e) {
@@ -75,10 +87,10 @@ public class SaveAndRead {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		text += "</html>";
-		
+
 		return text;
 	}
-	
+
 }

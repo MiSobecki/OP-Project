@@ -32,6 +32,8 @@ public class Inn extends JFrame {
 	private String savefile;
 
 	public Inn(Character character, String savefile) {
+		this.character = character;
+		this.savefile = savefile;
 		initialize();
 	}
 
@@ -58,6 +60,8 @@ public class Inn extends JFrame {
 		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		cashLabel.setBounds(410, 520, 89, 31);
 		getContentPane().add(cashLabel);
+		cashLabel.setBackground(Color.black);
+		cashLabel.setForeground(Color.red);
 		
 		// Place to show random history
 		histLab = new JLabel("");
@@ -65,6 +69,8 @@ public class Inn extends JFrame {
 		histLab.setBounds(10, 34, 574, 420);
 		histLab.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(histLab);
+		histLab.setBackground(Color.black);
+		histLab.setForeground(Color.red);
 		setHistory();
 
 		// Frame settings
@@ -74,6 +80,8 @@ public class Inn extends JFrame {
 		setSize(600, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.black);
+		setFocusable(true);
 	}
 
 	private void setButtonsDisabled(Character character) {
@@ -123,6 +131,8 @@ public class Inn extends JFrame {
 				setButtonsDisabled(character);
 			}
 		});
+		beerBut.setBackground(Color.black);
+		beerBut.setForeground(Color.red);
 	}
 	
 	private void setupChickenBut() {
@@ -146,6 +156,8 @@ public class Inn extends JFrame {
 				setButtonsDisabled(character);
 			}
 		});
+		chickenBut.setBackground(Color.black);
+		chickenBut.setForeground(Color.red);
 	}
 	
 	private void setupSoupBut() {
@@ -169,12 +181,16 @@ public class Inn extends JFrame {
 				setButtonsDisabled(character);
 			}
 		});
+		soupBut.setBackground(Color.black);
+		soupBut.setForeground(Color.red);
 	}
 	
 	private void setupToolBar() {
 		toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 181, 23);
+		toolBar.setBounds(0, 0, 181, 35);
 		getContentPane().add(toolBar);
+		toolBar.setBackground(Color.black);
+		toolBar.setForeground(Color.red);
 
 		// Button to exit game
 		exitBut = new JButton("Exit");
@@ -192,6 +208,8 @@ public class Inn extends JFrame {
 				System.exit(0);
 			}
 		});
+		exitBut.setBackground(Color.black);
+		exitBut.setForeground(Color.red);
 
 		// Button to return to the menu
 		menuBut = new JButton("Menu");
@@ -210,6 +228,8 @@ public class Inn extends JFrame {
 				dispose();
 			}
 		});
+		menuBut.setBackground(Color.black);
+		menuBut.setForeground(Color.red);
 
 		// Button to return to the previous window
 		returnBut = new JButton("Return");
@@ -229,12 +249,15 @@ public class Inn extends JFrame {
 				dispose();
 			}
 		});
+		returnBut.setBackground(Color.black);
+		returnBut.setForeground(Color.red);
 	}
 	
 	private void setupHpBar() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(200, 520, 200, 30);
 		getContentPane().add(healthBarPanel);
+		healthBarPanel.setBackground(Color.black);
 
 		hpBar = new JProgressBar(0, 100);
 		hpBar.setPreferredSize(new Dimension(200, 30));
@@ -248,5 +271,7 @@ public class Inn extends JFrame {
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		hpLabel.setBounds(50, 520, 150, 30);
 		getContentPane().add(hpLabel);
+		hpLabel.setBackground(Color.black);
+		hpLabel.setForeground(Color.red);
 	}
 }

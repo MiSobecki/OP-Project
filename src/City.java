@@ -39,7 +39,7 @@ public class City extends JFrame {
 		shopBut = new JButton("Shop");
 		shopBut.setBounds(550, 552, 150, 50);
 		getContentPane().add(shopBut);
-		shopBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		shopBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		shopBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -47,12 +47,14 @@ public class City extends JFrame {
 				dispose();
 			}
 		});
-
+		shopBut.setBackground(Color.black);
+		shopBut.setForeground(Color.red);
+		
 		// Button to open arena list window
 		arenaBut = new JButton("Arena");
 		arenaBut.setBounds(350, 99, 150, 50);
 		getContentPane().add(arenaBut);
-		arenaBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		arenaBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		arenaBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -60,12 +62,14 @@ public class City extends JFrame {
 				dispose();
 			}
 		});
+		arenaBut.setBackground(Color.black);
+		arenaBut.setForeground(Color.red);
 
 		// Button to open inventory window
 		invBut = new JButton("Inventory");
 		invBut.setBounds(100, 552, 150, 50);
 		getContentPane().add(invBut);
-		invBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		invBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		invBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -73,12 +77,14 @@ public class City extends JFrame {
 				dispose();
 			}
 		});
+		invBut.setBackground(Color.black);
+		invBut.setForeground(Color.red);
 
 		// Button to open Inn window
 		innBut = new JButton("Inn");
 		innBut.setBounds(100, 251, 150, 50);
 		getContentPane().add(innBut);
-		innBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		innBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		innBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -86,6 +92,8 @@ public class City extends JFrame {
 				dispose();
 			}
 		});
+		innBut.setBackground(Color.black);
+		innBut.setForeground(Color.red);
 
 		// HP bar
 		setupHpBar();
@@ -98,6 +106,8 @@ public class City extends JFrame {
 		cashLabel.setBounds(618, 699, 89, 31);
 		getContentPane().add(cashLabel);
 		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		cashLabel.setBackground(Color.black);
+		cashLabel.setForeground(Color.red);
 
 		// Frame settings
 		setTitle("City");
@@ -106,11 +116,14 @@ public class City extends JFrame {
 		setSize(800, 800);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.black);
+		setFocusable(true);
 	}
 	
 	private void setupHpBar() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(350, 700, 200, 30);
+		healthBarPanel.setBackground(Color.black);
 		getContentPane().add(healthBarPanel);
 
 		hpBar = new JProgressBar(0, 100);
@@ -125,12 +138,16 @@ public class City extends JFrame {
 		hpLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		hpLabel.setBounds(202, 700, 138, 30);
 		getContentPane().add(hpLabel);
+		hpLabel.setBackground(Color.black);
+		hpLabel.setForeground(Color.red);
 	}
 	
 	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 122, 30);
 		getContentPane().add(toolBar);
+		toolBar.setBackground(Color.black);
+		toolBar.setForeground(Color.red);
 
 		// Button to exit game
 		exitBut = new JButton("Exit");
@@ -142,6 +159,8 @@ public class City extends JFrame {
 				System.exit(0);
 			}
 		});
+		exitBut.setBackground(Color.black);
+		exitBut.setForeground(Color.red);
 
 		// Button to return to the menu
 		menuBut = new JButton("Menu");
@@ -154,5 +173,7 @@ public class City extends JFrame {
 				dispose();
 			}
 		});
+		menuBut.setBackground(Color.black);
+		menuBut.setForeground(Color.red);
 	}
 }

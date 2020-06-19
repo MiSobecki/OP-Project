@@ -1,9 +1,11 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,6 +43,8 @@ public class LoadGame extends JFrame {
 		label.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		label.setBounds(125, 20, 250, 40);
 		getContentPane().add(label);
+		label.setBackground(Color.black);
+		label.setForeground(Color.red);
 
 		createModel();
 
@@ -49,18 +53,20 @@ public class LoadGame extends JFrame {
 		selectBut = new JButton("Load save");
 		selectBut.setBounds(293, 502, 107, 40);
 		getContentPane().add(selectBut);
-		selectBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		selectBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		selectBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				selectSave();
 			}
 		});
+		selectBut.setBackground(Color.black);
+		selectBut.setForeground(Color.red);
 
 		returnBut = new JButton("Return to the menu");
-		returnBut.setBounds(100, 502, 142, 40);
+		returnBut.setBounds(100, 502, 169, 40);
 		getContentPane().add(returnBut);
-		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		returnBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -68,6 +74,8 @@ public class LoadGame extends JFrame {
 				dispose();
 			}
 		});
+		returnBut.setBackground(Color.black);
+		returnBut.setForeground(Color.red);
 
 		// Frame settings
 		setLocation(700, 300);
@@ -76,6 +84,8 @@ public class LoadGame extends JFrame {
 		setTitle("Load Game");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFocusable(true);
+		getContentPane().setBackground(Color.black);
 	}
 
 	private void createModel() {
@@ -131,5 +141,7 @@ public class LoadGame extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		list.setLayoutOrientation(JList.VERTICAL);
+		list.setBackground(Color.black);
+		list.setForeground(Color.red);
 	}
 }

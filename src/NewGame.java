@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,10 +36,12 @@ public class NewGame extends JFrame {
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoLabel.setBounds(137, 20, 178, 30);
 		getContentPane().add(infoLabel);
+		infoLabel.setBackground(Color.black);
+		infoLabel.setForeground(Color.red);
 
 		confirmBut = new JButton("Confirm");
 		confirmBut.setBounds(317, 134, 107, 37);
-		confirmBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		confirmBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(confirmBut);
 		confirmBut.addActionListener(new ActionListener() {
 			@Override
@@ -46,16 +49,20 @@ public class NewGame extends JFrame {
 				confirmAction();
 			}
 		});
+		confirmBut.setBackground(Color.black);
+		confirmBut.setForeground(Color.red);
 
 		textField = new JTextField();
-		textField.setBounds(33, 134, 241, 37);
-		textField.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		textField.setBounds(33, 125, 241, 50);
+		textField.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(textField);
 		textField.setColumns(10);
+		textField.setBackground(Color.black);
+		textField.setForeground(Color.red);
 
 		returnBut = new JButton("Return to the menu");
-		returnBut.setBounds(33, 210, 136, 37);
-		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		returnBut.setBounds(33, 210, 171, 37);
+		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(returnBut);
 		returnBut.addActionListener(new ActionListener() {
 			@Override
@@ -64,6 +71,8 @@ public class NewGame extends JFrame {
 				dispose();
 			}
 		});
+		returnBut.setBackground(Color.black);
+		returnBut.setForeground(Color.red);
 
 		// Frame settings
 		setLocation(800, 400);
@@ -72,6 +81,7 @@ public class NewGame extends JFrame {
 		setTitle("New Game");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.black);
 
 	}
 
@@ -109,7 +119,7 @@ public class NewGame extends JFrame {
 
 			JOptionPane.showMessageDialog(null, "Creating new save was successful");
 
-			 new City(createNewCharacter(), temp);
+			new City(createNewCharacter(), temp);
 			dispose();
 		}
 	}
