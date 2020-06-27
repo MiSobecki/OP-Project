@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,16 +43,12 @@ public class Shop extends JFrame {
 		setAllArtifacts();
 		setRandomList();
 
-		// Setting of available artifacts to buy
 		setupArtifactsToBuy();
 
-		// Labels informing about character's statistics
 		setupStats();
 
-		// Button to refresh list of available artifacts
 		setupRefreshBut();
 
-		// ToolBar
 		setupToolBar();
 
 		// Setting to frame
@@ -61,8 +58,13 @@ public class Shop extends JFrame {
 		setSize(1000, 700);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.black);
+		setFocusable(true);
 	}
 
+	/**
+	 * Creates List of all available artifacts in game
+	 */
 	private void setAllArtifacts() {
 		allArtifacts = new ArrayList<ArtifactTemplate>();
 		allArtifacts.add(new PracticeShield(new Artifact()));
@@ -73,8 +75,12 @@ public class Shop extends JFrame {
 		allArtifacts.add(new LeatherShoes(new Artifact()));
 	}
 
+	/**
+	 * Load Random List of artifacts from savefile
+	 */
 	private void setRandomList() {
 		SaveAndRead sr = new SaveAndRead();
+		
 		try {
 			randomList = (ArrayList<ArtifactTemplate>) sr.readShop("Shop");
 		} catch (Exception e) {
@@ -84,6 +90,9 @@ public class Shop extends JFrame {
 		}
 	}
 
+	/**
+	 * Creates new Random List of artifacts
+	 */
 	private void createNewRandList() {
 		randomList = new ArrayList<ArtifactTemplate>();
 		int x;
@@ -97,6 +106,11 @@ public class Shop extends JFrame {
 		}
 	}
 
+	/**
+	 * Actions which happer after BUY Button is pressed
+	 * 
+	 * @param i
+	 */
 	private void buyAction(int i) {
 		ArtifactTemplate temp = randomList.get(i);
 
@@ -135,12 +149,17 @@ public class Shop extends JFrame {
 			armorLabel.setText("Armor: " + character.getArmor());
 	}
 	
+	/**
+	 * Creates Labels and Button with artifacts to buy
+	 */
 	private void setupArtifactsToBuy() {
 		artLabel1 = new JLabel(randomList.get(0).getName());
 		artLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel1.setBounds(80, 170, 200, 30);
 		getContentPane().add(artLabel1);
 		artLabel1.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		artLabel1.setBackground(Color.black);
+		artLabel1.setForeground(Color.red);
 
 		artBut1 = new JButton("BUY");
 		artBut1.setToolTipText("Cost: " + randomList.get(0).getCost());
@@ -157,12 +176,16 @@ public class Shop extends JFrame {
 				buyAction(0);
 			}
 		});
+		artBut1.setBackground(Color.black);
+		artBut1.setForeground(Color.red);
 
 		artLabel2 = new JLabel(randomList.get(1).getName());
 		artLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel2.setBounds(720, 170, 200, 30);
 		getContentPane().add(artLabel2);
 		artLabel2.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		artLabel2.setBackground(Color.black);
+		artLabel2.setForeground(Color.red);
 
 		artBut2 = new JButton("BUY");
 		artBut2.setToolTipText("Cost: " + randomList.get(1).getCost());
@@ -179,12 +202,16 @@ public class Shop extends JFrame {
 				buyAction(1);
 			}
 		});
+		artBut2.setBackground(Color.black);
+		artBut2.setForeground(Color.red);
 
 		artLabel3 = new JLabel(randomList.get(2).getName());
 		artLabel3.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel3.setBounds(80, 420, 200, 30);
 		getContentPane().add(artLabel3);
 		artLabel3.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		artLabel3.setBackground(Color.black);
+		artLabel3.setForeground(Color.red);
 
 		artBut3 = new JButton("BUY");
 		artBut3.setToolTipText("Cost: " + randomList.get(2).getCost());
@@ -201,12 +228,16 @@ public class Shop extends JFrame {
 				buyAction(2);
 			}
 		});
+		artBut3.setBackground(Color.black);
+		artBut3.setForeground(Color.red);
 
 		artLabel4 = new JLabel(randomList.get(3).getName());
 		artLabel4.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel4.setBounds(720, 420, 200, 30);
 		getContentPane().add(artLabel4);
 		artLabel4.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		artLabel4.setBackground(Color.black);
+		artLabel4.setForeground(Color.red);
 
 		artBut4 = new JButton("BUY");
 		artBut4.setToolTipText("Cost: " + randomList.get(3).getCost());
@@ -223,12 +254,16 @@ public class Shop extends JFrame {
 				buyAction(3);
 			}
 		});
+		artBut4.setBackground(Color.black);
+		artBut4.setForeground(Color.red);
 
 		artLabel5 = new JLabel(randomList.get(4).getName());
 		artLabel5.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel5.setBounds(400, 500, 200, 30);
 		getContentPane().add(artLabel5);
 		artLabel5.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		artLabel5.setBackground(Color.black);
+		artLabel5.setForeground(Color.red);
 
 		artBut5 = new JButton("BUY");
 		artBut5.setToolTipText("Cost: " + randomList.get(4).getCost());
@@ -245,12 +280,16 @@ public class Shop extends JFrame {
 				buyAction(4);
 			}
 		});
+		artBut5.setBackground(Color.black);
+		artBut5.setForeground(Color.red);
 
 		artLabel6 = new JLabel(randomList.get(5).getName());
 		artLabel6.setHorizontalAlignment(SwingConstants.CENTER);
 		artLabel6.setBounds(400, 100, 200, 30);
 		getContentPane().add(artLabel6);
 		artLabel6.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		artLabel6.setBackground(Color.black);
+		artLabel6.setForeground(Color.red);
 
 		artBut6 = new JButton("BUY");
 		artBut6.setToolTipText("Cost: " + randomList.get(5).getCost());
@@ -267,34 +306,52 @@ public class Shop extends JFrame {
 				buyAction(5);
 			}
 		});
+		artBut6.setBackground(Color.black);
+		artBut6.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates Labels with Character stats
+	 */
 	private void setupStats() {
 		cashLabel = new JLabel("Cash: " + character.getWealth());
 		cashLabel.setBounds(450, 378, 100, 30);
 		cashLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(cashLabel);
+		cashLabel.setBackground(Color.black);
+		cashLabel.setForeground(Color.red);
 
 		armorLabel = new JLabel("Armor: " + character.getArmor());
 		armorLabel.setBounds(320, 10, 100, 30);
 		armorLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(armorLabel);
+		armorLabel.setBackground(Color.black);
+		armorLabel.setForeground(Color.red);
 
 		defenceLabel = new JLabel("Defence: " + character.getDefence());
 		defenceLabel.setBounds(510, 10, 100, 30);
 		defenceLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(defenceLabel);
+		defenceLabel.setBackground(Color.black);
+		defenceLabel.setForeground(Color.red);
 
 		attackLabel = new JLabel("Attack: " + character.getAttack());
 		attackLabel.setBounds(700, 10, 100, 30);
 		attackLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(attackLabel);
+		attackLabel.setBackground(Color.black);
+		attackLabel.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates ToolBar
+	 */
 	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 178, 23);
 		getContentPane().add(toolBar);
+		toolBar.setBackground(Color.black);
+		toolBar.setForeground(Color.red);
 
 		// Button to exit game
 		exitBut = new JButton("Exit");
@@ -313,6 +370,8 @@ public class Shop extends JFrame {
 				System.exit(0);
 			}
 		});
+		exitBut.setBackground(Color.black);
+		exitBut.setForeground(Color.red);
 
 		// Button to return to the menu
 		menuBut = new JButton("Menu");
@@ -332,6 +391,8 @@ public class Shop extends JFrame {
 				dispose();
 			}
 		});
+		menuBut.setBackground(Color.black);
+		menuBut.setForeground(Color.red);
 
 		// Button to return to the previous window
 		returnBut = new JButton("Return");
@@ -352,8 +413,13 @@ public class Shop extends JFrame {
 				dispose();
 			}
 		});
+		returnBut.setBackground(Color.black);
+		returnBut.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates refresh button which refresh list of artifacts to buy
+	 */
 	private void setupRefreshBut() {
 		refreshBut = new JButton("Refresh");
 		refreshBut.setToolTipText("Cost: 500");
@@ -374,6 +440,8 @@ public class Shop extends JFrame {
 				initialize();
 			}
 		});
+		refreshBut.setBackground(Color.black);
+		refreshBut.setForeground(Color.red);
 		
 		if (character.getWealth() < 500)
 			refreshBut.setEnabled(false);

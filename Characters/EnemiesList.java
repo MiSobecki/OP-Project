@@ -15,6 +15,11 @@ public class EnemiesList extends ArrayList<Enemy> {
 		setLvls(character);
 	}
 
+	/**
+	 * Sets enemies unlocked if Character lvl is big enough
+	 * 
+	 * @param character
+	 */
 	private void setLvls(Character character) {
 
 		for (int i = 0; i <= character.getArenaLvl(); i++) {

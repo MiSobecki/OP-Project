@@ -70,8 +70,6 @@ public class Menu extends JFrame {
 			}
 		});
 		
-		
-
 		// Frame settings
 		setLocation(800, 400);
 		setSize(200, 200);

@@ -95,10 +95,8 @@ public class City extends JFrame {
 		innBut.setBackground(Color.black);
 		innBut.setForeground(Color.red);
 
-		// HP bar
 		setupHpBar();
 
-		// ToolBar
 		setupToolBar();
 
 		// Label to inform about wealth of character
@@ -120,6 +118,9 @@ public class City extends JFrame {
 		setFocusable(true);
 	}
 	
+	/**
+	 * Creates Character Hp Bar
+	 */
 	private void setupHpBar() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(350, 700, 200, 30);
@@ -142,6 +143,9 @@ public class City extends JFrame {
 		hpLabel.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates Character Hp Bar
+	 */
 	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 122, 30);

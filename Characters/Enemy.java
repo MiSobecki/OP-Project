@@ -31,6 +31,11 @@ public class Enemy extends CharacterTemplate {
 		return attack;
 	}
 
+	/**
+	 * Makes decision which action Enemy will do
+	 * 
+	 * @return
+	 */
 	public String makeDecision() {
 		if (stamina >= 5) {
 			return "Attack";

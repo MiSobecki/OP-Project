@@ -85,6 +85,9 @@ public class NewGame extends JFrame {
 
 	}
 
+	/**
+	 * Creates new savefile or overwrite, when Select Button pressed
+	 */
 	private void confirmAction() {
 		String temp = textField.getText();
 		ArrayList<String> list;
@@ -124,6 +127,11 @@ public class NewGame extends JFrame {
 		}
 	}
 
+	/**
+	 * Construct new Character
+	 * 
+	 * @return
+	 */
 	private Character createNewCharacter() {
 		Character character = Character.builder().hp(100).attack(3).wealth(0).arenaLvl(0).armor(0).defence(3)
 				.artifacts(new ArrayList<ArtifactTemplate>()).addArrtifact(new PracticeSword(new Artifact()))

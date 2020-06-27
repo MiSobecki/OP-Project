@@ -26,6 +26,9 @@ public class Main {
 
 	}
 	
+	/**
+	 * Adds new Font
+	 */
 	private static void changeFonts() {
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/EnchantedLand.otf"));
@@ -44,6 +47,9 @@ public class Main {
 		UIManager.put("ToolTip.font", new FontUIResource("Enchanted Land", Font.TRUETYPE_FONT, 20));
 	}
 	
+	/**
+	 * Plays music
+	 */
 	private static void playMusic() {
 		File musicPath = new File("music/Dark-Things.wav");
 		

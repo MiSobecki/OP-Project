@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,19 +36,16 @@ public class ArenaList extends JFrame {
 	private void initialize() {
 		getContentPane().setLayout(null);
 
-		// ToolBar
 		createToolBar();
 
-		// List of enemies
 		createModel(new EnemiesList(character));
 
-		// Creates list of enemies
 		setupScrolledList();
 
 		// Button to start fighting enemy
 		fightBut = new JButton("FIGHT");
 		fightBut.setBounds(250, 460, 100, 50);
-		fightBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
+		fightBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		getContentPane().add(fightBut);
 		fightBut.addActionListener(new ActionListener() {
 			@Override
@@ -59,6 +57,8 @@ public class ArenaList extends JFrame {
 				}
 			}
 		});
+		fightBut.setBackground(Color.black);
+		fightBut.setForeground(Color.red);
 
 		// Setting to frame
 		setTitle("Arena List");
@@ -67,10 +67,15 @@ public class ArenaList extends JFrame {
 		setSize(600, 700);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		getContentPane().setBackground(Color.black);
+		setFocusable(true);
 	}
 
-	// create defaultListModel
+	/**
+	 * Creates defaultListModel for JList
+	 * 
+	 * @param enemiesList
+	 */
 	private void createModel(EnemiesList enemiesList) {
 		defaultList = new DefaultListModel<Enemy>();
 		for (Enemy a : enemiesList) {
@@ -81,12 +86,17 @@ public class ArenaList extends JFrame {
 		}
 	}
 
+	/**
+	 * Creates ToolBar
+	 */
 	private void createToolBar() {
 		toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 172, 23);
+		toolBar.setBounds(0, 0, 172, 35);
 		getContentPane().add(toolBar);
+		toolBar.setBackground(Color.black);
+		toolBar.setForeground(Color.red);
 
-		// Button to exit game
+		//Button to exit game
 		exitBut = new JButton("Exit");
 		toolBar.add(exitBut);
 		exitBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
@@ -102,8 +112,10 @@ public class ArenaList extends JFrame {
 				System.exit(0);
 			}
 		});
+		exitBut.setBackground(Color.black);
+		exitBut.setForeground(Color.red);
 
-		// Button to return to the menu
+		//Button to return to the menu
 		menuBut = new JButton("Menu");
 		menuBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
 		toolBar.add(menuBut);
@@ -121,8 +133,10 @@ public class ArenaList extends JFrame {
 				dispose();
 			}
 		});
+		menuBut.setBackground(Color.black);
+		menuBut.setForeground(Color.red);
 
-		// Button to return to the previous window
+		//Button to return to the previous window
 		returnBut = new JButton("Return");
 		toolBar.add(returnBut);
 		returnBut.setFont(new Font("Enchanted Land", Font.PLAIN, 20));
@@ -140,8 +154,13 @@ public class ArenaList extends JFrame {
 				dispose();
 			}
 		});
+		returnBut.setBackground(Color.black);
+		returnBut.setForeground(Color.red);
 	}
 
+	/**
+	 * Creates ScrolledList for JList
+	 */
 	private void setupScrolledList() {
 		scroll = new JScrollPane();
 		scroll.setBounds(100, 50, 400, 400);
@@ -152,5 +171,7 @@ public class ArenaList extends JFrame {
 		list.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
 		list.setLayoutOrientation(JList.VERTICAL);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBackground(Color.black);
+		list.setForeground(Color.red);
 	}
 }

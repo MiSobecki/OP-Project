@@ -1,4 +1,3 @@
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -15,11 +14,19 @@ public class Character extends CharacterTemplate implements Serializable {
 	private static final int basicArmor = 0;
 	private static final int basicDefence = 3;
 
+	/**
+	 * return Character's damage on attack
+	 */
 	public int makeAttack() {
 		return attack;
 	}
-
-	// Check if character have artifact with the "name"
+	
+	/**
+	 * Checks if Character has artifact with the "name"
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public boolean containArtifact(String name) {
 		for (ArtifactTemplate a : artifacts) {
 			if (a.getName().compareTo(name) == 0)
@@ -28,6 +35,12 @@ public class Character extends CharacterTemplate implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Returns Artifact with the "name" if Character owns it
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public ArtifactTemplate searchArtifactByName(String name) {
 		for (ArtifactTemplate a : artifacts) {
 			if (a.getName().compareTo(name) == 0)
@@ -36,7 +49,12 @@ public class Character extends CharacterTemplate implements Serializable {
 		return new Artifact();
 	}
 
-	// Builder class
+	/**
+	 * Builder class
+	 * 
+	 * @author MiSobecki
+	 *
+	 */
 	public static final class Builder {
 		private int hp, attack, armor, wealth, arenaLvl, defence, stamina, maxStamina;
 		private ArrayList<ArtifactTemplate> artifacts; // headList of artifacts character have
@@ -242,6 +260,11 @@ public class Character extends CharacterTemplate implements Serializable {
 		return basicDefence;
 	}
 
+	/**
+	 * Adds artifact to Character's artifact List
+	 * 
+	 * @param artifact
+	 */
 	public void addArtifact(ArtifactTemplate artifact) {
 		artifacts.add(artifact);
 	}

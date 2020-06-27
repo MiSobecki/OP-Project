@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="." destdir="doc" doctitle="&quot;Demons &amp; Darkness&quot; Docs" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="13" sourcefiles="src/Menu.java,Artifacts/RightHandArtifact.java,Artifacts/LegsArtifact.java,Characters/Character.java,Characters/EnemiesList.java,Artifacts/LeatherShoes.java,src/SaveAndRead.java,Artifacts/IronSword.java,Characters/CharacterTemplate.java,src/Inventory.java,src/Inn.java,src/City.java,Artifacts/LeatherArmor.java,Artifacts/ArtifactDecorator.java,src/LostWindow.java,Artifacts/PlateArmor.java,src/Arena.java,Artifacts/PracticeShield.java,Artifacts/PracticeSword.java,Artifacts/ChestArtifact.java,Artifacts/ArtifactTemplate.java,Artifacts/Artifact.java,src/ArenaList.java,Characters/Enemy.java,src/LoadGame.java,Artifacts/LeftHandArtifact.java,src/Main.java,src/NewGame.java,src/Shop.java" sourcepath="Characters;Artifacts;src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

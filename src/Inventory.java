@@ -57,13 +57,10 @@ public class Inventory extends JFrame {
 
 		createJListToolTips();
 
-		// ToolBar
 		setupToolBar();
 
-		// Setup of the Labels with artefacts, which character own
 		bodyGraphic();
 
-		// Statistics
 		setupStats();
 
 		// Setting to frame
@@ -77,7 +74,11 @@ public class Inventory extends JFrame {
 		setFocusable(true);
 	}
 
-	// Setting character's items on body
+	/**
+	 * Setting character's items on body
+	 * 
+	 * @return
+	 */
 	private Character setCharacter() {
 		character.setHead(character.searchArtifactByName(headLab.getText()));
 		character.setChest(character.searchArtifactByName(chestLab.getText()));
@@ -89,7 +90,11 @@ public class Inventory extends JFrame {
 		return character;
 	}
 
-	// Creating models for JLists
+	/**
+	 * Creating models for JLists
+	 * 
+	 * @throws IllegalArgumentException
+	 */
 	private void createModels() throws IllegalArgumentException {
 		model1 = new DefaultListModel<ArtifactTemplate>();
 		model2 = new DefaultListModel<ArtifactTemplate>();
@@ -132,6 +137,9 @@ public class Inventory extends JFrame {
 
 	}
 
+	/**
+	 * Creates ToolBar
+	 */
 	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 150, 34);
@@ -202,7 +210,9 @@ public class Inventory extends JFrame {
 		returnBut.setForeground(Color.red);
 	}
 
-	// Function to create JList ToolTips
+	/**
+	 * Function to create JList ToolTips
+	 */
 	private void createJListToolTips() {
 		mma = new MouseMotionAdapter() {
 			@Override
@@ -218,6 +228,9 @@ public class Inventory extends JFrame {
 		};
 	}
 
+	/**
+	 * Creates Labels with items which Character own
+	 */
 	private void bodyGraphic() {
 		headList = new JList<ArtifactTemplate>();
 		scrollPane1 = new JScrollPane();
@@ -405,6 +418,9 @@ public class Inventory extends JFrame {
 		leftLab.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates Labels with Character stats
+	 */
 	private void setupStats() {
 		armorLabel = new JLabel("Armor: " + character.getArmor());
 		armorLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
@@ -435,8 +451,12 @@ public class Inventory extends JFrame {
 		defenceLabel.setForeground(Color.red);
 	}
 
-	// Functions to drag and drop from JList to JLabel imported and modified from
-	// https://stackoverflow.com/questions/13855184/drag-and-drop-custom-object-from-jList-into-jlabel
+	/**
+	 * Functions to drag and drop from JList to JLabel
+	 * 
+	 * @author MiSobecki
+	 *
+	 */
 	@SuppressWarnings("serial")
 	public class ListTransferHandler extends TransferHandler {
 

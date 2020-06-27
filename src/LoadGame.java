@@ -88,6 +88,9 @@ public class LoadGame extends JFrame {
 		getContentPane().setBackground(Color.black);
 	}
 
+	/**
+	 * Creates DefaultListModel for JList
+	 */
 	private void createModel() {
 		SaveAndRead sr = new SaveAndRead();
 		model = new DefaultListModel<String>();
@@ -104,6 +107,9 @@ public class LoadGame extends JFrame {
 		}
 	}
 
+	/**
+	 * Actions when Select Button is pressed, load selected savefile
+	 */
 	private void selectSave() {
 		String temp = list.getSelectedValue();
 		SaveAndRead sr = new SaveAndRead();
@@ -131,6 +137,9 @@ public class LoadGame extends JFrame {
 		dispose();
 	}
 	
+	/**
+	 * Creates JList with savefiles
+	 */
 	private void createSavesList() {
 		scroll = new JScrollPane();
 		scroll.setBounds(100, 100, 300, 380);

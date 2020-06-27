@@ -41,10 +41,8 @@ public class Arena extends JFrame {
 	private void initialize() {
 		getContentPane().setLayout(null);
 
-		// Character HP bar
 		createCharacterBars();
 
-		// Enemy HP bar
 		createEnemyBars();
 
 		// Enemy portrait
@@ -54,10 +52,8 @@ public class Arena extends JFrame {
 		enemyLab.setBounds(325, 11, 150, 180);
 		getContentPane().add(enemyLab);
 
-		// Create images of up/down arrows
 		setupArrows();
 		
-		// Create Labels with info about given damage
 		setupDmgLabs();
 
 		// Attack button
@@ -71,6 +67,8 @@ public class Arena extends JFrame {
 				attackAction();
 			}
 		});
+		attackBut.setBackground(Color.black);
+		attackBut.setForeground(Color.red);
 
 		// Defend button
 		defendBut = new JButton("Defend");
@@ -83,6 +81,8 @@ public class Arena extends JFrame {
 				defendAction();
 			}
 		});
+		defendBut.setBackground(Color.black);
+		defendBut.setForeground(Color.red);
 
 		// Wait button
 		waitBut = new JButton("Wait");
@@ -95,18 +95,26 @@ public class Arena extends JFrame {
 				waitAction();
 			}
 		});
+		waitBut.setBackground(Color.black);
+		waitBut.setForeground(Color.red);
 
+		// Label to inform what enemy do
 		actionLab = new JLabel("");
 		actionLab.setHorizontalAlignment(SwingConstants.CENTER);
 		actionLab.setBounds(556, 88, 150, 56);
 		getContentPane().add(actionLab);
 		actionLab.setFont(new Font("Enchanted Land", Font.PLAIN, 40));
+		actionLab.setBackground(Color.black);
+		actionLab.setForeground(Color.red);
 
+		// Label showing enemy Name
 		nameLab = new JLabel(enemy.getName());
 		nameLab.setHorizontalAlignment(SwingConstants.CENTER);
 		nameLab.setBounds(50, 88, 150, 56);
 		getContentPane().add(nameLab);
 		nameLab.setFont(new Font("Enchanted Land", Font.PLAIN, 40));
+		nameLab.setBackground(Color.black);
+		nameLab.setForeground(Color.red);
 
 		// Setting to frame
 		setTitle("Arena");
@@ -115,9 +123,13 @@ public class Arena extends JFrame {
 		setSize(800, 800);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.black);
+		setFocusable(true);
 	}
 
-	// actions after attackBut pressed
+	/**
+	 * Actions after attackBut pressed
+	 */
 	private void attackAction() {
 		upArrowLab.setVisible(true);
 
@@ -143,7 +155,9 @@ public class Arena extends JFrame {
 		}
 	}
 
-	// actions after defendBut pressed
+	/**
+	 * Actions after defendBut pressed
+	 */
 	private void defendAction() {
 		actionLab.setText(enemy.makeDecision());
 
@@ -170,7 +184,9 @@ public class Arena extends JFrame {
 		secondTimer();
 	}
 
-	// actions after waitBut pressed
+	/**
+	 * Actions after waitBut pressed
+	 */
 	private void waitAction() {
 		actionLab.setText(enemy.makeDecision());
 
@@ -198,6 +214,9 @@ public class Arena extends JFrame {
 		secondTimer();
 	}
 
+	/**
+	 * Character attack action
+	 */
 	private void charactersAttack(String Edecision) {
 		int dmg = 0;
 		if (Edecision.compareTo("Attack") == 0 || Edecision.compareTo("Wait") == 0) {
@@ -229,6 +248,9 @@ public class Arena extends JFrame {
 
 	}
 
+	/**
+	 * Actions which enemy do
+	 */
 	private void enemysMove(String Cdecision, String Edecision) {
 		if (Edecision.compareTo("Attack") == 0) {
 			downArrowLab.setVisible(true);
@@ -261,7 +283,9 @@ public class Arena extends JFrame {
 		sLabelE.setText("Stamina: " + enemy.getStamina() + "/" + enemy.getMaxStamina());
 	}
 
-	// happens if enemy has 0 hp
+	/**
+	 * Happens if enemy has 0 hp, moves back to City window
+	 */
 	private void enemyLost() {
 		character.setArenaLvl(character.getArenaLvl() + 1);
 		character.setWealth(character.getWealth() + enemy.getAward());
@@ -285,10 +309,14 @@ public class Arena extends JFrame {
 		dispose();
 	}
 
+	/**
+	 * Creates Character bars
+	 */
 	private void createCharacterBars() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(150, 700, 200, 30);
 		getContentPane().add(healthBarPanel);
+		healthBarPanel.setBackground(Color.black);
 
 		hpBar = new JProgressBar(0, 100);
 		hpBar.setPreferredSize(new Dimension(200, 30));
@@ -302,10 +330,13 @@ public class Arena extends JFrame {
 		hpLabel.setBounds(22, 700, 118, 30);
 		getContentPane().add(hpLabel);
 		hpLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		hpLabel.setBackground(Color.black);
+		hpLabel.setForeground(Color.red);
 
 		staminaBarPanel = new JPanel();
 		staminaBarPanel.setBounds(500, 700, 200, 30);
 		getContentPane().add(staminaBarPanel);
+		staminaBarPanel.setBackground(Color.black);
 
 		sBar = new JProgressBar(0, character.getMaxStamina());
 		sBar.setPreferredSize(new Dimension(200, 30));
@@ -319,12 +350,18 @@ public class Arena extends JFrame {
 		sLabel.setBounds(360, 700, 130, 30);
 		getContentPane().add(sLabel);
 		sLabel.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		sLabel.setBackground(Color.black);
+		sLabel.setForeground(Color.red);
 	}
 
+	/**
+	 * Creates Enemy bars
+	 */
 	private void createEnemyBars() {
 		healthBarPanelE = new JPanel();
 		healthBarPanelE.setBounds(150, 200, 200, 30);
 		getContentPane().add(healthBarPanelE);
+		healthBarPanelE.setBackground(Color.black);
 
 		hpBarE = new JProgressBar(0, 100);
 		hpBarE.setPreferredSize(new Dimension(200, 30));
@@ -338,10 +375,13 @@ public class Arena extends JFrame {
 		hpLabelE.setBounds(22, 200, 118, 30);
 		getContentPane().add(hpLabelE);
 		hpLabelE.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		hpLabelE.setBackground(Color.black);
+		hpLabelE.setForeground(Color.red);
 
 		staminaBarPanelE = new JPanel();
 		staminaBarPanelE.setBounds(500, 200, 200, 30);
 		getContentPane().add(staminaBarPanelE);
+		staminaBarPanelE.setBackground(Color.black);
 
 		sBarE = new JProgressBar(0, enemy.getMaxStamina());
 		sBarE.setPreferredSize(new Dimension(200, 30));
@@ -355,8 +395,13 @@ public class Arena extends JFrame {
 		sLabelE.setBounds(360, 200, 130, 30);
 		getContentPane().add(sLabelE);
 		sLabelE.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
+		sLabelE.setBackground(Color.black);
+		sLabelE.setForeground(Color.red);
 	}
 
+	/**
+	 * Timer enabling the corresponding buttons
+	 */
 	private void secondTimer() {
 		Timer timer2 = new Timer(3000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -380,6 +425,9 @@ public class Arena extends JFrame {
 		timer2.start();
 	}
 
+	/**
+	 * Creates up/down arrow Images
+	 */
 	private void setupArrows() {
 		upArrowLab = new JLabel("");
 		ImageIcon img1 = new ImageIcon("pictures/upArrow.gif");
@@ -387,7 +435,7 @@ public class Arena extends JFrame {
 		upArrowLab.setBounds(150, 290, 193, 300);
 		getContentPane().add(upArrowLab);
 		upArrowLab.setVisible(false);
-
+	
 		downArrowLab = new JLabel("");
 		ImageIcon img2 = new ImageIcon("pictures/downArrow.gif");
 		downArrowLab.setIcon(img2);
@@ -396,6 +444,9 @@ public class Arena extends JFrame {
 		downArrowLab.setVisible(false);
 	}
 	
+	/**
+	 * Creates Labels with information about dealt damage
+	 */
 	private void setupDmgLabs() {
 		CDmgLab = new JLabel("");
 		CDmgLab.setHorizontalAlignment(SwingConstants.CENTER);
@@ -403,6 +454,8 @@ public class Arena extends JFrame {
 		getContentPane().add(CDmgLab);
 		CDmgLab.setVisible(false);
 		CDmgLab.setFont(new Font("Enchanted Land", Font.PLAIN, 40));
+		CDmgLab.setBackground(Color.black);
+		CDmgLab.setForeground(Color.red);
 		
 		EDmgLab = new JLabel("");
 		EDmgLab.setHorizontalAlignment(SwingConstants.CENTER);
@@ -410,5 +463,7 @@ public class Arena extends JFrame {
 		getContentPane().add(EDmgLab);
 		EDmgLab.setVisible(false);
 		EDmgLab.setFont(new Font("Enchanted Land", Font.PLAIN, 40));
+		EDmgLab.setBackground(Color.black);
+		EDmgLab.setForeground(Color.red);
 	}
 }

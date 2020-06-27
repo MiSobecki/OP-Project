@@ -40,19 +40,14 @@ public class Inn extends JFrame {
 	private void initialize() {
 		getContentPane().setLayout(null);
 
-		// Beer button
 		setupBeerBut();
 
-		// Chicken button
 		setupChickenBut();
 
-		// Soup button
 		setupSoupBut();
 
-		// ToolBar
 		setupToolBar();
 
-		// HP bar
 		setupHpBar();
 
 		// Label to inform about wealth of character
@@ -84,6 +79,11 @@ public class Inn extends JFrame {
 		setFocusable(true);
 	}
 
+	/**
+	 * Sets options with meals and drink disabled if Character's wealth is below their cost
+	 * 
+	 * @param character
+	 */
 	private void setButtonsDisabled(Character character) {
 		if (character.getHp() == 100 || character.getWealth() < 200) {
 			beerBut.setEnabled(false);
@@ -97,6 +97,9 @@ public class Inn extends JFrame {
 		}
 	}
 	
+	/**
+	 * Sets one random history to the window
+	 */
 	private void setHistory() {
 		SaveAndRead sr = new SaveAndRead();
 		
@@ -110,6 +113,9 @@ public class Inn extends JFrame {
 		histLab.setText(sr.readHistory(hists.get(x)));
 	}
 	
+	/**
+	 * Creates Beer Button
+	 */
 	private void setupBeerBut() {
 		beerBut = new JButton("Beer");
 		beerBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
@@ -135,6 +141,9 @@ public class Inn extends JFrame {
 		beerBut.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates Chicken Button
+	 */
 	private void setupChickenBut() {
 		chickenBut = new JButton("Chicken");
 		chickenBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
@@ -160,6 +169,9 @@ public class Inn extends JFrame {
 		chickenBut.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates Soup Button
+	 */
 	private void setupSoupBut() {
 		soupBut = new JButton("Soup");
 		soupBut.setFont(new Font("Enchanted Land", Font.PLAIN, 25));
@@ -185,6 +197,9 @@ public class Inn extends JFrame {
 		soupBut.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates ToolBar
+	 */
 	private void setupToolBar() {
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 0, 181, 35);
@@ -253,6 +268,9 @@ public class Inn extends JFrame {
 		returnBut.setForeground(Color.red);
 	}
 	
+	/**
+	 * Creates Character Hp Bar
+	 */
 	private void setupHpBar() {
 		healthBarPanel = new JPanel();
 		healthBarPanel.setBounds(200, 520, 200, 30);

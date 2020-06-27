@@ -11,6 +11,13 @@ import java.util.ArrayList;
 
 public class SaveAndRead {
 
+	/**
+	 * Saves Character to savefile
+	 * 
+	 * @param character
+	 * @param savefile
+	 * @throws IOException
+	 */
 	public void save(Character character, String savefile) throws IOException {
 		ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savefile + ".bin"));
 		outputStream.writeObject(character);
@@ -18,6 +25,14 @@ public class SaveAndRead {
 		outputStream.close();
 	}
 
+	/**
+	 * Reads Character from savefile
+	 * 
+	 * @param savefile
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public Character read(String savefile) throws IOException, ClassNotFoundException {
 		Character temp;
 		if (new File(savefile + ".bin").exists()) {
@@ -29,6 +44,13 @@ public class SaveAndRead {
 		return temp;
 	}
 
+	/**
+	 * Saves Shop List to savefile
+	 * 
+	 * @param temp
+	 * @param savefile
+	 * @throws IOException
+	 */
 	public void saveShop(ArrayList<ArtifactTemplate> temp, String savefile) throws IOException {
 		ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savefile + ".bin"));
 		outputStream.writeObject(temp);
@@ -36,6 +58,14 @@ public class SaveAndRead {
 		outputStream.close();
 	}
 
+	/**
+	 * Reads Shop List from savefile
+	 * 
+	 * @param savefile
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<ArtifactTemplate> readShop(String savefile) throws IOException, ClassNotFoundException {
 		ArrayList<ArtifactTemplate> temp;
@@ -48,6 +78,13 @@ public class SaveAndRead {
 		return temp;
 	}
 
+	/**
+	 * Saves Character savefiles List to savefile
+	 * 
+	 * @param temp
+	 * @param savefile
+	 * @throws IOException
+	 */
 	public void saveSaves(ArrayList<String> temp, String savefile) throws IOException {
 		ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savefile + ".bin"));
 		outputStream.writeObject(temp);
@@ -55,6 +92,14 @@ public class SaveAndRead {
 		outputStream.close();
 	}
 
+	/**
+	 * Reads Character savefiles List to savefile
+	 * 
+	 * @param savefile
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> readSaves(String savefile) throws IOException, ClassNotFoundException {
 		ArrayList<String> temp;
@@ -67,6 +112,12 @@ public class SaveAndRead {
 		return temp;
 	}
 
+	/**
+	 * Reads history from text file
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public String readHistory(String path) {
 		String line, text;
 
