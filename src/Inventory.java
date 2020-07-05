@@ -25,6 +25,12 @@ import javax.swing.SwingConstants;
 import javax.swing.TransferHandler;
 import javax.swing.border.MatteBorder;
 
+/**
+ * Place where player can wear artifacts
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Inventory extends JFrame {
 
 	/**

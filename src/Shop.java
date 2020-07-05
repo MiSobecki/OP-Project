@@ -12,6 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+/**
+ * Place where player can buy new artifacts
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Shop extends JFrame {
 
 	/**

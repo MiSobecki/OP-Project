@@ -13,6 +13,12 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 
+/**
+ * Window to create a new savefile
+ * 
+ * @author MiSobecki
+ *
+ */
 public class NewGame extends JFrame {
 
 	/**

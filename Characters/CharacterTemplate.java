@@ -1,5 +1,11 @@
 import java.io.Serializable;
 
+/**
+ * Template for the Character and Enemy classes
+ * 
+ * @author MiSobecki
+ *
+ */
 public abstract class CharacterTemplate implements Serializable {
 
 	/**

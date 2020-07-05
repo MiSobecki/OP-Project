@@ -12,6 +12,12 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 
+/**
+ * List to choose enemy which player want to fight
+ * 
+ * @author MiSobecki
+ *
+ */
 public class ArenaList extends JFrame {
 
 	/**

@@ -16,6 +16,12 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 
+/**
+ * Loading game window
+ * 
+ * @author MiSobecki
+ *
+ */
 public class LoadGame extends JFrame {
 
 	/**

@@ -13,6 +13,12 @@ import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+/**
+ * City window, where player can move to other locations
+ * 
+ * @author MiSobecki
+ *
+ */
 public class City extends JFrame {
 
 	/**

@@ -14,6 +14,12 @@ import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Arena where player fights against enemy
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Arena extends JFrame {
 
 	/**

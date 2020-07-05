@@ -9,6 +9,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Class to save and read from savefiles
+ * 
+ * @author MiSobecki
+ *
+ */
 public class SaveAndRead {
 
 	/**

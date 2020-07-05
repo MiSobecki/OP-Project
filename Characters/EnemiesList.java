@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * List of available enemies to fight for the player
+ * 
+ * @author MiSobecki
+ *
+ */
 public class EnemiesList extends ArrayList<Enemy> {
 
 	/**

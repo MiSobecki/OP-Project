@@ -1,4 +1,9 @@
-
+/**
+ * Enemy class which player fight against
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Enemy extends CharacterTemplate {
 
 	/**

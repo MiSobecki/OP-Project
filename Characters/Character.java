@@ -1,6 +1,12 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Character class which player play
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Character extends CharacterTemplate implements Serializable {
 
 	/**

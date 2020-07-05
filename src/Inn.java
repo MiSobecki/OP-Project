@@ -15,6 +15,12 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+/**
+ * Place where player can eat or drink to be healed
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Inn extends JFrame {
 
 	/**

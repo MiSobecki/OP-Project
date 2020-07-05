@@ -13,6 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * Window which appear after player's death
+ * 
+ * @author MiSobecki
+ *
+ */
 public class LostWindow extends JFrame {
 
 	/**

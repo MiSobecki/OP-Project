@@ -8,6 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Component;
 
+/**
+ * Main menu where player can choose to create, load savefile or exit
+ * 
+ * @author MiSobecki
+ *
+ */
 public class Menu extends JFrame {
 
 	/**
